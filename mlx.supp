@@ -1,0 +1,174 @@
+{
+   <mlxleak1>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:_nl_load_locale_from_archive
+   fun:_nl_find_locale
+   fun:setlocale
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak2>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:setlocale
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak3>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XInitThreads
+   fun:call_init
+   fun:call_init
+   fun:_dl_init
+   obj:/lib64/ld-linux-x86-64.so.2
+   obj:*
+   obj:*
+   obj:*
+}
+{
+   <mlxleak4>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XInitThreads
+   fun:call_init
+   fun:call_init
+   fun:_dl_init
+   obj:/lib64/ld-linux-x86-64.so.2
+   obj:*
+   obj:*
+   obj:*
+}
+{
+   <mlxleak5>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XInitThreads
+   fun:call_init
+   fun:call_init
+   fun:_dl_init
+   obj:/lib64/ld-linux-x86-64.so.2
+   obj:*
+   obj:*
+   obj:*
+}
+{
+   <mlxleak6>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XrmInternalStringToQuark
+   fun:XrmInitialize
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak7>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nl_load_locale_from_archive
+   fun:_nl_find_locale
+   fun:setlocale
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak8>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:new_composite_name
+   fun:setlocale
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak9>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nl_intern_locale_data
+   fun:_nl_load_locale_from_archive
+   fun:_nl_find_locale
+   fun:setlocale
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak10>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_IO_file_doallocate
+   fun:_IO_doallocbuf
+   fun:_IO_doallocbuf
+   fun:_IO_file_overflow@@GLIBC_2.2.5
+   fun:_IO_new_file_xsputn
+   fun:_IO_file_xsputn@@GLIBC_2.2.5
+   fun:__printf_buffer_flush_to_file
+   fun:__printf_buffer_to_file_done
+   fun:__vfprintf_internal
+   fun:__printf_chk
+   fun:main
+}
+{
+   <mlxleak10>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nl_intern_locale_data
+   fun:_nl_load_locale_from_archive
+   fun:_nl_find_locale
+   fun:setlocale
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak11>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_XrmInternalStringToQuark
+   fun:XrmInitialize
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <mlxleak12>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XrmInternalStringToQuark
+   fun:XrmInitialize
+   fun:glfwInit
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
