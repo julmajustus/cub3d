@@ -6,6 +6,7 @@ my_tests
 vg.supp
 MLX_42
 MLX42
+cub3D
 # Prerequisites
 *.d
 *.un~
