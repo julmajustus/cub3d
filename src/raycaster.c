@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/23 19:03:56 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/10/30 09:28:47 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,16 @@ static void	find_ray_hit_position_and_side(t_caster *c)
 		if (c->side_dist_x < c->side_dist_y)
 		{
 			c->side_dist_x += c->delta_dist_x;
+			if (c->map_x > c->map->map_width)
+				break ;
 			c->map_x += c->step_x;
 			c->wall_hit_side = 0;
 		}
 		else
 		{
 			c->side_dist_y += c->delta_dist_y;
+			if (c->map_y > c->map->map_height)
+				break ;
 			c->map_y += c->step_y;
 			c->wall_hit_side = 1;
 		}
