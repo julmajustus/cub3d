@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/30 09:30:43 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:48:05 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 int	check_collision(t_caster *c, double new_px, double new_py)
 {
-    double collision_radius = 0.01;
+    double collision_radius = 0.10;
     int collision_x = 0, collision_y = 0;
 
+	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
+		return (0);
     if (c->map->map_arr[(int)c->py][(int)(new_px - collision_radius)] == '1' ||
         c->map->map_arr[(int)c->py][(int)(new_px + collision_radius)] == '1')
-    {
         collision_x = 1;
-    }
     if (c->map->map_arr[(int)(new_py - collision_radius)][(int)c->px] == '1' ||
         c->map->map_arr[(int)(new_py + collision_radius)][(int)c->px] == '1')
-    {
 		collision_y = 1;
-	}
 //	if (c->map->map_arr[(int)(new_py - collision_radius)][(int)(new_px - collision_radius)] == '1' ||
 //		c->map->map_arr[(int)(new_py - collision_radius)][(int)(new_px + collision_radius)] == '1' ||
-//		c->map->map_arr[(int)(new_py + collision_radius)][(int)(new_px - collision_radius)] == '1' ||
+//	c->map->map_arr[(int)(new_py + collision_radius)][(int)(new_px - collision_radius)] == '1' ||
 //		c->map->map_arr[(int)(new_py + collision_radius)][(int)(new_px + collision_radius)] == '1')
 	if (collision_x && collision_y)
-		return 0;
+		return (0);
 	if (!collision_x)
 		c->px = new_px;
 	if (!collision_y)
