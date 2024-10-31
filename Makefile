@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+         #
+#    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/10/30 15:10:37 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/10/31 16:11:20 by skwon2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 NAME            = cub3D
 LIBFT_DIR       = ./libft
 MLX42_DIR       = ./MLX42
@@ -17,11 +18,18 @@ INC_DIR         = inc
 
 SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/window_init.c \
-				  $(SRC_DIR)/read_map.c \
 				  $(SRC_DIR)/parse_minimap.c \
 				  $(SRC_DIR)/raycaster.c \
 				  $(SRC_DIR)/controls_keyboard.c \
 				  $(SRC_DIR)/exit_mlx.c \
+  				  $(SRC_DIR)/parsing_description/file_exist.c\
+				  $(SRC_DIR)/parsing_description/map_configuration.c\
+				  $(SRC_DIR)/parsing_description/read_description.c\
+				  $(SRC_DIR)/parsing_description/find_player.c\
+				  $(SRC_DIR)/parsing_description/parsing_colors.c\
+				  $(SRC_DIR)/parsing_description/check_wall.c
+#$(SRC_DIR)/parsing_description/new_gln.c\
+#$(SRC_DIR)/read_map.c \
 
 OBJ_DIR         = obj
 OBJ             = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -55,7 +63,8 @@ $(LIBMLX42):
 
 # Object file compilation
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/*.h
-	@mkdir -p $(OBJ_DIR)
+# @mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Targets

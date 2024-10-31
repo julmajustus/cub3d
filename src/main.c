@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/23 19:04:22 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:24:45 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,31 @@ void	init(t_caster *c, char **av)
 	c->img->minimap = NULL;
 	c->img->player = NULL;
 	c->map = malloc(sizeof(t_map));
-	if (!c->map)
-		exit_failure(c, "map malloc failed");
+	c->map->map_fd = -2;
+	c->map->texture_fd = -2;
+	c->map->map_path = av[1];
+	c->map->texture_path = NULL;
 	c->map->map_arr = NULL;
 	c->map->map_width = 0;
 	c->map->map_height = 0;
+	if (!c->map)
+		exit_failure(c, "map malloc failed");
 	c->textures = malloc(sizeof(t_textures));
 	if (!c->textures)
 		exit_failure(c, "textures malloc failed");
-	c->textures->north_texture = mlx_load_png("./textures/test_wall2.png");
-	c->textures->south_texture = mlx_load_png("./textures/test_wall5.png");
-	c->textures->east_texture = mlx_load_png("./textures/test_wall3.png");
-	c->textures->west_texture = mlx_load_png("./textures/test_wall4.png");
-	if (!c->textures->north_texture \
-		|| !c->textures->south_texture \
-		|| !c->textures->west_texture \
-		|| !c->textures->east_texture)
-		exit_failure(c, "Loading textures failed");
+	c->textures->north_texture = NULL;
+	c->textures->south_texture = NULL;
+	c->textures->east_texture = NULL;
+	c->textures->west_texture = NULL;
+	// c->textures->north_texture = mlx_load_png("./textures/test_wall2.png");
+	// c->textures->south_texture = mlx_load_png("./textures/test_wall5.png");
+	// c->textures->east_texture = mlx_load_png("./textures/test_wall3.png");
+	// c->textures->west_texture = mlx_load_png("./textures/test_wall4.png");
+	// if (!c->textures->north_texture \
+	// 	|| !c->textures->south_texture \
+	// 	|| !c->textures->west_texture \
+	// 	|| !c->textures->east_texture)
+	// 	exit_failure(c, "Loading textures failed");
 	c->textures->floor_color = 0;
 	c->textures->ceiling_color = 0;
 	c->speed_multiplier = 0.02;
@@ -75,12 +83,12 @@ void	init(t_caster *c, char **av)
 
 void	reset_images(t_caster *c)
 {
-	if (c->img->view)
-		mlx_delete_image(c->img->handle, c->img->view);
-	if (c->img->minimap)
-		mlx_delete_image(c->img->handle, c->img->minimap);
-	if (c->img->player)
-		mlx_delete_image(c->img->handle, c->img->player);
+	// if (c->img->view)
+	// 	mlx_delete_image(c->img->handle, c->img->view);
+	// if (c->img->minimap)
+	// 	mlx_delete_image(c->img->handle, c->img->minimap);
+	// if (c->img->player)
+	// 	mlx_delete_image(c->img->handle, c->img->player);
 	c->img->view = mlx_new_image(c->img->handle, WIDTH, HEIGHT);
 	c->img->minimap = mlx_new_image(c->img->handle, WIDTH, HEIGHT);
 	c->img->player = mlx_new_image(c->img->handle, WIDTH, HEIGHT);
@@ -131,7 +139,8 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	init(&c, av);
-	read_map(&c, av);
+	// read_map(&c, av);
+	read_description(&c);
 	int i = -1;
 	while (c.map->map_arr[++i])
 		printf("%s", c.map->map_arr[i]);
