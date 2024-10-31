@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:11:15 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/23 19:29:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:42:34 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	set_player_direction(t_caster *c, size_t x, size_t y)
 		c->view_angle = 0; // 0 degrees (facing east)
 	else if (c->map->map_arr[y][x] == 'W')
 		c->view_angle = M_PI; // 180 degrees (facing west)
+	c->map->map_arr[y][x] = '0';
 }
 
 static void	find_player_pos(t_caster *c)
