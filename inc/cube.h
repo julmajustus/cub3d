@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 14:15:56 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 18:16:54 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_caster
 	int				tex_x;
 	int				tex_y;
 	uint32_t		pixel_color;
+	double			cursor_pos;
 }	t_caster;
 
 void	window_init(t_caster *c);
@@ -107,7 +108,8 @@ void	read_map(t_caster *c, char **av);
 int		check_collision(t_caster *c, double new_px, double new_py);
 int		movement_up_down(t_caster *c);
 int		movement_left_right(t_caster *c);
-int		turn_left_right(t_caster *c);
+int		rotate_view_keyboard(t_caster *c);
+int		rotate_view_mouse(t_caster *c);
 void	keyboard_listener(mlx_key_data_t key, void *param);
 
 void	parse_minimap(t_caster *c);
@@ -116,6 +118,9 @@ void	draw_player_to_minimap(t_caster *c);
 void	raycaster(t_caster *c);
 void	render_engine(t_caster *c);
 void	game_loop(void *param);
+void	check_cursor_movement(t_caster *c);
+//void	cursor_movement(double x, double y, void *param);
+//int		cursor_movement(t_caster *c);
 int		check_movement(t_caster *c);
 void	reset_images(t_caster *c);
 
