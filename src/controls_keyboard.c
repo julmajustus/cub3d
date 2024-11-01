@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 18:22:30 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:02:31 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 int	check_collision(t_caster *c, double new_px, double new_py)
 {
-    double collision_radius = 0.10;
-    int collision_x = 0, collision_y = 0;
+    int		can_move_x = 1;
+    int		can_move_y = 1;
+	double	dir_x;
+	double	dir_y;
 
+   dir_x = cos(c->view_angle) * 0.15;
+   dir_y = sin(c->view_angle) * 0.15;
 	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
 		return (0);
-    if (c->map->map_arr[(int)c->py][(int)(new_px - collision_radius)] == '1' ||
-        c->map->map_arr[(int)c->py][(int)(new_px + collision_radius)] == '1')
-        collision_x = 1;
-    if (c->map->map_arr[(int)(new_py - collision_radius)][(int)c->px] == '1' ||
-        c->map->map_arr[(int)(new_py + collision_radius)][(int)c->px] == '1')
-		collision_y = 1;
-	if (collision_x && collision_y)
-		return (0);
-	if (!collision_x)
-		c->px = new_px;
-	if (!collision_y)
-		c->py = new_py;
+    if (c->map->map_arr[(int)c->py][(int)(new_px + dir_x)] == '1' ||
+        c->map->map_arr[(int)c->py][(int)(new_px - dir_x)] == '1')
+        can_move_x = 0;
+    if (c->map->map_arr[(int)(new_py + dir_y)][(int)c->px] == '1' ||
+        c->map->map_arr[(int)(new_py - dir_y)][(int)c->px] == '1')
+        can_move_y = 0;
+    if (can_move_x)
+        c->px = new_px;
+    if (can_move_y)
+        c->py = new_py;
     c->mmap_px = c->px * c->map->scale_x;
     c->mmap_py = c->py * c->map->scale_y;
-    return (!collision_x || !collision_y);
+    return (can_move_x || can_move_y);
 }
 
 int	movement_up_down(t_caster *c)
@@ -80,6 +82,7 @@ void	check_cursor_movement(t_caster *c)
 {
 	int	x;
 	int	y;
+
 	mlx_get_mouse_pos(c->img->handle, &x, &y);
 	c->cursor_pos = WIDTH / 2 - x;
 	mlx_set_mouse_pos(c->img->handle, WIDTH / 2, HEIGHT / 2);
