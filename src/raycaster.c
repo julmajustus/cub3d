@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 14:15:51 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:30:47 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ static void	render_wall_column(t_caster *c, int x)
 			| (c->wall_texture->pixels[tex_index + 1] << 16) \
 			| (c->wall_texture->pixels[tex_index + 2] << 8) \
 			| c->wall_texture->pixels[tex_index + 3];
-		mlx_put_pixel(c->img->view, x, y, c->pixel_color);
+		mlx_put_pixel(c->window->view, x, y, c->pixel_color);
 		y++;
 	}
 }
@@ -145,8 +145,8 @@ static void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
 	y_ceiling = HEIGHT - draw_end - 1;
 	while (y_floor < HEIGHT && y_ceiling >= 0)
 	{
-		mlx_put_pixel(c->img->view, x, y_floor++, c->textures->floor_color);
-		mlx_put_pixel(c->img->view, x, y_ceiling--, c->textures->ceiling_color);
+		mlx_put_pixel(c->window->view, x, y_floor++, c->textures->floor_color);
+		mlx_put_pixel(c->window->view, x, y_ceiling--, c->textures->ceiling_color);
 	}
 }
 

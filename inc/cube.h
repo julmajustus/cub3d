@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 18:16:54 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:29:31 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ typedef struct s_textures
 	uint32_t		floor_color;
 }	t_textures;
 
-typedef struct s_img
+typedef struct s_window
 {
 	mlx_t			*handle;
 	mlx_image_t		*view;
 	mlx_image_t		*minimap;
 	mlx_image_t		*player;
-}	t_img;
+}	t_window;
 
 typedef struct s_caster
 {
 	char			*window_title;
-	t_img			*img;
+	t_window  		*window;
 	t_map			*map;
 	t_textures		*textures;
 	char			**av;
@@ -102,7 +102,8 @@ typedef struct s_caster
 	double			cursor_pos;
 }	t_caster;
 
-void	window_init(t_caster *c);
+void	init(t_caster *c, char **av);
+void	set_images_to_window(t_caster *c);
 void	read_map(t_caster *c, char **av);
 
 int		check_collision(t_caster *c, double new_px, double new_py);
@@ -122,7 +123,6 @@ void	check_cursor_movement(t_caster *c);
 //void	cursor_movement(double x, double y, void *param);
 //int		cursor_movement(t_caster *c);
 int		check_movement(t_caster *c);
-void	reset_images(t_caster *c);
 
 void	exit_mlx(t_caster *c);
 void	exit_failure(t_caster *c, char *msg);
