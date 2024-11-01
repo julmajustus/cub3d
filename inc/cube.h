@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/30 15:19:23 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:15:56 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ typedef struct s_caster
 	double			plane_x;
 	double			plane_y;
 
-	double			camera;
+	double			view_offset;
 	double			ray_dir_x;
 	double			ray_dir_y;
 	int				map_x;
 	int				map_y;
-	double			delta_dist_x;
-	double			delta_dist_y;
+	double			dist_increment_x;
+	double			dist_increment_y;
 	int				step_x;
 	int				step_y;
-	double			side_dist_x;
-	double			side_dist_y;
-	int				wall_hit_side;
+	double			dist_to_grid_x;
+	double			dist_to_grid_y;
+	int				wall_hit_is_horizontal;
 	double			wall_dist;
 	int				wall_height;
 	int				draw_start;
