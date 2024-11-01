@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 20:29:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:53:30 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	init(t_caster *c, char **av);
 void	set_images_to_window(t_caster *c);
 void	read_map(t_caster *c, char **av);
 
-int		check_collision(t_caster *c, double new_px, double new_py);
 int		movement_up_down(t_caster *c);
 int		movement_left_right(t_caster *c);
 int		rotate_view_keyboard(t_caster *c);
