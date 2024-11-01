@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 20:02:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:32:01 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	check_collision(t_caster *c, double new_px, double new_py)
 {
-    int		can_move_x = 1;
-    int		can_move_y = 1;
+    int		can_move_x;
+    int		can_move_y;
 	double	dir_x;
 	double	dir_y;
 
-   dir_x = cos(c->view_angle) * 0.15;
-   dir_y = sin(c->view_angle) * 0.15;
+    can_move_x = 1;
+    can_move_y = 1;
+	dir_x = cos(c->view_angle) * 0.15;
+	dir_y = sin(c->view_angle) * 0.15;
 	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
 		return (0);
     if (c->map->map_arr[(int)c->py][(int)(new_px + dir_x)] == '1' ||
@@ -35,7 +37,7 @@ int	check_collision(t_caster *c, double new_px, double new_py)
         c->py = new_py;
     c->mmap_px = c->px * c->map->scale_x;
     c->mmap_py = c->py * c->map->scale_y;
-    return (can_move_x || can_move_y);
+	return (can_move_x || can_move_y);
 }
 
 int	movement_up_down(t_caster *c)
@@ -43,13 +45,13 @@ int	movement_up_down(t_caster *c)
 	double new_px;
 	double new_py;
 
-	if (mlx_is_key_down(c->img->handle, MLX_KEY_W))
+	if (mlx_is_key_down(c->window->handle, MLX_KEY_W))
 	{
 		new_px = c->px + cos(c->view_angle) * c->speed_multiplier * 1.4;
 		new_py = c->py + sin(c->view_angle) * c->speed_multiplier * 1.4;
 		return (check_collision(c, new_px, new_py));
 	}
-	else if (mlx_is_key_down(c->img->handle, MLX_KEY_S))
+	else if (mlx_is_key_down(c->window->handle, MLX_KEY_S))
 	{
 		new_px = c->px - cos(c->view_angle) * c->speed_multiplier;
 		new_py = c->py - sin(c->view_angle) * c->speed_multiplier;
@@ -63,13 +65,13 @@ int	movement_left_right(t_caster *c)
 	double new_px;
 	double new_py;
 
-	if (mlx_is_key_down(c->img->handle, MLX_KEY_A))
+	if (mlx_is_key_down(c->window->handle, MLX_KEY_A))
 	{
 		new_px = c->px + sin(c->view_angle) * c->speed_multiplier;
 		new_py = c->py - cos(c->view_angle) * c->speed_multiplier;
 		return (check_collision(c, new_px, new_py));
 	}
-	else if (mlx_is_key_down(c->img->handle, MLX_KEY_D))
+	else if (mlx_is_key_down(c->window->handle, MLX_KEY_D))
 	{
 		new_px = c->px - sin(c->view_angle) * c->speed_multiplier;
 		new_py = c->py + cos(c->view_angle) * c->speed_multiplier;
@@ -83,9 +85,9 @@ void	check_cursor_movement(t_caster *c)
 	int	x;
 	int	y;
 
-	mlx_get_mouse_pos(c->img->handle, &x, &y);
+	mlx_get_mouse_pos(c->window->handle, &x, &y);
 	c->cursor_pos = WIDTH / 2 - x;
-	mlx_set_mouse_pos(c->img->handle, WIDTH / 2, HEIGHT / 2);
+	mlx_set_mouse_pos(c->window->handle, WIDTH / 2, HEIGHT / 2);
 }
 
 int	rotate_view_keyboard(t_caster *c)
@@ -93,14 +95,14 @@ int	rotate_view_keyboard(t_caster *c)
 	int retval;
 
 	retval = 0;
-	if (mlx_is_key_down(c->img->handle, MLX_KEY_LEFT))
+	if (mlx_is_key_down(c->window->handle, MLX_KEY_LEFT))
 	{
 		c->view_angle -= c->speed_multiplier;
 		if (c->view_angle < -M_PI)
 			c->view_angle += 2 * M_PI;
 		retval = 1;
 	}
-	else if (mlx_is_key_down(c->img->handle, MLX_KEY_RIGHT))
+	else if (mlx_is_key_down(c->window->handle, MLX_KEY_RIGHT))
 	{
 		c->view_angle += c->speed_multiplier;
 		if (c->view_angle > M_PI)

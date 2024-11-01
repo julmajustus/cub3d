@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/16 19:15:53 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:31:52 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	exit_mlx(t_caster *c)
 {
-	mlx_terminate(c ->img->handle);
+	mlx_terminate(c ->window->handle);
 	if (c->map->map_arr)
 		free_arr_and_null(&c->map->map_arr);
-	if (c->img)
-		free(c->img);
+	if (c->window)
+		free(c->window);
 	if (c->map)
 		free(c->map);
 	if (c->textures)
@@ -34,12 +34,12 @@ void	exit_mlx(t_caster *c)
 
 void	exit_failure(t_caster *c, char *msg)
 {
-	if (c->img && c->img->handle)
-		mlx_terminate(c ->img->handle);
+	if (c->window && c->window->handle)
+		mlx_terminate(c ->window->handle);
 	if (c->map->map_arr)
 		free_arr_and_null(&c->map->map_arr);
-	if (c->img)
-		free(c->img);
+	if (c->window)
+		free(c->window);
 	if (c->map)
 		free(c->map);
 	if (c->textures)

@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/23 19:27:58 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:30:40 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	draw_minimap(t_caster *c, size_t x, size_t y, int flag)
 	int		i;
 	int		j;
 	uint32_t	color;
-	mlx_image_t	*img;
+	mlx_image_t	*window;
 	
-	img = c->img->minimap;
+	window = c->window->minimap;
 	if (flag == 1)
 		color =	0x000000FF;
 	else if (flag == 3)
 	{
-		img = c->img->player;
+		window = c->window->player;
 		color = 0x00FF00FF;
 	}
 	else
@@ -34,7 +34,7 @@ void	draw_minimap(t_caster *c, size_t x, size_t y, int flag)
 	{
 		j = -1;
 		while (++j < c->map->scale_x)
-			mlx_put_pixel(img, x + j, y + i, color);
+			mlx_put_pixel(window, x + j, y + i, color);
 	}
 }
 

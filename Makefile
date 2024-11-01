@@ -6,7 +6,7 @@
 #    By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/01 13:03:39 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/01 20:26:31 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME            = cub3D
@@ -16,7 +16,7 @@ SRC_DIR         = src
 INC_DIR         = inc
 
 SRC             = $(SRC_DIR)/main.c \
-				  $(SRC_DIR)/window_init.c \
+				  $(SRC_DIR)/init.c \
 				  $(SRC_DIR)/read_map.c \
 				  $(SRC_DIR)/parse_minimap.c \
 				  $(SRC_DIR)/raycaster.c \
