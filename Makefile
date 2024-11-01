@@ -6,7 +6,7 @@
 #    By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/10/30 15:10:37 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/01 13:03:39 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME            = cub3D
@@ -34,7 +34,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
 				  -I$(INC_DIR) \
 				  -I$(LIBFT_DIR) \
 				  -I$(MLX42_DIR)/include/$(MLX42_DIR) \
-				  -g -ggdb3 -fsanitize=address
+				  -O3 #-g -ggdb3 -fsanitize=address
 
 
 all:  $(LIBFT) $(LIBMLX42) $(NAME)

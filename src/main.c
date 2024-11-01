@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/23 19:04:22 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:17:44 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ void	init(t_caster *c, char **av)
 	c->mmap_py = 0;
 	c->view_angle = 0;
 	c->plane_x = 0.66;
-	//c->plane_y = -0.66;
-	c->camera = 0;
+	c->plane_y = 0;
+	c->view_offset = 0;
 	c->ray_dir_x = 0;
 	c->ray_dir_y = 0;
 	c->map_x = 0;
 	c->map_y = 0;
-	c->delta_dist_x = 0;
-	c->delta_dist_y = 0;
+	c->dist_increment_x = 0;
+	c->dist_increment_y = 0;
 	c->step_x = 0;
 	c->step_y = 0;
-	c->side_dist_x = 0;
-	c->side_dist_y = 0;
-	c->wall_hit_side = 0;
+	c->dist_to_grid_x = 0;
+	c->dist_to_grid_y = 0;
+	c->wall_hit_is_horizontal = 0;
 	c->wall_dist = 0;
 	c->wall_height = 0;
 	c->draw_start = 0;
