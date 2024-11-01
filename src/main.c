@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 14:17:44 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/01 18:17:28 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	init(t_caster *c, char **av)
 	c->tex_x = 0;
 	c->tex_y = 0;
 	c->pixel_color = 0;
+	c->cursor_pos = 0;
 
 }
 
@@ -112,11 +113,13 @@ void	game_loop(void *param)
 
 	c = (t_caster *)param;
 	redraw = 0;
-
+	c->cursor_pos = 0;
 	c->speed_multiplier = c->img->handle->delta_time * 2.2;
+	check_cursor_movement(c);
 	redraw |= movement_up_down(c);
 	redraw |= movement_left_right(c);
-	redraw |= turn_left_right(c);
+	redraw |= rotate_view_keyboard(c);
+	redraw |= rotate_view_mouse(c);
 	if (redraw)
 		render_engine(c);
 }
