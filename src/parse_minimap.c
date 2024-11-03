@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parse_minimap.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/23 19:27:58 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:11:36 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	draw_minimap(t_caster *c, size_t x, size_t y, int flag)
+void draw_minimap(t_caster *c, size_t x, size_t y, int flag)
 {
-	int		i;
-	int		j;
-	uint32_t	color;
-	mlx_image_t	*img;
-	
-	img = c->img->minimap;
+	int i;
+	int j;
+	uint32_t color;
+	mlx_image_t *window;
+
+	window = c->window->minimap;
 	if (flag == 1)
-		color =	0x000000FF;
+		color = 0x000000FF;
 	else if (flag == 3)
 	{
-		img = c->img->player;
+		window = c->window->player;
 		color = 0x00FF00FF;
 	}
 	else
@@ -34,24 +34,24 @@ void	draw_minimap(t_caster *c, size_t x, size_t y, int flag)
 	{
 		j = -1;
 		while (++j < c->map->scale_x)
-			mlx_put_pixel(img, x + j, y + i, color);
+			mlx_put_pixel(window, x + j, y + i, color);
 	}
 }
 
-void	draw_player_to_minimap(t_caster *c)
+void draw_player_to_minimap(t_caster *c)
 {
 	draw_minimap(c, c->mmap_px, c->mmap_py, 3);
 	printf("Player pos X: %f Y: %f\n", c->mmap_px, c->mmap_py);
 	printf("speed_multiplier: %f\n", c->speed_multiplier);
 }
 
-void	parse_minimap(t_caster *c)
+void parse_minimap(t_caster *c)
 {
-	size_t	x;
-	size_t	y;
-	size_t	xo;
-	size_t	yo;
-	
+	size_t x;
+	size_t y;
+	size_t xo;
+	size_t yo;
+
 	y = -1;
 	while (++y < (size_t)c->map->map_height)
 	{
