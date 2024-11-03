@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:20:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/10/31 16:03:43 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/03 09:04:53 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void check_else_char(t_caster *c, char character)
 
 static void store_position_player(t_caster *c, int *found, size_t x, size_t y)
 {
-    if (found == 0)
-    {
+    // printf("Checking character: '%c', found :%d\n", c->map->map_arr[y][x], *found);
+
+    // if (*found == 0)
+    // {
         if (c->map->map_arr[y][x] == 'N' || c->map->map_arr[y][x] == 'S' ||
             c->map->map_arr[y][x] == 'W' || c->map->map_arr[y][x] == 'E')
         {
@@ -44,7 +46,7 @@ static void store_position_player(t_caster *c, int *found, size_t x, size_t y)
             c->mmap_py = y * c->map->scale_y + 0.0001;
             set_player_direction(c, x, y);
         }
-    }
+    // }
 }
 
 void    find_player_pos(t_caster *c)
@@ -63,9 +65,9 @@ void    find_player_pos(t_caster *c)
             check_else_char(c, c->map->map_arr[y][x]);
             store_position_player(c, &found, x, y);
         }
-        if (found == 0)
-            exit_failure(c, "Player not found.");
-        else if (found > 1)
-            exit_failure(c, "There is more than one player.");
     }
+    if (found == 0)
+        exit_failure(c, "Player not found.");
+    else if (found > 1)
+        exit_failure(c, "There is more than one player.");
 }

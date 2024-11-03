@@ -6,13 +6,13 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/10/31 17:58:33 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/03 09:10:49 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	parse_texture_color(t_caster *c, char *line, const char *order, T_Dir i)
+static void parse_texture_color(t_caster *c, char *line, const char *order, T_Dir i)
 {
 	if (!ft_strncmp(line, order, ft_strlen(order)))
 	{
@@ -36,7 +36,7 @@ static void	parse_texture_color(t_caster *c, char *line, const char *order, T_Di
 	}
 }
 
-void	init_var(T_Dir *i, const char **order)
+void init_var(T_Dir *i, const char **order)
 {
 	order[0] = "NO ";
 	order[1] = "SO ";
@@ -58,38 +58,39 @@ int whole_space_line(char *str)
 	return (true);
 }
 
-void	process_line(t_caster *c, char *line, T_Dir *i, const char **order)
+void process_line(t_caster *c, char **line, T_Dir *i, const char **order)
 {
 	char *new_line;
-	int		width;
-	
-	width = ft_strlen(line);
+	int width;
+
+	width = ft_strlen(*line);
 	// printf("width : %d\n", width);
-	printf("Processing line: %s", line);
+	// printf("Processing *line: %s", *line);
 	if (width > c->map->map_width)
 		c->map->map_width = width - 1;
 	if (*i < end)
 	{
-		parse_texture_color(c, line, order[*i], *i);
+		parse_texture_color(c, *line, order[*i], *i);
 		(*i)++;
 	}
 	else
 	{
-		new_line = ft_substr(line, 0, ft_strlen(line) - 1);
-		free(line);
-		line = NULL;
-		line = new_line;
-		printf("without newline : %s$\n", line);
-		append_array(line, &c->map->map_arr, &c->map->map_height);
-		printf("height : %d\n", c->map->map_height);
+		new_line = ft_substr(*line, 0, ft_strlen(*line) - 1);
+		if (*line)
+			free_and_null((void **)line);
+		*line = new_line;
+		// printf("without newline : %s$\n", *line);
+		append_array(*line, &c->map->map_arr, &c->map->map_height);
+		// printf("%s", c->map->map_arr[c->map->map_height-1]);
+		// printf("height : %d\n", c->map->map_height);
 	}
 }
 
-void	check_map(t_caster *c)
+void check_map(t_caster *c)
 {
-	char 	*line;
-	T_Dir	 i;
-	const char	*order[6];
+	char *line;
+	T_Dir i;
+	const char *order[6];
 
 	init_var(&i, order);
 	line = get_next_line(c->map->map_fd);
@@ -100,19 +101,20 @@ void	check_map(t_caster *c)
 	{
 		if (line[0] == '\n' || whole_space_line(line))
 		{
-			free(line);
-			line = NULL;
+			if (i >= end)
+				exit_failure(c, "Newline in between the map.");
+			if (line)
+				free_and_null((void**)&line);
 			line = get_next_line(c->map->map_fd);
-			printf("in line: %s***", line);
+			// printf("in line: %s***", line);
 			continue;
 		}
-		process_line(c, line, &i, order);
-		free(line);
-		line = NULL;
+		process_line(c, &line, &i, order);
+		if (line)
+			free_and_null((void**)&line);
 		line = get_next_line(c->map->map_fd);
 	}
 }
-
 
 // void	check_map(t_caster *c)
 // {
