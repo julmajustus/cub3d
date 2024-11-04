@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:31:29 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/03 09:05:27 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:55:30 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void file_exist(t_caster *c, char *file, char *extension, int i)
 {
 	int	len;
-	// printf("texture file name : %s\n", c->map->texture_path);
-	// printf("file name : %s\n", file);
+
 	len = ft_strlen(file);
 	if (i == MAP)
 		c->map->map_fd = open(file, O_RDONLY);

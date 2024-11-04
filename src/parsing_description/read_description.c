@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:00:52 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/03 01:38:44 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:54:14 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	read_description(t_caster *c)
 	check_map(c);
 	c->map->scale_x = (double)((WIDTH / 5) / c->map->map_width);
 	c->map->scale_y = (double)((HEIGHT / 5) / c->map->map_height);
-	print_map(c);
+	// print_map(c);
 	find_player_pos(c);
 	check_wall(c);
-	printf("helllllllllllllllll\n");
-	print_map(c);
 }
 
 

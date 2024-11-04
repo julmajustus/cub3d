@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/03 00:08:44 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:57:20 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,4 +163,6 @@ void	check_wall(t_caster *c);
 void	find_player_pos(t_caster *c);
 void	check_map(t_caster *c);
 void	parse_plain_colors(t_caster *c, char *line);
+// void	update_minimap(t_caster *c);
+
 #endif

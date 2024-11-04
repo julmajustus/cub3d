@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/03 09:10:49 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:55:04 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,27 @@ static void parse_texture_color(t_caster *c, char *line, const char *order, T_Di
 {
 	if (!ft_strncmp(line, order, ft_strlen(order)))
 	{
-		if (i == F || i == C)
-			parse_plain_colors(c, line);
-		else
+		if (i == NT || i == ST || i == WT || i == ET)
 		{
-			if (line[3] == '.' && line[4] == '/')
+			if (ft_strlen(line) > 4 && line[3] == '.' && line[4] == '/')
+			{
 				c->map->texture_path = ft_substr(line, 3, ft_strlen(line) - 4);
-			// printf("texture file name : %s\n", c->map->texture_path);
-			file_exist(c, c->map->texture_path, ".png", TEXTURE);
-			if (i == NT)
-				c->textures->north_texture = mlx_load_png(c->map->texture_path);
-			if (i == ST)
-				c->textures->south_texture = mlx_load_png(c->map->texture_path);
-			if (i == WT)
-				c->textures->west_texture = mlx_load_png(c->map->texture_path);
-			if (i == ET)
-				c->textures->east_texture = mlx_load_png(c->map->texture_path);
+				file_exist(c, c->map->texture_path, ".png", TEXTURE);
+				if (i == NT)
+					c->textures->north_texture = mlx_load_png(c->map->texture_path);
+				else if (i == ST)
+					c->textures->south_texture = mlx_load_png(c->map->texture_path);
+				else if (i == WT)
+					c->textures->west_texture = mlx_load_png(c->map->texture_path);
+				else if (i == ET)
+					c->textures->east_texture = mlx_load_png(c->map->texture_path);
+			}
 		}
+		else if (i == F || i == C)
+			parse_plain_colors(c, line);
 	}
+	else
+		exit_failure(c, "There is wrong text in between the description.");
 }
 
 void init_var(T_Dir *i, const char **order)
@@ -62,15 +65,17 @@ void process_line(t_caster *c, char **line, T_Dir *i, const char **order)
 {
 	char *new_line;
 	int width;
+	int index;
 
+	index = 0;
 	width = ft_strlen(*line);
-	// printf("width : %d\n", width);
-	// printf("Processing *line: %s", *line);
 	if (width > c->map->map_width)
 		c->map->map_width = width - 1;
 	if (*i < end)
 	{
-		parse_texture_color(c, *line, order[*i], *i);
+		while ((*line)[index] && ((*line)[index] == ' ' || ((*line)[index] >= 9 && (*line)[index] <= 13)))
+			index++;
+		parse_texture_color(c, *line + index, order[*i], *i);
 		(*i)++;
 	}
 	else
@@ -79,10 +84,7 @@ void process_line(t_caster *c, char **line, T_Dir *i, const char **order)
 		if (*line)
 			free_and_null((void **)line);
 		*line = new_line;
-		// printf("without newline : %s$\n", *line);
 		append_array(*line, &c->map->map_arr, &c->map->map_height);
-		// printf("%s", c->map->map_arr[c->map->map_height-1]);
-		// printf("height : %d\n", c->map->map_height);
 	}
 }
 
@@ -96,17 +98,15 @@ void check_map(t_caster *c)
 	line = get_next_line(c->map->map_fd);
 	if (!line)
 		exit_failure(c, "Empty description.");
-	// printf("line: %s", line);
 	while (line)
 	{
-		if (line[0] == '\n' || whole_space_line(line))
+		if (whole_space_line(line))
 		{
-			if (i >= end)
+			if (i >= end && c->map->map_arr && c->map->map_arr[0])
 				exit_failure(c, "Newline in between the map.");
 			if (line)
 				free_and_null((void**)&line);
 			line = get_next_line(c->map->map_fd);
-			// printf("in line: %s***", line);
 			continue;
 		}
 		process_line(c, &line, &i, order);
@@ -115,33 +115,3 @@ void check_map(t_caster *c)
 		line = get_next_line(c->map->map_fd);
 	}
 }
-
-// void	check_map(t_caster *c)
-// {
-// 	int		width;
-// 	char 	*line;
-// 	T_Dir	 i;
-// 	const char	*order[6];
-
-// 	init_var(&width, &i, order, &line);
-// 	while(line)
-// 	{
-// 		if (line[0] == '\n' || !whole_space_line(line))
-// 		{
-// 			free(line);
-// 			line = getnextline(c->map->map_fd);
-// 			continue;
-// 		}
-// 		if (width > c->map->map_width)
-// 			c->map->map_width = width - 1;
-// 		if (i < end)
-// 		{
-// 			parse_texture_color(c, line, order[i]);
-// 			i++;
-// 		}
-// 		else
-// 			append_array(line, &c->map->map_arr, &c->map->map_height);
-// 		free(line);
-// 		line = getnextline(c->map->map_fd);
-// 	}
-// }

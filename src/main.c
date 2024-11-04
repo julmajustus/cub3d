@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/03 00:09:41 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:57:03 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void render_engine(t_caster *c)
 	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
 	raycaster(c);
 	parse_minimap(c);
+	// update_minimap(c);
 	if (c->window->player)
 		mlx_delete_image(c->window->handle, c->window->player);
 	c->window->player = mlx_new_image(c->window->handle, WIDTH, HEIGHT);

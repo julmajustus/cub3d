@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/02 23:07:23 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/03 11:54:22 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,3 +100,4 @@ void keyboard_listener(mlx_key_data_t key, void *param)
 	c = (t_caster *)param;
 	keys_utils(key, c);
 }
+
