@@ -6,74 +6,13 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 15:08:54 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:18:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-//static int check_collision(t_caster *c, double new_px, double new_py)
-//{
-//	int can_move_x;
-//	int can_move_y;
-//	double dir_x;
-//	double dir_y;
-//
-//	can_move_x = 1;
-//	can_move_y = 1;
-//	dir_x = cos(c->view_angle) * 0.25;
-//	dir_y = sin(c->view_angle) * 0.25;
-//	printf("Check dir_y %f, dir_y: %f\n", dir_y, dir_x);
-//	printf("Check player view_angle: %f\n", c->view_angle);
-////	if (c->map->map_arr[(int)(new_py + dir_y)][(int)(new_px + dir_x)] != '0')
-////		return (0);
-//	if (c->map->map_arr[(int)c->py][(int)(new_px + dir_x)] == '1' ||
-//		c->map->map_arr[(int)c->py][(int)(new_px - dir_x)] == '1')
-//	{
-//		can_move_x = 0;
-//		printf("Movement y: %f X: %f denied.\n", new_py, new_px);
-//	}
-//	if (c->map->map_arr[(int)(new_py + dir_y)][(int)c->px] == '1' ||
-//		c->map->map_arr[(int)(new_py - dir_y)][(int)c->px] == '1')
-//	{
-//
-//		can_move_y = 0;
-//		printf("Movement Y: %f x: %f denied.\n", new_py, new_px);
-//	}
-//	if (can_move_x)
-//		c->px = new_px;
-//	if (can_move_y)
-//		c->py = new_py;
-//	c->mmap_px = c->px * c->map->scale_x;
-//	c->mmap_py = c->py * c->map->scale_y;
-//	return (can_move_x || can_move_y);
-//}
-
-static int check_collision_up_down(t_caster *c, double new_px, double new_py)
-{
-	int can_move_x;
-	int can_move_y;
-	
-	can_move_x = 1;
-	can_move_y = 1;
-	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
-		return (0);
-	if (c->map->map_arr[(int)c->py][(int)(new_px + 0.15)] == '1' ||
-		c->map->map_arr[(int)c->py][(int)(new_px - 0.15)] == '1')
-		can_move_x = 0;
-	if (c->map->map_arr[(int)(new_py + 0.15)][(int)c->px] == '1' ||
-		c->map->map_arr[(int)(new_py - 0.15)][(int)c->px] == '1')
-		can_move_y = 0;
-	if (can_move_x)
-		c->px = new_px;
-	if (can_move_y)
-		c->py = new_py;
-	c->mmap_px = c->px * c->map->scale_x;
-	c->mmap_py = c->py * c->map->scale_y;
-	return (can_move_x || can_move_y);
-}
-
-static int check_collision_left_right(t_caster *c, double new_px, double new_py)
+static int check_collision(t_caster *c, double new_px, double new_py)
 {
 	int can_move_x;
 	int can_move_y;
@@ -106,13 +45,13 @@ int movement_up_down(t_caster *c)
 	{
 		new_px = c->px + cos(c->view_angle) * c->speed_multiplier * 1.4;
 		new_py = c->py + sin(c->view_angle) * c->speed_multiplier * 1.4;
-		return (check_collision_up_down(c, new_px, new_py));
+		return (check_collision(c, new_px, new_py));
 	}
 	else if (mlx_is_key_down(c->window->handle, MLX_KEY_S))
 	{
 		new_px = c->px - cos(c->view_angle) * c->speed_multiplier;
 		new_py = c->py - sin(c->view_angle) * c->speed_multiplier;
-		return (check_collision_up_down(c, new_px, new_py));
+		return (check_collision(c, new_px, new_py));
 	}
 	return (0);
 }
@@ -126,13 +65,13 @@ int movement_left_right(t_caster *c)
 	{
 		new_px = c->px + sin(c->view_angle) * c->speed_multiplier;
 		new_py = c->py - cos(c->view_angle) * c->speed_multiplier;
-		return (check_collision_left_right(c, new_px, new_py));
+		return (check_collision(c, new_px, new_py));
 	}
 	else if (mlx_is_key_down(c->window->handle, MLX_KEY_D))
 	{
 		new_px = c->px - sin(c->view_angle) * c->speed_multiplier;
 		new_py = c->py + cos(c->view_angle) * c->speed_multiplier;
-		return (check_collision_left_right(c, new_px, new_py));
+		return (check_collision(c, new_px, new_py));
 	}
 	return (0);
 }
