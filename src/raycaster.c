@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 20:30:47 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/05 09:44:20 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_ray_dir_and_cast_position(t_caster *c)
 
 static void	trace_ray_until_wall_hit(t_caster *c)
 {
-	int	hit;
+	int hit;
 
 	hit = 0;
 	while (!hit)
@@ -60,7 +60,7 @@ static void	trace_ray_until_wall_hit(t_caster *c)
 			c->wall_hit_is_horizontal = 1;
 		}
 		if (c->map_x >= c->map->map_width || c->map_y >= c->map->map_height)
-			break ;
+			break;
 		if (c->map->map_arr[c->map_y][c->map_x] == '1')
 			hit = 1;
 	}
@@ -102,7 +102,6 @@ static void	get_wall_texture(t_caster *c)
 static void	get_texture_offset(t_caster *c)
 {
 	double	wall_texture_offset;
-
 	if (c->wall_hit_is_horizontal == 0)
 		wall_texture_offset = c->py + c->wall_dist * c->ray_dir_y;
 	else
@@ -113,9 +112,9 @@ static void	get_texture_offset(t_caster *c)
 
 static void	render_wall_column(t_caster *c, int x)
 {
-	int	y;
-	int	pixel_pos;
-	int	tex_index;
+	int y;
+	int pixel_pos;
+	int tex_index;
 
 	y = c->draw_start;
 	while (y <= c->draw_end)
@@ -150,9 +149,9 @@ static void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
 	}
 }
 
-void	raycaster(t_caster *c)
+void raycaster(t_caster *c)
 {
-	int	x;
+	int x;
 
 	x = -1;
 	while (++x < WIDTH)
