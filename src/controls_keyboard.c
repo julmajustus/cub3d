@@ -3,44 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   controls_keyboard.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/01 20:57:11 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/05 09:38:18 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:54:22 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int	check_collision(t_caster *c, double new_px, double new_py)
+static int check_collision(t_caster *c, double new_px, double new_py)
 {
-    int		can_move_x;
-    int		can_move_y;
-	double	dir_x;
-	double	dir_y;
+	int can_move_x;
+	int can_move_y;
+	double dir_x;
+	double dir_y;
 
-    can_move_x = 1;
-    can_move_y = 1;
+	can_move_x = 1;
+	can_move_y = 1;
 	dir_x = cos(c->view_angle) * 0.15;
 	dir_y = sin(c->view_angle) * 0.15;
 	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
 		return (0);
-    if (c->map->map_arr[(int)c->py][(int)(new_px + dir_x)] == '1' ||
-        c->map->map_arr[(int)c->py][(int)(new_px - dir_x)] == '1')
-        can_move_x = 0;
-    if (c->map->map_arr[(int)(new_py + dir_y)][(int)c->px] == '1' ||
-        c->map->map_arr[(int)(new_py - dir_y)][(int)c->px] == '1')
-        can_move_y = 0;
-    if (can_move_x)
-        c->px = new_px;
-    if (can_move_y)
-        c->py = new_py;
-    c->mmap_px = c->px * c->map->scale_x;
-    c->mmap_py = c->py * c->map->scale_y;
+	if (c->map->map_arr[(int)c->py][(int)(new_px + dir_x)] == '1' ||
+		c->map->map_arr[(int)c->py][(int)(new_px - dir_x)] == '1')
+		can_move_x = 0;
+	if (c->map->map_arr[(int)(new_py + dir_y)][(int)c->px] == '1' ||
+		c->map->map_arr[(int)(new_py - dir_y)][(int)c->px] == '1')
+		can_move_y = 0;
+	if (can_move_x)
+		c->px = new_px;
+	if (can_move_y)
+		c->py = new_py;
+	c->mmap_px = c->px * c->map->scale_x;
+	c->mmap_py = c->py * c->map->scale_y;
 	return (can_move_x || can_move_y);
 }
 
-int	movement_up_down(t_caster *c)
+int movement_up_down(t_caster *c)
 {
 	double new_px;
 	double new_py;
@@ -60,7 +61,7 @@ int	movement_up_down(t_caster *c)
 	return (0);
 }
 
-int	movement_left_right(t_caster *c)
+int movement_left_right(t_caster *c)
 {
 	double new_px;
 	double new_py;
@@ -80,12 +81,12 @@ int	movement_left_right(t_caster *c)
 	return (0);
 }
 
-static void	keys_utils(mlx_key_data_t key, t_caster *c)
+static void keys_utils(mlx_key_data_t key, t_caster *c)
 {
 	if (key.key == MLX_KEY_ESCAPE)
 	{
 		exit_mlx(c);
-		return ;
+		return;
 	}
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
 		;
@@ -93,10 +94,11 @@ static void	keys_utils(mlx_key_data_t key, t_caster *c)
 		;
 }
 
-void	keyboard_listener(mlx_key_data_t key, void *param)
+void keyboard_listener(mlx_key_data_t key, void *param)
 {
-	t_caster	*c;
+	t_caster *c;
 
 	c = (t_caster *)param;
 	keys_utils(key, c);
 }
+

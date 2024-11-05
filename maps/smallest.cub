@@ -1,0 +1,15 @@
+  NO ./textures/test_wall2.png
+
+SO ./textures/test_wall5.png
+
+WE ./textures/test_wall3.png
+
+EA ./textures/test_wall4.png
+
+
+F 220,100,0
+
+C 225,30,0  
+111
+1S1
+111
