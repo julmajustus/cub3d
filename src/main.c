@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:41:12 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/05 09:52:49 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int main(int ac, char **av)
 	}
 	init(&c, av);
 	read_description(&c);
-	// read_map(&c, av);
 	int i = -1;
 	while (c.map->map_arr[++i])
 		printf("%s", c.map->map_arr[i]);
