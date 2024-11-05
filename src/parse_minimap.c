@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:41:51 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:48:39 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void draw_minimap(t_caster *c, size_t x, size_t y, int flag)
 void draw_player_to_minimap(t_caster *c)
 {
 	draw_minimap(c, c->mmap_px, c->mmap_py, 3);
-	printf("Player pos X: %f Y: %f\n", c->mmap_px, c->mmap_py);
+	printf("Player pos Y: %f X: %f\n", c->py, c->px);
 	printf("speed_multiplier: %f\n", c->speed_multiplier);
 }
 
