@@ -1,13 +1,17 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
+NO ./textures/test_wall2.png
 
-WE ./path_to_the_west_texture
+SO ./textures/test_wall5.png
 
-EA ./path_to_the_east_texture
+WE ./textures/test_wall3.png
+
+
+EA ./textures/test_wall4.png
 
 
 F 0,66,0
 C 225,211,245
+
+
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
