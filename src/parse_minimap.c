@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/06 23:15:04 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/07 00:39:20 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void parse_minimap(t_caster *c)
 	}
 	else if (camera_offset_x > (c->map->map_width * c->map->scale_x) - MINIMAP_SIZE)
 	{
+		// 넘지않도록 미니맵윈도우크기 , 오프셋 조정
 		camera_offset_x = (c->map->map_width * c->map->scale_x) - MINIMAP_SIZE;
 	}
 
@@ -177,15 +178,63 @@ void parse_minimap(t_caster *c)
 				draw_minimap(c, minimap_x, minimap_y, 1); // 벽 타일
 			else if (tile == '0')
 				draw_minimap(c, minimap_x, minimap_y, 0); // 빈 공간
-
 			x++;
 		}
 		y++;
 	}
 
-	//플레이어를 미니맵에 그리기 (플레이어 위치는 항상 일정하게 표시)
+	// 플레이어를 미니맵에 그리기 (플레이어 위치는 항상 일정하게 표시)
+	//  플레이어의 위치 계산 (camera_offset 고려)
 	int player_x = (int)(c->px * c->map->scale_x) - camera_offset_x;
 	int player_y = (int)(c->py * c->map->scale_y) - camera_offset_y;
-	draw_minimap(c, player_x, player_y, 2);
-	// draw_minimap(c, PLAYER_CENTER, PLAYER_CENTER, 2);
+
+	// 미니맵 경계를 넘지 않도록 제한
+	if (player_x < 0)
+		player_x = 0;
+	else if (player_x >= MINIMAP_SIZE)
+		player_x = MINIMAP_SIZE - 1;
+
+	if (player_y < 0)
+		player_y = 0;
+	else if (player_y >= MINIMAP_SIZE)
+		player_y = MINIMAP_SIZE - 1;
+
+	// 맵 인덱스를 계산할 때 scale_x와 scale_y로 나눈 후 범위 체크
+	printf("player_x : %d\n player_y : %d\n", player_x,  player_y);
+	// int map_x = (int)(player_x / c->map->scale_x);
+	// int map_y = (int)(player_y / c->map->scale_y);
+	int map_x = (int)(c->px); // px는 실제 좌표이므로 바로 인덱스로 사용
+	int map_y = (int)(c->py);
+
+	// map_arr의 범위가 유효한지 확인
+	if (map_x >= 0 && map_x < c->map->map_width && map_y >= 0 && map_y < c->map->map_height)
+	{
+		// 디버깅용 출력
+		printf("map_arr[%d][%d] : %c\n", map_y, map_x, c->map->map_arr[map_y][map_x]);
+
+		// 벽이 있는지 체크
+		if (c->map->map_arr[map_y][map_x] == '1')
+		{
+			// 벽에 부딪히지 않도록 수정
+			if (player_x < 0)
+				player_x = 0;
+			else if (player_x >= MINIMAP_SIZE)
+				player_x = MINIMAP_SIZE - 1;
+
+			if (player_y < 0)
+				player_y = 0;
+			else if (player_y >= MINIMAP_SIZE)
+				player_y = MINIMAP_SIZE - 1;
+		}
 	}
+	else
+	{
+		// 인덱스가 범위를 벗어나는 경우 처리
+		printf("Invalid map indices: map_x = %d, map_y = %d\n", map_x, map_y);
+	}
+
+	// 미니맵에 플레이어 그리기
+	draw_minimap(c, player_x, player_y, 2);
+
+	// draw_minimap(c, PLAYER_CENTER, PLAYER_CENTER, 2);
+}
