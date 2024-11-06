@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/04 11:00:00 by skwon2           ###   ########.fr        #
+#    Updated: 2024/11/04 11:27:14 by skwon2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
-	@rm -rf $(MLX42_DIR)/build
+#@rm -rf $(MLX42_DIR)/build
 
 re: fclean all
 
