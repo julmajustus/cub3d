@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/03 00:41:38 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:57:57 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ static void init_textures(t_caster *c)
     c->textures->west_texture = NULL;
     c->textures->floor_color = 0;
     c->textures->ceiling_color = 0;
+    c->textures->mmap_space = 0;
+    c->textures->mmap_wall = 0;
+    c->textures->player = 0;
 }
 
 static void init_raycaster(t_caster *c)

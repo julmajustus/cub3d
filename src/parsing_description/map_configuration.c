@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/04 10:55:04 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/05 11:02:56 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void parse_texture_color(t_caster *c, char *line, const char *order, T_Di
 					c->textures->west_texture = mlx_load_png(c->map->texture_path);
 				else if (i == ET)
 					c->textures->east_texture = mlx_load_png(c->map->texture_path);
+				free_and_null((void **)&c->map->texture_path);
 			}
 		}
 		else if (i == F || i == C)
