@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:44:20 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/07 09:48:54 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,19 @@ static void	trace_ray_until_wall_hit(t_caster *c)
 static void	get_wall_dist_and_height(t_caster *c)
 {
 	if (c->wall_hit_is_horizontal == 0)
-		c->wall_dist = (c->map_x - c->px + (1 - c->step_x) / 2) / c->ray_dir_x;
+		c->wall_dist = (c->map_x - c->px + \
+			(1 - c->step_x) / 2) / c->ray_dir_x;
 	else
-		c->wall_dist = (c->map_y - c->py + (1 - c->step_y) / 2) / c->ray_dir_y;
+		c->wall_dist = (c->map_y - c->py + \
+			(1 - c->step_y) / 2) / c->ray_dir_y;
+	printf("Check wall_dist %f\n", c->wall_dist);
 	c->wall_height = (int)(HEIGHT / c->wall_dist);
 	c->draw_start = -c->wall_height / 2 + HEIGHT / 2;
 	if (c->draw_start < 0)
 		c->draw_start = 0;
 	c->draw_end = c->wall_height / 2 + HEIGHT / 2;
 	if (c->draw_end >= HEIGHT)
-		c->draw_end = HEIGHT - 1;
+		c->draw_end = HEIGHT;
 }
 
 static void	get_wall_texture(t_caster *c)
@@ -117,7 +120,7 @@ static void	render_wall_column(t_caster *c, int x)
 	int tex_index;
 
 	y = c->draw_start;
-	while (y <= c->draw_end)
+	while (y < c->draw_end)
 	{
 		pixel_pos = (y - (-c->wall_height / 2 + HEIGHT / 2));
 		c->tex_y = ((pixel_pos * TEXTURE_HEIGHT) / c->wall_height);
