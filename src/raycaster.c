@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 18:45:32 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:46:55 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	get_texture_offset(t_caster *c)
 		wall_texture_offset = c->py + c->wall_dist * c->ray_dir_y; //texture start point : where the palyer + walldistance * direction( & speed)
 	else
 		wall_texture_offset = c->px + c->wall_dist * c->ray_dir_x;// 오프셋은 벽에닿은 레이의 교차점위치를 수평이나 수직층에 해당하는 상대적위치로 계사나는 값.0 -1 상의 값이되므로
-	wall_texture_offset -= floor(wall_texture_offset);
+	wall_texture_offset -= (int)(wall_texture_offset);
 	c->tex_x = (int)(wall_texture_offset * (double)TEXTURE_WIDTH); //실제 텍스처의 픽셀좌표로 변환해야하기때문에 정확한 텍스쳐 픽셀의 위치에서 추출해 그려나가진다.
 }
 
