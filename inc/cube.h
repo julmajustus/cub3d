@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 17:43:11 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:22:54 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,12 @@ void keyboard_listener(mlx_key_data_t key, void *param);
 void parse_minimap(t_caster *c);
 void draw_player_to_minimap(t_caster *c);
 
-void raycaster(t_caster *c);
+void	raycaster(t_caster *c);
+void	get_wall_texture(t_caster *c);
+void	get_texture_offset(t_caster *c);
+void	render_wall_column(t_caster *c, int x);
+void	render_floor_and_ceiling(t_caster *c, int draw_end, int x);
+
 void render_engine(t_caster *c);
 void game_loop(void *param);
 void check_cursor_movement(t_caster *c);
