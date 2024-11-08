@@ -6,35 +6,11 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:47:01 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:57:34 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-static int check_collision(t_caster *c, double new_px, double new_py)
-{
-	int can_move_x;
-	int can_move_y;
-
-	can_move_x = 1;
-	can_move_y = 1;
-	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
-		return (0);
-	if (c->map->map_arr[(int)c->py][(int)(new_px + 0.15)] == '1' ||
-		c->map->map_arr[(int)c->py][(int)(new_px - 0.15)] == '1')
-		can_move_x = 0;
-	if (c->map->map_arr[(int)(new_py + 0.15)][(int)c->px] == '1' ||
-		c->map->map_arr[(int)(new_py - 0.15)][(int)c->px] == '1')
-		can_move_y = 0;
-	if (can_move_x)
-		c->px = new_px;
-	if (can_move_y)
-		c->py = new_py;
-	c->mmap_px = c->px * c->map->scale_x;
-	c->mmap_py = c->py * c->map->scale_y;
-	return (can_move_x || can_move_y);
-}
 
 int movement_up_down(t_caster *c)
 {

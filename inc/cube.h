@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:46:36 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:56:52 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # endif
 # ifndef TEXTURE
 #  define TEXTURE 2
+# endif
+# ifndef COLLISION_RADIUS
+#  define COLLISION_RADIUS 0.15
 # endif
 
 typedef struct s_line
@@ -155,9 +158,8 @@ void raycaster(t_caster *c);
 void render_engine(t_caster *c);
 void game_loop(void *param);
 void check_cursor_movement(t_caster *c);
-// void	cursor_movement(double x, double y, void *param);
-// int		cursor_movement(t_caster *c);
 int check_movement(t_caster *c);
+int	check_collision(t_caster *c, double new_px, double new_py);
 
 void exit_mlx(t_caster *c);
 void exit_failure(t_caster *c, char *msg);
