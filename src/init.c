@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 16:21:10 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:34:46 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void init_raycaster(t_caster *c)
     c->mmap_px = 0;
     c->mmap_py = 0;
     c->view_angle = 0;
-    c->plane_x = 0.66;
-    c->plane_y = 0;
+	c->plane_x = 0.66 * sin(c->view_angle);
+	c->plane_y = -0.66 * cos(c->view_angle);
     c->view_offset = 0;
     c->ray_dir_x = 0;
     c->ray_dir_y = 0;

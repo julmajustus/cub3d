@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 16:20:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:43:11 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ typedef struct s_caster
 	int tex_y;
 	uint32_t pixel_color;
 	double cursor_pos;
+	double	cos_table[WIDTH];
+	double	sin_table[WIDTH];
 } t_caster;
 
 void init(t_caster *c, char **av);
