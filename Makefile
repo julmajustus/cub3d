@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/08 15:57:23 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/08 16:16:32 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ LIBFT           = $(LIBFT_DIR)/libft.a
 MLX42_LIB       = $(MLX42_DIR)/build/libmlx42.a
 GLFW_LIB_PATH   = /opt/homebrew/opt/glfw/lib
 GLFW_INCLUDE_PATH = /opt/homebrew/opt/glfw/include
+BONUS_FLAGS		=
 
 RM              = rm -f
 CC              = clang
@@ -49,6 +50,8 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 
+bonus: BONUS_FLAGS += -DBONUS=1
+bonus: all
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -70,11 +73,11 @@ $(MLX42_LIB):
 # Object file compilation
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/*.h
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(BONUS_FLAGS) -c $< -o $@
 
 # Targets
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42_LIB) -L$(GLFW_LIB_PATH) -lm -lglfw -o $(NAME);
+	@$(CC) $(CFLAGS) $(BONUS_FLAGS) $(OBJ) $(LIBFT) $(MLX42_LIB) -L$(GLFW_LIB_PATH) -lm -lglfw -o $(NAME);
 	@echo "\n$(Yellow)-----CUB3D HAS BEEN CREATED-----$(Ending)\n"
 
 # Clean targets
@@ -89,7 +92,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 
 Red = \033[0;31m
 Green = \033[0;32m

@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:47:47 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:10:52 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void game_loop(void *param)
 	redraw = 0;
 	c->cursor_pos = 0;
 	c->speed_multiplier = c->window->handle->delta_time * 2.2;
-	check_cursor_movement(c);
+	if (BONUS)
+		check_cursor_movement(c);
 	redraw |= movement_up_down(c);
 	redraw |= movement_left_right(c);
 	redraw |= rotate_view_keyboard(c);
@@ -67,12 +68,6 @@ int main(int ac, char **av)
 	}
 	init(&c, av);
 	read_description(&c);
-	int i = -1;
-	while (c.map->map_arr[++i])
-		printf("%s", c.map->map_arr[i]);
-	//	i = -1;
-	//	while (++i < 4096)
-	//		printf("Pixel data: %d\n", c.textures->wall_texture->pixels[i]);
 	render_engine(&c);
 	mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);
