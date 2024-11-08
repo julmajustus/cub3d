@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 15:18:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:47:01 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int check_collision(t_caster *c, double new_px, double new_py)
 {
 	int can_move_x;
 	int can_move_y;
-	
+
 	can_move_x = 1;
 	can_move_y = 1;
 	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
@@ -96,4 +96,3 @@ void keyboard_listener(mlx_key_data_t key, void *param)
 	c = (t_caster *)param;
 	keys_utils(key, c);
 }
-

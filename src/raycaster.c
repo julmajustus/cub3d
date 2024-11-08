@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/07 09:48:54 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:51:35 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static void	get_wall_dist_and_height(t_caster *c)
 	else
 		c->wall_dist = (c->map_y - c->py + \
 			(1 - c->step_y) / 2) / c->ray_dir_y;
-	printf("Check wall_dist %f\n", c->wall_dist);
+	if (c->view_offset == 0)
+		printf("Check wall_dist %f\n", c->wall_dist);
 	c->wall_height = (int)(HEIGHT / c->wall_dist);
 	c->draw_start = -c->wall_height / 2 + HEIGHT / 2;
 	if (c->draw_start < 0)
@@ -83,8 +84,7 @@ static void	get_wall_dist_and_height(t_caster *c)
 	if (c->draw_end >= HEIGHT)
 		c->draw_end = HEIGHT;
 }
-
-static void	get_wall_texture(t_caster *c)
+static void get_wall_texture(t_caster *c)
 {
 	if (c->wall_hit_is_horizontal == 0)
 	{
@@ -106,11 +106,11 @@ static void	get_texture_offset(t_caster *c)
 {
 	double	wall_texture_offset;
 	if (c->wall_hit_is_horizontal == 0)
-		wall_texture_offset = c->py + c->wall_dist * c->ray_dir_y;
+		wall_texture_offset = c->py + c->wall_dist * c->ray_dir_y; //texture start point : where the palyer + walldistance * direction( & speed)
 	else
-		wall_texture_offset = c->px + c->wall_dist * c->ray_dir_x;
+		wall_texture_offset = c->px + c->wall_dist * c->ray_dir_x;// 오프셋은 벽에닿은 레이의 교차점위치를 수평이나 수직층에 해당하는 상대적위치로 계사나는 값.0 -1 상의 값이되므로
 	wall_texture_offset -= floor(wall_texture_offset);
-	c->tex_x = (int)(wall_texture_offset * (double)TEXTURE_WIDTH);
+	c->tex_x = (int)(wall_texture_offset * (double)TEXTURE_WIDTH); //실제 텍스처의 픽셀좌표로 변환해야하기때문에 정확한 텍스쳐 픽셀의 위치에서 추출해 그려나가진다.
 }
 
 static void	render_wall_column(t_caster *c, int x)
@@ -122,8 +122,8 @@ static void	render_wall_column(t_caster *c, int x)
 	y = c->draw_start;
 	while (y < c->draw_end)
 	{
-		pixel_pos = (y - (-c->wall_height / 2 + HEIGHT / 2));
-		c->tex_y = ((pixel_pos * TEXTURE_HEIGHT) / c->wall_height);
+		pixel_pos = (y - (-c->wall_height / 2 + HEIGHT / 2)); //시작이 0이되게하기위해서 //벽의 화면에서의 위치와 텍스처에서의 위치를 연관 짓기 위한 준비 :y는 렉더링한 픽셀의 위치
+			c->tex_y = ((pixel_pos * TEXTURE_HEIGHT) / c->wall_height); //
 		if (c->tex_y >= TEXTURE_HEIGHT)
 			c->tex_y = TEXTURE_HEIGHT - 1;
 		if (c->tex_y < 0)
@@ -155,6 +155,7 @@ static void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
 void raycaster(t_caster *c)
 {
 	int x;
+
 
 	x = -1;
 	while (++x < WIDTH)

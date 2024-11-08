@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:37:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:46:36 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-
+# define MINIMAP_WIDTH 200  // 미니맵 너비
+# define MINIMAP_HEIGHT 200 // 미니맵 높이
 # ifndef WIDTH
 #  define WIDTH 1920
 # endif
@@ -54,10 +55,10 @@ typedef struct s_line
 
 typedef enum 
 {
-    NT,
-    ST,
-    WT,
-   	ET,
+    NO,
+    SO,
+    WE,
+   	EA,
 	F,
 	C,
 	end
@@ -84,6 +85,10 @@ typedef struct s_textures
 	mlx_texture_t *east_texture;
 	uint32_t ceiling_color;
 	uint32_t floor_color;
+	mlx_texture_t *mmap_wall;
+	mlx_texture_t *mmap_space;
+	mlx_texture_t *player;
+
 } t_textures;
 
 typedef struct s_window
