@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/05 09:35:06 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/07 18:38:17 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(INC_DIR) \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
-                  -I$(GLFW_INCLUDE_PATH) -Ofast\
+                  -I$(GLFW_INCLUDE_PATH) -O3 \
                   -g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
@@ -73,7 +73,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/*.h
 
 # Targets
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42_LIB) -L$(GLFW_LIB_PATH) -lglfw -o $(NAME);
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42_LIB) -L$(GLFW_LIB_PATH) -lm -lglfw -o $(NAME);
 	@echo "\n$(Yellow)-----CUB3D HAS BEEN CREATED-----$(Ending)\n"
 
 # Clean targets
