@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/07 11:02:46 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:50:09 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ void draw_player_to_minimap(t_caster *c)
 
 void draw_minimap(t_caster *c, int x, int y, int flag)
 {
-	int i, j;
+	int i;
+	int j;
 	uint32_t color;
-	
+	mlx_image_t *window;
+
 	if (flag == 1)
 		color = 0x0000FF;
 	if (flag == 0)
 		color = 0xFFFFFF; // 벽은 검은색, 빈 공간은 흰색
 	if (flag == 2)
 		color = 0xFF0000;
-
-	mlx_image_t *window = c->window->minimap; //CALL THE MINIMAP IMAGE FORMAT TO WINDOW
+	window = c->window->minimap; //CALL THE MINIMAP IMAGE FORMAT TO WINDOW
 	i = -1;
 	while (++i < c->map->scale_y)
 	{
 		j = -1;
 		while (++j < c->map->scale_x)
-			mlx_put_pixel(window, x + j, y + i, color); // EACH TILE GETS TO BE FILLED 
+		{
+			// mlx_put_pixel(window, x + j, y + i, color); // EACH TILE GETS TO BE FILLED
+			if (x + j < (int) window->width && y + i < (int) window->height)
+				mlx_put_pixel(window, x + j, y + i, color);
+		}
 	}
 }
 

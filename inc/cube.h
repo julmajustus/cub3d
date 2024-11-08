@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/06 22:22:39 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/08 10:05:54 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ typedef struct s_line
 
 typedef enum 
 {
-    NT,
-    ST,
-    WT,
-   	ET,
+    NO,
+    SO,
+    WE,
+   	EA,
 	F,
 	C,
 	end
