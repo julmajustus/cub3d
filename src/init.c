@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:47:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:21:10 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ static void init_map(t_caster *c, char **av)
 
 static void init_textures(t_caster *c)
 {
-    // c->textures = malloc(sizeof(t_textures));
-    // if (!c->textures)
-    //     exit_failure(c, "textures malloc failed");
-    // c->textures->north_texture = mlx_load_png("./textures/test_wall2.png");
-    // c->textures->south_texture = mlx_load_png("./textures/test_wall5.png");
-    // c->textures->east_texture = mlx_load_png("./textures/test_wall3.png");
-    // c->textures->west_texture = mlx_load_png("./textures/test_wall4.png");
-    // if (!c->textures->north_texture || !c->textures->south_texture || !c->textures->west_texture || !c->textures->east_texture)
-    //     exit_failure(c, "Loading textures failed");
     c->textures = malloc(sizeof(t_textures));
     if (!c->textures)
         exit_failure(c, "textures malloc failed");
@@ -101,7 +92,6 @@ void init(t_caster *c, char **av)
     c->window->handle = NULL;
     c->window->view = NULL;
     c->window->minimap = NULL;
-    c->window->player = NULL;
     c->px = 0;
     c->py = 0;
     c->cursor_pos = 0;
