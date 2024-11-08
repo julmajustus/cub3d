@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/08 10:46:16 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/08 15:57:23 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/raycaster.c \
                   $(SRC_DIR)/rotate_view.c \
                   $(SRC_DIR)/controls_keyboard.c \
+                  $(SRC_DIR)/check_collision.c \
                   $(SRC_DIR)/exit_mlx.c \
                   $(SRC_DIR)/parsing_description/file_exist.c \
                   $(SRC_DIR)/parsing_description/map_configuration.c \
