@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/07 10:14:27 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:50:59 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void set_images_to_window(t_caster *c)
 {
 	c->window->view = mlx_new_image(c->window->handle, WIDTH, HEIGHT);
-	c->window->minimap = mlx_new_image(c->window->handle, WIDTH, HEIGHT);
+	c->window->minimap = mlx_new_image(c->window->handle, 200, 200);
 	c->window->player = mlx_new_image(c->window->handle, WIDTH, HEIGHT);
 	mlx_image_to_window(c->window->handle, c->window->view, 0, 0);
 	mlx_image_to_window(c->window->handle, c->window->minimap, 20, 20);
