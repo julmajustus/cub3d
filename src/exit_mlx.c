@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:39:09 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:47:17 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void exit_mlx(t_caster *c)
 		close(c->map->map_fd);
 	if (c->map->texture_fd > -1)
 		close(c->map->texture_fd);
-	if (c->map->texture_path)
-		free(c->map->texture_path);
 	if (c->map)
 		free(c->map);
 	if (c->window)
@@ -52,8 +50,6 @@ void exit_failure(t_caster *c, char *msg)
 		close(c->map->map_fd);
 	if (c->map->texture_fd > -1)
 		close(c->map->texture_fd);
-	if (c->map->texture_path)
-		free(c->map->texture_path);
 	if (c->map)
 		free(c->map);
 	if (c->window)
