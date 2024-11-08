@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:51:35 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:45:32 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	init_ray_dir_and_cast_position(t_caster *c)
 {
-	c->ray_dir_x = cos(c->view_angle) + c->plane_x * c->view_offset;
-	c->ray_dir_y = sin(c->view_angle) + c->plane_y * c->view_offset;
+	//c->ray_dir_x = cos(c->view_angle) + c->plane_x * c->view_offset;
+	//c->ray_dir_y = sin(c->view_angle) + c->plane_y * c->view_offset;
 	c->dist_increment_x = fabs(1 / c->ray_dir_x);
 	c->dist_increment_y = fabs(1 / c->ray_dir_y);
 	if (c->ray_dir_x < 0)
@@ -152,15 +152,30 @@ static void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
 	}
 }
 
+void	precalculate_ray_directions(t_caster *c)
+{
+	int x;
+
+	x = -1;
+    while (++x < WIDTH)
+	{
+		c->view_offset = 2 * x / (double)WIDTH - 1;
+		c->cos_table[x] = cos(c->view_angle) + c->plane_x * c->view_offset;
+		c->sin_table[x] = sin(c->view_angle) + c->plane_y * c->view_offset;
+    }
+}
+
 void raycaster(t_caster *c)
 {
 	int x;
 
-
+	precalculate_ray_directions(c);
 	x = -1;
 	while (++x < WIDTH)
 	{
-		c->view_offset = 2 * x / (double)WIDTH - 1;
+		c->ray_dir_x = c->cos_table[x];
+		c->ray_dir_y = c->sin_table[x];
+		//c->view_offset = 2 * x / (double)WIDTH - 1;
 		c->map_x = (int)c->px;
 		c->map_y = (int)c->py;
 		init_ray_dir_and_cast_position(c);
