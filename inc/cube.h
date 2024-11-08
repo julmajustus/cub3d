@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 15:56:52 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:09:31 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+# ifndef BONUS
+#  define BONUS 0
+# endif
 # define MINIMAP_WIDTH 200  // 미니맵 너비
 # define MINIMAP_HEIGHT 200 // 미니맵 높이
 # ifndef WIDTH
