@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 16:10:33 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:52:57 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	init(t_caster *c, char **av)
 		exit_failure(c, "window struct malloc failed");
 	ft_bzero(c->window, sizeof(t_window));
 	c->speed_multiplier = 0.02;
-	c->plane_x = 0.66 * sin(c->view_angle);
-	c->plane_y = -0.66 * cos(c->view_angle);
+	c->plane_x = 0.66;// * sin(c->view_angle);
+	//c->plane_y = -0.66 * cos(c->view_angle);
 	init_map(c, av);
 	init_textures(c);
 	init_mlx(c);

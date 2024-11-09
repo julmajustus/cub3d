@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:20:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/08 20:43:25 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:44:33 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,16 @@ static void set_player_direction(t_caster *c, size_t x, size_t y)
 
 static void check_else_char(t_caster *c, char character)
 {
-    if (ft_strchr("01D NSWE", character) == NULL)
-        exit_failure(c, "Invalid characters in the map.");
+	if (BONUS)
+	{
+		if (ft_strchr("01D NSWE", character) == NULL)
+			exit_failure(c, "Invalid characters in the map.");
+	}
+	else
+	{
+		if (ft_strchr("01 NSWE", character) == NULL)
+			exit_failure(c, "Invalid characters in the map.");
+	}
 }
 
 static void store_position_player(t_caster *c, int *found, size_t x, size_t y)
