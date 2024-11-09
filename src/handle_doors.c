@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:39:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 14:31:11 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:46:51 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,21 @@ t_door	*find_door_in_view(t_caster *c, double max_distance)
 	ray_travel_dist = 0.0;
 	c->get_door->ray_x = c->px;
 	c->get_door->ray_y = c->py;
-	c->get_door->ray_step_x = c->cos_table[WIDTH / 2] * 0.1;
-	c->get_door->ray_step_y = c->sin_table[WIDTH / 2] * 0.1;
+	c->get_door->ray_step_x = c->cos_table[WIDTH / 2] * 0.2;
+	c->get_door->ray_step_y = c->sin_table[WIDTH / 2] * 0.2;
 	while (ray_travel_dist < max_distance)
 	{
 		c->get_door->map_x = (int)c->get_door->ray_x;
 		c->get_door->map_y = (int)c->get_door->ray_y;
-		if (c->map->map_arr[c->get_door->map_y][c->get_door->map_x] == 'D' \
-						&& c->map->map_arr[(int)c->py][(int)c->px] != 'D')
+		if (c->get_door->map_x == (int)c->px \
+			&& c->get_door->map_y == (int)c->py \
+			&& c->map->map_arr[(int)c->py][(int)c->px] == 'D')
+			;
+		else if (c->map->map_arr[c->get_door->map_y][c->get_door->map_x] == 'D')
 			return (find_door_at(c, c->get_door->map_y, c->get_door->map_x));
 		c->get_door->ray_x += c->get_door->ray_step_x;
 		c->get_door->ray_y += c->get_door->ray_step_y;
-		ray_travel_dist += sqrt(c->get_door->ray_step_x \
-						* c->get_door->ray_step_x + c->get_door->ray_step_y \
-						* c->get_door->ray_step_y);
+		ray_travel_dist += 0.2;
 	}
 	return (NULL);
 }
@@ -92,7 +93,7 @@ void	store_door_info(t_caster *c, const char *line)
 		if (line[x] == 'D')
 		{
 			c->doors = ft_realloc(c->doors, (sizeof(t_door) * c->door_count), \
-						(sizeof(t_door) * (c->door_count + 1)));
+			 (sizeof(t_door) * (c->door_count + 1)));
 			if (!c->doors)
 				exit_failure(c, "Failed to allocate memory for doors");
 			new_door = &c->doors[c->door_count];
