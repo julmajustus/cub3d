@@ -6,13 +6,13 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/08 10:50:15 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:36:24 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void parse_texture_color(t_caster *c, char *line, T_Dir *i)
+static void parse_texture_color(t_caster *c, char *line, t_dir *i)
 {
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
 	{
@@ -41,7 +41,7 @@ static void parse_texture_color(t_caster *c, char *line, T_Dir *i)
 		exit_failure(c, "There is wrong text in between the description.");
 }
 
-void init_var(T_Dir *i, const char **order)
+void init_var(t_dir *i, const char **order)
 {
 	order[0] = "NO ";
 	order[1] = "SO ";
@@ -63,7 +63,7 @@ int whole_space_line(char *str)
 	return (true);
 }
 
-void process_line(t_caster *c, char **line, T_Dir *i)
+void process_line(t_caster *c, char **line, t_dir *i)
 {
 	char *new_line;
 	int width;
@@ -88,14 +88,16 @@ void process_line(t_caster *c, char **line, T_Dir *i)
 		if (*line)
 			free_and_null((void **)line);
 		*line = new_line;
-		append_array(*line, &c->map->map_arr, &c->map->map_height);
+		if (ft_strchr(*line, 'D'))
+            store_door_info(c, *line);
+        append_array(*line, &c->map->map_arr, &c->map->map_height);
 	}
 }
 
 void check_map(t_caster *c)
 {
 	char *line;
-	T_Dir i;
+	t_dir i;
 
 	i = NO;
 	line = get_next_line(c->map->map_fd);

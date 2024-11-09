@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 15:57:34 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 23:32:24 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ static void keys_utils(mlx_key_data_t key, t_caster *c)
 		return;
 	}
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
-		;
+	{
+		printf("SPaceRegisterd\n");
+		toggle_door(c, 1.0);
+		render_engine(c);
+	}
 	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
 		;
 }

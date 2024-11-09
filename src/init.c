@@ -6,11 +6,24 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 18:34:46 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:17:09 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static void init_get_door(t_caster *c)
+{
+	c->get_door = malloc(sizeof(t_get_door));
+	if (!c->get_door)
+		exit_failure(c, "get_door struct malloc failed");
+	c->get_door->ray_x = 0;
+	c->get_door->ray_y = 0;
+	c->get_door->ray_step_x = 0;
+	c->get_door->ray_step_y = 0;
+	c->get_door->map_x = 0;
+	c->get_door->map_y = 0;
+}
 
 static void init_map(t_caster *c, char **av)
 {
@@ -35,6 +48,7 @@ static void init_textures(t_caster *c)
     c->textures->south_texture = NULL;
     c->textures->east_texture = NULL;
     c->textures->west_texture = NULL;
+    c->textures->door_texture = NULL;
     c->textures->floor_color = 0;
     c->textures->ceiling_color = 0;
     c->textures->mmap_space = 0;
@@ -70,6 +84,8 @@ static void init_raycaster(t_caster *c)
     c->tex_x = 0;
     c->tex_y = 0;
     c->pixel_color = 0;
+	c->door_count = 0;
+	c->doors = NULL;
 }
 
 static void init_mlx(t_caster *c)
@@ -99,4 +115,5 @@ void init(t_caster *c, char **av)
     init_textures(c);
     init_raycaster(c);
     init_mlx(c);
+	init_get_door(c);
 }

@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:20:13 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 19:22:01 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/08 22:25:40 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	get_wall_texture(t_caster *c)
 {
+	if (c->map->map_arr[c->map_y][c->map_x] == 'D')
+	{
+		c->wall_texture = c->textures->door_texture;
+		return ;
+	}
 	if (c->wall_hit_is_horizontal == 0)
 	{
 		if (c->ray_dir_x > 0)
