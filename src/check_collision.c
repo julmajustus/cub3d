@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:55:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 23:21:04 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:49:34 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cube.h"
@@ -22,7 +22,7 @@ static void	check_collision_left_right(t_caster *c, int *moved, double new_px)
 		x_radius = new_px - COLLISION_RADIUS;
 	if (c->map->map_arr[(int)c->py][(int)x_radius] == '0' \
 		|| (c->map->map_arr[(int)c->py][(int)x_radius] == 'D' \
-		&& is_door_open(c,(int)c->py, (int)x_radius)))
+		&& is_door_open(c, (int)c->py, (int)x_radius)))
 	{
 		c->px = new_px;
 		*moved = 1;
@@ -40,7 +40,7 @@ static void	check_collision_up_down(t_caster *c, int *moved, double new_py)
 		y_radius = new_py - COLLISION_RADIUS;
 	if (c->map->map_arr[(int)y_radius][(int)c->px] == '0' \
 		|| (c->map->map_arr[(int)y_radius][(int)c->px] == 'D' \
-		&& is_door_open(c,(int)y_radius, (int)c->px)))
+		&& is_door_open(c, (int)y_radius, (int)c->px)))
 	{
 		c->py = new_py;
 		*moved = 1;

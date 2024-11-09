@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 23:21:18 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:57:47 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ static void	trace_ray_until_wall_hit(t_caster *c)
 		}
 		if (c->map_x >= c->map->map_width || c->map_y >= c->map->map_height)
 			break ;
-		if (c->map->map_arr[c->map_y][c->map_x] == 'D')
-		{
-			if (!is_door_open(c, c->map_y, c->map_x))
-				hit = 1; // Treat as wall if door is closed
-		}
+		if (c->map->map_arr[c->map_y][c->map_x] == 'D' \
+			&& !is_door_open(c, c->map_y, c->map_x))
+			hit = 1;
 		else if (c->map->map_arr[c->map_y][c->map_x] == '1')
-			hit = 1; // Wall hit
+			hit = 1;
 	}
 }
 
