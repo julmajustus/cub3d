@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/08 19:22:28 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/09 14:10:21 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/parsing_description/read_description.c \
                   $(SRC_DIR)/parsing_description/find_player.c \
                   $(SRC_DIR)/parsing_description/parsing_colors.c \
-                  $(SRC_DIR)/parsing_description/check_wall.c
+                  $(SRC_DIR)/parsing_description/check_wall.c \
+                  $(SRC_DIR)/handle_doors.c
 
 OBJ_DIR         = obj
 OBJ             = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -48,7 +49,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
                   -I$(GLFW_INCLUDE_PATH) -O3 \
-                  #-g -ggdb3 -fsanitize=address
+                  -g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 

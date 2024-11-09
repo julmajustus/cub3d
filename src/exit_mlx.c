@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:47:17 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:20:44 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void exit_mlx(t_caster *c)
 		free(c->map);
 	if (c->window)
 		free(c->window);
+	if (c->doors)
+		free(c->doors);
+	if (c->get_door)
+		free(c->get_door);
 	if (c->textures)
 	{
 		if (c->textures->north_texture)
@@ -35,6 +39,8 @@ void exit_mlx(t_caster *c)
 			mlx_delete_texture(c->textures->east_texture);
 		if (c->textures->west_texture)
 			mlx_delete_texture(c->textures->west_texture);
+		if (c->textures->door_texture)
+			mlx_delete_texture(c->textures->door_texture);
 		free(c->textures);
 	}
 	exit(EXIT_SUCCESS);
@@ -54,6 +60,10 @@ void exit_failure(t_caster *c, char *msg)
 		free(c->map);
 	if (c->window)
 		free(c->window);
+	if (c->doors)
+		free(c->doors);
+	if (c->get_door)
+		free(c->get_door);
 	if (c->textures)
 	{
 		if (c->textures->north_texture)
@@ -64,6 +74,8 @@ void exit_failure(t_caster *c, char *msg)
 			mlx_delete_texture(c->textures->east_texture);
 		if (c->textures->west_texture)
 			mlx_delete_texture(c->textures->west_texture);
+		if (c->textures->door_texture)
+			mlx_delete_texture(c->textures->door_texture);
 		free(c->textures);
 	}
 	// printf("%s\n", msg);
