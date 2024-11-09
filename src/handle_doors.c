@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:39:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 19:46:51 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:51:12 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	store_door_info(t_caster *c, const char *line)
 		if (line[x] == 'D')
 		{
 			c->doors = ft_realloc(c->doors, (sizeof(t_door) * c->door_count), \
-			 (sizeof(t_door) * (c->door_count + 1)));
+				(sizeof(t_door) * (c->door_count + 1)));
 			if (!c->doors)
 				exit_failure(c, "Failed to allocate memory for doors");
 			new_door = &c->doors[c->door_count];
