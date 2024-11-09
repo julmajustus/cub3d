@@ -6,16 +6,16 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 23:32:24 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:53:50 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int movement_up_down(t_caster *c)
+int	movement_up_down(t_caster *c)
 {
-	double new_px;
-	double new_py;
+	double	new_px;
+	double	new_py;
 
 	if (mlx_is_key_down(c->window->handle, MLX_KEY_W))
 	{
@@ -32,10 +32,10 @@ int movement_up_down(t_caster *c)
 	return (0);
 }
 
-int movement_left_right(t_caster *c)
+int	movement_left_right(t_caster *c)
 {
-	double new_px;
-	double new_py;
+	double	new_px;
+	double	new_py;
 
 	if (mlx_is_key_down(c->window->handle, MLX_KEY_A))
 	{
@@ -52,12 +52,12 @@ int movement_left_right(t_caster *c)
 	return (0);
 }
 
-static void keys_utils(mlx_key_data_t key, t_caster *c)
+static void	keys_utils(mlx_key_data_t key, t_caster *c)
 {
 	if (key.key == MLX_KEY_ESCAPE)
 	{
 		exit_mlx(c);
-		return;
+		return ;
 	}
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
 	{
@@ -69,9 +69,9 @@ static void keys_utils(mlx_key_data_t key, t_caster *c)
 		;
 }
 
-void keyboard_listener(mlx_key_data_t key, void *param)
+void	keyboard_listener(mlx_key_data_t key, void *param)
 {
-	t_caster *c;
+	t_caster	*c;
 
 	c = (t_caster *)param;
 	keys_utils(key, c);
