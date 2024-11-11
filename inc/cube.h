@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 19:43:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 00:55:24 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 #  define COLLISION_RADIUS 0.15
 # endif
 # ifndef DOOR_TOGGLE_DISTANCE
-#  define DOOR_TOGGLE_DISTANCE 1.0
+#  define DOOR_TOGGLE_DISTANCE 1.5
 # endif
 
 typedef struct s_line
@@ -92,6 +92,18 @@ typedef struct s_door
 	int		is_open;
 }	t_door;
 
+typedef struct s_sprite
+{
+	double			x;
+	double			y;
+	int				is_visible;
+	int				frame_count;
+	int				current_frame;
+	double			last_frame_time;
+	uint32_t		color;
+	mlx_texture_t	*sprite_texture;
+}   t_sprite;
+
 typedef struct s_get_door
 {
 	double	ray_x;
@@ -121,6 +133,7 @@ typedef struct s_window
 	mlx_t			*handle;
 	mlx_image_t		*view;
 	mlx_image_t		*minimap;
+	mlx_image_t		*sprite;
 }	t_window;
 
 typedef struct s_caster
@@ -164,6 +177,7 @@ typedef struct s_caster
 	t_door			*doors;
 	int				door_count;
 	t_get_door		*get_door;
+	t_sprite		*squirrel;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -207,4 +221,7 @@ int		is_door_open(t_caster *c, int y, int x);
 t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
 
+
+void    init_sprites(t_caster *c);
+void    render_sprites(t_caster *c);
 #endif

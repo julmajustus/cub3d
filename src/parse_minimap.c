@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 10:48:59 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/10 23:16:14 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void parse_minimap(t_caster *c)
 		player_y = 0;
 	else if (player_y >= MINIMAP_SIZE)
 		player_y = MINIMAP_SIZE - 1;
-	printf("player_x : %d\n player_y : %d\n", player_x,  player_y);
+	//printf("player_x : %d\n player_y : %d\n", player_x,  player_y);
 	// int map_x = (int)(c->px);
 	// int map_y = (int)(c->py);
 	// if (map_x >= 0 && map_x < c->map->map_width && map_y >= 0 && map_y < c->map->map_height)
