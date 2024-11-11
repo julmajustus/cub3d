@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 20:52:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/09 23:11:46 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	init(t_caster *c, char **av)
 	init_textures(c);
 	init_mlx(c);
 	init_get_door(c);
+	init_sprites(c);
 }

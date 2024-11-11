@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/09 14:10:21 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/09 22:19:31 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/parsing_description/find_player.c \
                   $(SRC_DIR)/parsing_description/parsing_colors.c \
                   $(SRC_DIR)/parsing_description/check_wall.c \
-                  $(SRC_DIR)/handle_doors.c
+                  $(SRC_DIR)/handle_doors.c \
+                  $(SRC_DIR)/sprite_animations.c
 
 OBJ_DIR         = obj
 OBJ             = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

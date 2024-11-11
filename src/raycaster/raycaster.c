@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 14:57:47 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 00:43:27 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static void	trace_ray_until_wall_hit(t_caster *c)
 			c->map_y += c->step_y;
 			c->wall_hit_is_horizontal = 1;
 		}
-		if (c->map_x >= c->map->map_width || c->map_y >= c->map->map_height)
-			break ;
+		if (c->map_y == (int)c->squirrel->y && c->map_x == (int)c->squirrel->x)
+			c->squirrel->is_visible = 1;
 		if (c->map->map_arr[c->map_y][c->map_x] == 'D' \
 			&& !is_door_open(c, c->map_y, c->map_x))
 			hit = 1;
@@ -88,8 +88,6 @@ static void	get_wall_dist_and_height(t_caster *c)
 	else
 		c->wall_dist = (c->map_y - c->py + \
 			(1 - c->step_y) / 2) / c->ray_dir_y;
-	if (c->view_offset == 0)
-		printf("Check wall_dist %f\n", c->wall_dist);
 	c->wall_height = (int)(HEIGHT / c->wall_dist);
 	c->draw_start = -c->wall_height / 2 + HEIGHT / 2;
 	if (c->draw_start < 0)
