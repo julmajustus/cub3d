@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 10:36:53 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:29:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # ifndef COLLISION_RADIUS
 #  define COLLISION_RADIUS 0.15
 # endif
-# ifndef DOOR_TOGGLE_DISTANCE
-#  define DOOR_TOGGLE_DISTANCE 1.5
+# ifndef ACTION_DISTANCE
+#  define ACTION_DISTANCE 1.5
 # endif
 
 typedef struct s_line
@@ -114,9 +114,11 @@ typedef struct s_sprite
     double			cam_inv;
     double			cam_x;
     double			cam_y;
+	int				collect_count;
+	double			last_spwan_time;
 }   t_sprite;
 
-typedef struct s_get_door
+typedef struct s_toggle_action
 {
 	double	ray_x;
 	double	ray_y;
@@ -124,7 +126,7 @@ typedef struct s_get_door
 	double	ray_step_y;
 	int		map_x;
 	int		map_y;
-}	t_get_door;
+}	t_toggle_action;
 
 typedef struct s_textures
 {
@@ -188,7 +190,7 @@ typedef struct s_caster
 	double			sin_table[WIDTH];
 	t_door			*doors;
 	int				door_count;
-	t_get_door		*get_door;
+	t_toggle_action	*ta;
 	t_sprite		*sp;
 }	t_caster;
 
@@ -236,4 +238,5 @@ void	toggle_door(t_caster *c, double max_distance);
 
 void    init_sprites(t_caster *c);
 void    render_sprites(t_caster *c);
+void	collect_sprite(t_caster *c);
 #endif
