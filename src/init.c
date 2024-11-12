@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 11:11:26 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:56:06 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init(t_caster *c, char **av)
 	ft_bzero(c->window, sizeof(t_window));
 	c->speed_multiplier = 0.02;
 	c->plane_x = 0.66;// * sin(c->view_angle);
-	//c->plane_y = -0.66 * cos(c->view_angle);
+	//c->plane_y = 0.66;// * cos(c->view_angle);
 	init_map(c, av);
 	init_textures(c);
 	init_mlx(c);
