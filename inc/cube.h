@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 11:29:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:02:57 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,4 +239,5 @@ void	toggle_door(t_caster *c, double max_distance);
 void    init_sprites(t_caster *c);
 void    render_sprites(t_caster *c);
 void	collect_sprite(t_caster *c);
+void	spawn_sprite(t_caster *c);
 #endif

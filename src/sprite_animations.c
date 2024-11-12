@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:05:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 11:36:32 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:42:51 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,31 @@
 
 void	spawn_sprite(t_caster *c)
 {
-	double current_time;
-	int	seed_y;
-	int	seed_x;
+	double	current_time;
+	int		seed_y;
+	int		seed_x;
+	int		new_spawn;
 
-	current_time = mlx_get_time();
-	seed_y = (int)(c->sp->last_spwan_time * current_time) % c->map->map_height;
-	seed_x = (int)(c->sp->last_spwan_time * current_time) % c->map->map_width;
+	new_spawn = 0;
+	while (!new_spawn)
+	{
+		current_time = mlx_get_time();
+		seed_y = ft_abs((int)(c->sp->last_spwan_time * c->py * current_time) % c->map->map_height);
+		seed_x = ft_abs((int)(c->sp->last_spwan_time * c->px * current_time) % c->map->map_width);
+		if (seed_y < c->map->map_height)
+		{
+			printf("Check seed_y: %d\n", seed_y);
+			if ((size_t)seed_x < ft_strlen(c->map->map_arr[seed_y]))
+			{
+				printf("Check seed_x: %d\n", seed_x);
+				if (c->map->map_arr[seed_y][seed_x] != '0')
+					continue ;
+				c->sp->y = seed_y;
+				c->sp->x = seed_x;
+				new_spawn = 1;
+			}
+		}
+	}
 	c->sp->last_spwan_time = current_time;
 	printf("Check seed_y: %d seed_x : %d\n", seed_y, seed_x);
 
@@ -41,7 +59,7 @@ void	init_sprites(t_caster *c)
     c->sp->current_frame = 0;
     c->sp->last_frame_time = 0.0;
     c->sp->x = 25.0;
-    c->sp->y = 3.0;
+    c->sp->y = 6.0;
 	c->sp->is_visible = 0;
 	c->sp->collect_count = 0;
 }
@@ -71,11 +89,9 @@ int	find_sprite_in_view(t_caster *c, double max_distance)
 
 void	collect_sprite(t_caster *c)
 {
-	spawn_sprite(c);
 	if (find_sprite_in_view(c, ACTION_DISTANCE + 1))
 	{
-		c->sp->y = -1;
-		c->sp->x = -1;
+		spawn_sprite(c);
 		c->sp->collect_count += 1;
 	}
 }
