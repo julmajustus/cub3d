@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:05:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 11:33:40 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:36:32 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	spawn_sprite(t_caster *c)
 	int	seed_x;
 
 	current_time = mlx_get_time();
-	seed_y = (int)current_time - (int)c->sp->last_spwan_time % c->map->map_height;
-	seed_x = (int)current_time - (int)c->sp->last_spwan_time % c->map->map_width;
+	seed_y = (int)(c->sp->last_spwan_time * current_time) % c->map->map_height;
+	seed_x = (int)(c->sp->last_spwan_time * current_time) % c->map->map_width;
 	c->sp->last_spwan_time = current_time;
 	printf("Check seed_y: %d seed_x : %d\n", seed_y, seed_x);
 
