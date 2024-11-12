@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:56:02 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 15:25:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:02:41 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_cursor_movement(t_caster *c)
 
 int	rotate_view_mouse(t_caster *c)
 {
-	int	retval;
+	int retval;
 
 	retval = 0;
 	if (c->cursor_pos > 0)
@@ -50,7 +50,7 @@ int	rotate_view_mouse(t_caster *c)
 
 int	rotate_view_keyboard(t_caster *c)
 {
-	int	retval;
+	int retval;
 
 	retval = 0;
 	if (mlx_is_key_down(c->window->handle, MLX_KEY_LEFT))

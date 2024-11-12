@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 20:52:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/11 20:47:34 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static void	init_map(t_caster *c, char **av)
 	c->map->map_fd = -2;
 	c->map->texture_fd = -2;
 	c->map->map_path = av[1];
+    c->mmap = malloc(sizeof(t_minmap));
+    if (!c->mmap)
+        exit_failure(c, "minimap struct malloc failed");
+    c->mmap->wall = mlx_load_png("./textures/wall.png");
+    c->mmap->space = mlx_load_png("./textures/space.png");
+    c->mmap->door = mlx_load_png("./textures/door.png");
 }
 
 static void	init_textures(t_caster *c)
@@ -60,7 +66,7 @@ void	init(t_caster *c, char **av)
 	ft_bzero(c->window, sizeof(t_window));
 	c->speed_multiplier = 0.02;
 	c->plane_x = 0.66;// * sin(c->view_angle);
-	//c->plane_y = -0.66 * cos(c->view_angle);
+	c->plane_y = 0;
 	init_map(c, av);
 	init_textures(c);
 	init_mlx(c);

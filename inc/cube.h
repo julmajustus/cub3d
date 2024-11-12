@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 19:43:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 02:04:14 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,23 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+
 # ifndef BONUS
 #  define BONUS 0
 # endif
-# define MINIMAP_WIDTH 200  // 미니맵 너비
-# define MINIMAP_HEIGHT 200 // 미니맵 높이
+
+# ifndef MINIMAP_SIZE
+#  define MINIMAP_SIZE 200
+# endif
+
+# ifndef PLAYER_CENTER
+#  define PLAYER_CENTER 100
+# endif
+
+# ifndef MINIMAP_SCALE
+#  define MINIMAP_SCALE 10
+# endif
+
 # ifndef WIDTH
 #  define WIDTH 1920
 # endif
@@ -85,6 +97,17 @@ typedef struct s_map
 	double	scale_y;
 }	t_map;
 
+typedef struct s_minmap
+{
+	int camera_offset_x;
+	int camera_offset_y;
+	uint32_t color;
+	// mlx_texture_t *minimap_window;
+	mlx_texture_t *wall;
+	mlx_texture_t *space;
+	mlx_texture_t *door;
+}	t_minmap;
+
 typedef struct s_door
 {
 	int		x;
@@ -111,8 +134,8 @@ typedef struct s_textures
 	mlx_texture_t	*door_texture;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
-	mlx_texture_t	*mmap_wall;
-	mlx_texture_t	*mmap_space;
+	// mlx_texture_t	*mmap_wall;
+	// mlx_texture_t	*mmap_space;
 	mlx_texture_t	*player;
 }	t_textures;
 
@@ -129,6 +152,7 @@ typedef struct s_caster
 	t_window		*window;
 	t_map			*map;
 	t_textures		*textures;
+	t_minmap		*mmap;
 	char			**av;
 	double			speed_multiplier;
 	double			px;
@@ -207,4 +231,11 @@ int		is_door_open(t_caster *c, int y, int x);
 t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
 
+/////////
+void draw_player(t_caster *c);
+void put_player_in_middle(t_caster *c);
+void draw_tiles(t_caster *c, int x, int y, int flag);
+void draw_sprites(t_caster *c);
+void restrict_sizes_to_mimmap(int *x, int *y);
+void find_which_tiles(t_caster *c, int x, int y);
 #endif
