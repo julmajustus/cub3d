@@ -6,12 +6,25 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:05:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 10:38:38 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:33:40 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42.h"
 #include "cube.h"
+
+void	spawn_sprite(t_caster *c)
+{
+	double current_time;
+	int	seed_y;
+	int	seed_x;
+
+	current_time = mlx_get_time();
+	seed_y = (int)current_time - (int)c->sp->last_spwan_time % c->map->map_height;
+	seed_x = (int)current_time - (int)c->sp->last_spwan_time % c->map->map_width;
+	c->sp->last_spwan_time = current_time;
+	printf("Check seed_y: %d seed_x : %d\n", seed_y, seed_x);
+
+}
 
 void	init_sprites(t_caster *c)
 {
@@ -30,6 +43,41 @@ void	init_sprites(t_caster *c)
     c->sp->x = 25.0;
     c->sp->y = 3.0;
 	c->sp->is_visible = 0;
+	c->sp->collect_count = 0;
+}
+
+int	find_sprite_in_view(t_caster *c, double max_distance)
+{
+	double	ray_travel_dist;
+
+	ray_travel_dist = 0.0;
+	c->ta->ray_y = c->py;
+	c->ta->ray_x = c->px;
+	c->ta->ray_step_y = c->sin_table[WIDTH / 2] * 0.2;
+	c->ta->ray_step_x = c->cos_table[WIDTH / 2] * 0.2;
+	while (ray_travel_dist < max_distance)
+	{
+		c->ta->map_y = (int)c->ta->ray_y;
+		c->ta->map_x = (int)c->ta->ray_x;
+		if (c->ta->map_y == c->sp->y \
+			&& c->ta->map_x == c->sp->x)
+			return (1);
+		c->ta->ray_y += c->ta->ray_step_y;
+		c->ta->ray_x += c->ta->ray_step_x;
+		ray_travel_dist += 0.2;
+	}
+	return (0);
+}
+
+void	collect_sprite(t_caster *c)
+{
+	spawn_sprite(c);
+	if (find_sprite_in_view(c, ACTION_DISTANCE + 1))
+	{
+		c->sp->y = -1;
+		c->sp->x = -1;
+		c->sp->collect_count += 1;
+	}
 }
 
 void	update_sprite_frame(t_sprite *sp)

@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 14:51:50 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:12:50 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	exit_mlx(t_caster *c)
 		free(c->window);
 	if (c->doors)
 		free(c->doors);
-	if (c->get_door)
-		free(c->get_door);
+	if (c->ta)
+		free(c->ta);
 	free_textures(c);
 	exit(EXIT_SUCCESS);
 }
@@ -67,8 +67,8 @@ void	exit_failure(t_caster *c, char *msg)
 		free(c->window);
 	if (c->doors)
 		free(c->doors);
-	if (c->get_door)
-		free(c->get_door);
+	if (c->ta)
+		free(c->ta);
 	free_textures(c);
 	perror(msg);
 	exit(EXIT_FAILURE);

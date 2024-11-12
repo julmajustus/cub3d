@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 09:30:59 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 10:51:11 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	set_images_to_window(t_caster *c)
 void	render_engine(t_caster *c)
 {
 	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
-	printf("Check py: %f px: %f\n", c->py, c->px);
+	printf("Check py: %f px: %f sp collect_count: %d\n", c->py, c->px, c->sp->collect_count);
 	raycaster(c);
-	if (c->sp->is_visible)
+	if (BONUS && c->sp->is_visible)
 		render_sprites(c);
 	parse_minimap(c);
 }

@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:39:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 20:07:01 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:09:23 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,22 @@ t_door	*find_door_in_view(t_caster *c, double max_distance)
 	double	ray_travel_dist;
 
 	ray_travel_dist = 0.0;
-	c->get_door->ray_y = c->py;
-	c->get_door->ray_x = c->px;
-	c->get_door->ray_step_y = c->sin_table[WIDTH / 2] * 0.2;
-	c->get_door->ray_step_x = c->cos_table[WIDTH / 2] * 0.2;
+	c->ta->ray_y = c->py;
+	c->ta->ray_x = c->px;
+	c->ta->ray_step_y = c->sin_table[WIDTH / 2] * 0.2;
+	c->ta->ray_step_x = c->cos_table[WIDTH / 2] * 0.2;
 	while (ray_travel_dist < max_distance)
 	{
-		c->get_door->map_y = (int)c->get_door->ray_y;
-		c->get_door->map_x = (int)c->get_door->ray_x;
-		if (c->get_door->map_y == (int)c->py \
-			&& c->get_door->map_x == (int)c->px \
+		c->ta->map_y = (int)c->ta->ray_y;
+		c->ta->map_x = (int)c->ta->ray_x;
+		if (c->ta->map_y == (int)c->py \
+			&& c->ta->map_x == (int)c->px \
 			&& c->map->map_arr[(int)c->py][(int)c->px] == 'D')
 			;
-		else if (c->map->map_arr[c->get_door->map_y][c->get_door->map_x] == 'D')
-			return (find_door_at(c, c->get_door->map_y, c->get_door->map_x));
-		c->get_door->ray_y += c->get_door->ray_step_y;
-		c->get_door->ray_x += c->get_door->ray_step_x;
+		else if (c->map->map_arr[c->ta->map_y][c->ta->map_x] == 'D')
+			return (find_door_at(c, c->ta->map_y, c->ta->map_x));
+		c->ta->ray_y += c->ta->ray_step_y;
+		c->ta->ray_x += c->ta->ray_step_x;
 		ray_travel_dist += 0.2;
 	}
 	return (NULL);

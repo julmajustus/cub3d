@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 21:44:58 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:07:23 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static void	keys_utils(mlx_key_data_t key, t_caster *c)
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
 	{
 		printf("SPaceRegisterd\n");
-		toggle_door(c, DOOR_TOGGLE_DISTANCE);
+		collect_sprite(c);
+		toggle_door(c, ACTION_DISTANCE);
 		render_engine(c);
 	}
 	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
