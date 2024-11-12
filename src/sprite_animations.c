@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 22:05:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 12:42:51 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:02:33 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	spawn_sprite(t_caster *c)
 			if ((size_t)seed_x < ft_strlen(c->map->map_arr[seed_y]))
 			{
 				printf("Check seed_x: %d\n", seed_x);
-				if (c->map->map_arr[seed_y][seed_x] != '0')
-					continue ;
-				c->sp->y = seed_y;
-				c->sp->x = seed_x;
+				//if (c->map->map_arr[seed_y][seed_x] != '0')
+				//	continue ;
+				//c->sp->y = seed_y;
+				//c->sp->x = seed_x;
 				new_spawn = 1;
 			}
 		}
@@ -59,7 +59,7 @@ void	init_sprites(t_caster *c)
     c->sp->current_frame = 0;
     c->sp->last_frame_time = 0.0;
     c->sp->x = 25.0;
-    c->sp->y = 6.0;
+    c->sp->y = 4.0;
 	c->sp->is_visible = 0;
 	c->sp->collect_count = 0;
 }
@@ -89,9 +89,12 @@ int	find_sprite_in_view(t_caster *c, double max_distance)
 
 void	collect_sprite(t_caster *c)
 {
+	spawn_sprite(c);
 	if (find_sprite_in_view(c, ACTION_DISTANCE + 1))
 	{
-		spawn_sprite(c);
+		c->sp->x = -1;
+		c->sp->y = -1;
+		//spawn_sprite(c);
 		c->sp->collect_count += 1;
 	}
 }

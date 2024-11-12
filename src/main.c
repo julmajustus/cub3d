@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 12:03:16 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:50:41 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 	}
 	init(&c, av);
 	read_description(&c);
-	spawn_sprite(&c);
+	//spawn_sprite(&c);
 	render_engine(&c);
 	mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);
