@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:20:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/11 18:26:09 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/06 15:49:26 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,8 @@ static void set_player_direction(t_caster *c, size_t x, size_t y)
 
 static void check_else_char(t_caster *c, char character)
 {
-	if (BONUS)
-	{
-		if (ft_strchr("01D NSWE", character) == NULL)
-			exit_failure(c, "Invalid characters in the map.");
-	}
-	else
-	{
-		if (ft_strchr("01 NSWE", character) == NULL)
-			exit_failure(c, "Invalid characters in the map.");
-	}
+    if (ft_strchr("01 NSWE", character) == NULL)
+        exit_failure(c, "Invalid characters in the map.");
 }
 
 static void store_position_player(t_caster *c, int *found, size_t x, size_t y)
@@ -44,10 +36,10 @@ static void store_position_player(t_caster *c, int *found, size_t x, size_t y)
         c->map->map_arr[y][x] == 'W' || c->map->map_arr[y][x] == 'E')
     {
         (*found)++;
-        c->px = x + 0.25;
-        c->py = y + 0.25;
-        c->mmap_px = x * MINIMAP_SCALE + 0.25;
-        c->mmap_py = y * MINIMAP_SCALE + 0.25;
+        c->px = x + 0.201;
+        c->py = y + 0.201;
+        // c->mmap_px = x * c->map->scale_x + 0.501;
+        // c->mmap_py = y * c->map->scale_y + 0.501;
         set_player_direction(c, x, y);
     }
 }
