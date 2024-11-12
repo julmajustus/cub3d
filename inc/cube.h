@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 00:55:24 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 10:36:53 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,26 @@ typedef struct s_door
 
 typedef struct s_sprite
 {
+	mlx_texture_t	*sprite_texture;
 	double			x;
 	double			y;
 	int				is_visible;
 	int				frame_count;
 	int				current_frame;
 	double			last_frame_time;
+    int				frame_offset;
+    int				tex_y;
+    int				tex_x;
+    int				tex_index;
 	uint32_t		color;
-	mlx_texture_t	*sprite_texture;
+    double			dx;
+    double			dy;
+	int				screen_y;
+	int				screen_x;
+	int				scale;
+    double			cam_inv;
+    double			cam_x;
+    double			cam_y;
 }   t_sprite;
 
 typedef struct s_get_door
@@ -177,7 +189,7 @@ typedef struct s_caster
 	t_door			*doors;
 	int				door_count;
 	t_get_door		*get_door;
-	t_sprite		*squirrel;
+	t_sprite		*sp;
 }	t_caster;
 
 void	init(t_caster *c, char **av);

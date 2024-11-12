@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 00:43:27 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:31:38 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static void	trace_ray_until_wall_hit(t_caster *c)
 			c->map_y += c->step_y;
 			c->wall_hit_is_horizontal = 1;
 		}
-		if (c->map_y == (int)c->squirrel->y && c->map_x == (int)c->squirrel->x)
-			c->squirrel->is_visible = 1;
+		if (c->map_y == (int)c->sp->y && c->map_x == (int)c->sp->x)
+			c->sp->is_visible = 1;
 		if (c->map->map_arr[c->map_y][c->map_x] == 'D' \
 			&& !is_door_open(c, c->map_y, c->map_x))
 			hit = 1;
