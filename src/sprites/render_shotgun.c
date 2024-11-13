@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:48:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 15:18:05 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:53:17 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ void	gun_fire_animation(t_caster *c)
 		frame_delay = 0.10;
 		if (current_time - c->gun->last_frame_time >= frame_delay)
 		{
-			mlx_delete_image(c->window->handle, c->window->gun);
-			c->window->gun = mlx_new_image(c->window->handle, WIDTH, HEIGHT);
-			mlx_image_to_window(c->window->handle, c->window->gun, 0, 0);
-			c->window->gun->instances[0].z = 2;
 			update_gun_frame(c->gun);
 			render_gun(c);
 			c->gun->last_frame_time = current_time;
