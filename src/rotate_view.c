@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:56:02 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 15:39:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:03:08 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	rotate_view_mouse(t_caster *c)
 
 int	rotate_view_keyboard(t_caster *c)
 {
-	int retval;
+	int	retval;
 
 	retval = 0;
 	if (mlx_is_key_down(c->window->handle, MLX_KEY_LEFT))
