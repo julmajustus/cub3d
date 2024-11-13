@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:09 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 18:04:09 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:18:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,8 @@ void	check_wall(t_caster *c)
 	}
 	if (!check_dfs(c, c->py - 0.201, c->px - 0.201, visited))
 		exit_failure(c, "map is not covered by walls.");
+	i = -1;
+	while (++i < c->map->map_height)
+		free(visited[i]);
+	free(visited);
 }
