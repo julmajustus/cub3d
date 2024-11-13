@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   check_collision.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:55:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 14:49:34 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/10 14:16:54 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "cube.h"
 
 static void	check_collision_left_right(t_caster *c, int *moved, double new_px)
@@ -56,8 +57,8 @@ int	check_collision(t_caster *c, double new_px, double new_py)
 	check_collision_up_down(c, &moved, new_py);
 	if (moved)
 	{
-		c->mmap_px = c->px * c->map->scale_x;
-		c->mmap_py = c->py * c->map->scale_y;
+		c->mmap_px = (c->px - 0.25) * c->map->scale_x + 0.25;
+		c->mmap_py = (c->py - 0.25) * c->map->scale_y + 0.25;
 	}
 	return (moved);
 }

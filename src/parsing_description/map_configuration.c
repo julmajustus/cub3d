@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/09 14:36:24 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/11 19:33:02 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ static void parse_texture_color(t_caster *c, char *line, t_dir *i)
 			else if (ft_strncmp(line, "EA ", 3) == 0)
 				c->textures->east_texture = mlx_load_png(c->map->texture_path);
 			free_and_null((void **)&c->map->texture_path);
-			(*i)++;
 		}
 		else if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
-		{
 			parse_plain_colors(c, line);
-			(*i)++;
-		}
+		(*i)++;
 	}
 	else
 		exit_failure(c, "There is wrong text in between the description.");
@@ -65,29 +62,26 @@ int whole_space_line(char *str)
 
 void process_line(t_caster *c, char **line, t_dir *i)
 {
-	char *new_line;
 	int width;
 	int index;
+	int len;
 
 	index = 0;
 	width = ft_strlen(*line);
 	if (width > c->map->map_width)
 		c->map->map_width = width - 1;
-	printf("i : %d\n", *i);
+	printf("line [%d] : %s\n", *i, *line);
 	if (*i < end)
 	{
 		while ((*line)[index] && ((*line)[index] == ' ' || ((*line)[index] >= 9 && (*line)[index] <= 13)))
 			index++;
 		parse_texture_color(c, *line + index, i);
-		// (*i)++;
-		printf("i : %d\n", *i);
 	}
 	else
 	{
-		new_line = ft_substr(*line, 0, ft_strlen(*line) - 1);
-		if (*line)
-			free_and_null((void **)line);
-		*line = new_line;
+		len = ft_strlen(*line);
+		if (len > 0 && (*line)[len - 1] == '\n')
+			(*line)[len - 1] = '\0';
 		if (ft_strchr(*line, 'D'))
             store_door_info(c, *line);
         append_array(*line, &c->map->map_arr, &c->map->map_height);
