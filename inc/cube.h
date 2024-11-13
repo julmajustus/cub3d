@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 12:02:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 04:04:30 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,23 @@ typedef struct s_sprite
 	int				frame_count;
 	int				current_frame;
 	double			last_frame_time;
-    int				frame_offset;
-    int				tex_y;
-    int				tex_x;
-    int				tex_index;
+	int				frame_offset;
+	int				tex_y;
+	int				tex_x;
+	int				tex_index;
 	uint32_t		color;
-    double			dx;
-    double			dy;
+	double			dx;
+	double			dy;
 	int				screen_y;
 	int				screen_x;
 	int				scale;
-    double			cam_inv;
-    double			cam_x;
-    double			cam_y;
+	double			cam_inv;
+	double			cam_x;
+	double			cam_y;
 	int				collect_count;
 	double			last_spwan_time;
+	int				remaining_frames;
+	int				is_animating;
 }   t_sprite;
 
 typedef struct s_toggle_action
@@ -148,6 +150,7 @@ typedef struct s_window
 	mlx_image_t		*view;
 	mlx_image_t		*minimap;
 	mlx_image_t		*sprite;
+	mlx_image_t		*gun;
 }	t_window;
 
 typedef struct s_caster
@@ -192,6 +195,7 @@ typedef struct s_caster
 	int				door_count;
 	t_toggle_action	*ta;
 	t_sprite		*sp;
+	t_sprite		*gun;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -236,8 +240,13 @@ t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
 
 
-void    init_sprites(t_caster *c);
-void    render_sprites(t_caster *c);
-void	collect_sprite(t_caster *c);
-void	spawn_sprite(t_caster *c);
+void    init_squirrel(t_caster *c);
+void    render_squirrel(t_caster *c);
+void	check_squirrel_hit(t_caster *c);
+void	spawn_squirrel(t_caster *c);
+
+void	init_shotgun(t_caster *c);
+void	render_gun(t_caster *c);
+void	start_gun_fire_animation(t_sprite *gun);
+void	gun_fire_animation(t_caster *c);
 #endif

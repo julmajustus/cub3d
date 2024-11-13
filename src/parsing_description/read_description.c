@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:00:52 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/09 13:39:52 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:57:11 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	read_description(t_caster *c)
 	check_map(c);
 	find_player_pos(c);
 	check_wall(c);
-	// print_map(c);
+	print_map(c);
 }
 
 
