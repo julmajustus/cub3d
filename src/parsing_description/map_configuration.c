@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 18:10:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:27:42 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	process_line(t_caster *c, char **line, t_dir *i)
 	width = ft_strlen(*line);
 	if (width > c->map->map_width)
 		c->map->map_width = width - 1;
-	printf("line [%d] : %s\n", *i, *line);
 	if (*i < end)
 	{
 		while ((*line)[index] && ((*line)[index] == ' ' \

@@ -6,11 +6,29 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 15:36:42 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:40:59 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static void	free_structs(t_caster *c)
+{
+	if (c->map)
+		free(c->map);
+	if (c->window)
+		free(c->window);
+	if (c->doors)
+		free(c->doors);
+	if (c->ta)
+		free(c->ta);
+	if (c->sp)
+		free(c->sp);
+	if (c->gun)
+		free(c->gun);
+	if (c->mmap)
+		free(c->mmap);
+}
 
 static void	free_textures(t_caster *c)
 {
@@ -30,19 +48,11 @@ static void	free_textures(t_caster *c)
 			mlx_delete_texture(c->sp->texture);
 		if (c->gun->texture)
 			mlx_delete_texture(c->gun->texture);
-		free(c->textures);
-		if (c->sp)
-			free(c->sp);
-		if (c->gun)
-			free(c->gun);
-	}
-	if (c->mmap)
-	{
 		if (c->mmap->wall)
 			mlx_delete_texture(c->mmap->wall);
 		if (c->mmap->space)
 			mlx_delete_texture(c->mmap->space);
-		free(c->mmap);
+		free(c->textures);
 	}
 }
 
@@ -55,15 +65,8 @@ void	exit_mlx(t_caster *c)
 		close(c->map->map_fd);
 	if (c->map->texture_fd > -1)
 		close(c->map->texture_fd);
-	if (c->map)
-		free(c->map);
-	if (c->window)
-		free(c->window);
-	if (c->doors)
-		free(c->doors);
-	if (c->ta)
-		free(c->ta);
 	free_textures(c);
+	free_structs(c);
 	exit(EXIT_SUCCESS);
 }
 
@@ -77,15 +80,8 @@ void	exit_failure(t_caster *c, char *msg)
 		close(c->map->map_fd);
 	if (c->map->texture_fd > -1)
 		close(c->map->texture_fd);
-	if (c->map)
-		free(c->map);
-	if (c->window)
-		free(c->window);
-	if (c->doors)
-		free(c->doors);
-	if (c->ta)
-		free(c->ta);
 	free_textures(c);
+	free_structs(c);
 	perror(msg);
 	exit(EXIT_FAILURE);
 }
