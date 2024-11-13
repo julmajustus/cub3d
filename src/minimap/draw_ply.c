@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 01:56:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/12 02:53:18 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/12 14:09:25 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void draw_ray(t_caster *c, int player_x, int player_y)
     int i;
 
     i = -1;
-    while (++i < 66)
+    while (++i < 66 * 2)
     {
         ray_x = player_x;
         ray_y = player_y;

@@ -1,0 +1,163 @@
+[33mcommit 2d47e4da75700cedc4a47c5612e80cb667dda5f7[m[33m ([m[1;36mHEAD -> [m[1;32mupstream-sumin[m[33m, [m[1;31morigin/upstream-sumin[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Su Kwon <skwon2@c1r5p8.hive.fi>
+Date:   Fri Nov 8 17:26:52 2024 +0200
+
+    fixed minimap
+
+[33mcommit 7204788bb898958879a103f0107f7c6cc5676ae9[m[33m ([m[1;32mupstream-main[m[33m)[m
+Merge: 22a89e9 ba4d011
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 8 10:52:14 2024 +0200
+
+    Merge remote-tracking branch 'origin/sumin' into testing
+
+[33mcommit 22a89e9356feb714d940c3de5d656cc2a17a3ca3[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 8 10:44:59 2024 +0200
+
+    Added math library to binary linking
+
+[33mcommit ba4d0117a0ba55aee34647a3b21fb63a08b6ce33[m[33m ([m[1;31mupstream/sumin[m[33m)[m
+Author: Sumin <kwontnals@gmail.com>
+Date:   Fri Nov 8 10:25:08 2024 +0200
+
+    fixed parsing and minimap
+
+[33mcommit 676fbca68336f1a3e9a5622664b4839bb835f437[m[33m ([m[1;31morigin/sumin[m[33m, [m[1;32msumin[m[33m, [m[1;32mstream/main[m[33m)[m
+Author: Su Kwon <skwon2@c3r5p6.hive.fi>
+Date:   Thu Nov 7 11:03:53 2024 +0200
+
+    parsing_mmap
+
+[33mcommit 50b989841fc33a6e07fe46265c8b7abb09926100[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Thu Nov 7 09:50:45 2024 +0200
+
+    Fixed draw end/height calculation to fill the whole window height
+
+[33mcommit 0ad81b88760da6bd9e0a2f099edd5d86d66d51b6[m
+Author: Sumin <kwontnals@gmail.com>
+Date:   Thu Nov 7 00:41:16 2024 +0200
+
+    ongoing minimap
+
+[33mcommit df93a2dcf90e84653025bdd18f6d6dad90967fdc[m
+Author: Sumin <kwontnals@gmail.com>
+Date:   Wed Nov 6 23:31:12 2024 +0200
+
+    minimap
+
+[33mcommit 879d4ba4a7c2ef96f126ddec76c528f0d8e51907[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Tue Nov 5 15:19:44 2024 +0200
+
+    Reverted back to simpler method of collision check, added slight offset to player spawn position on the map
+
+[33mcommit 4ea8ea59e4292ddbe4e2ede3540eeaf6323dbf58[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Tue Nov 5 15:11:02 2024 +0200
+
+    Added separate collision checks for the up/down left/right
+
+[33mcommit e553eff7194f8e96e19eb51a56683aaa28b84c0b[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Tue Nov 5 10:07:16 2024 +0200
+
+    Fixed leak in the texture parsing
+
+[33mcommit ccc565703a3cffde5ddeafac8cea05c8dde8da5e[m
+Merge: 9dd0492 0cb5802
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Tue Nov 5 09:48:04 2024 +0200
+
+    Merge test with new parsing
+
+[33mcommit 0cb580221b9254904bb448ac53b596e448c2ac5e[m
+Author: Sumin <kwontnals@gmail.com>
+Date:   Mon Nov 4 11:02:16 2024 +0200
+
+    fixed edgecases for parsing
+
+[33mcommit c3ef9a6a12b8e76a0a93d7d0c43ce1b08e59e461[m
+Author: Sumin <kwontnals@gmail.com>
+Date:   Sun Nov 3 11:38:14 2024 +0200
+
+    parsingfixed
+
+[33mcommit 9dd0492d70a5dfa1700fce341b3f4942ccbb646e[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 1 20:58:41 2024 +0200
+
+    Splitted view rotation to different file for clarity
+
+[33mcommit dbe560d0831aceb6d51da5d1e515d196fc77aa74[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 1 20:51:52 2024 +0200
+
+    Refactored the variable and struct initalizations
+
+[33mcommit 58947e0c2a5c6e76b316eed03efffd60aa6a0ae9[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 1 20:03:33 2024 +0200
+
+    Refactored collision check to take count the player angle
+
+[33mcommit 97a3955cfec1112e2672dd8dc32b9810db9d916e[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 1 18:23:24 2024 +0200
+
+    Added not good implementation of mouse rotation for camera view
+
+[33mcommit 14f2c22bd7d1bdd7af0cf8af3e13bba921c0fce4[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Fri Nov 1 14:19:53 2024 +0200
+
+    Renamed raycaster variable and function names to be more descriptive
+
+[33mcommit e98f459ff15477584be556cb27c5709497834db0[m
+Author: Su Kwon <skwon2@c3r1p2.hive.fi>
+Date:   Thu Oct 31 18:02:20 2024 +0200
+
+    should fix parsing more
+
+[33mcommit 797741e2d315bbb1965b33dc00dcecdbf84e95b3[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Thu Oct 31 10:34:36 2024 +0200
+
+    added more robust boundary checks for map access in casting and player movement.
+
+[33mcommit ed00d388de5d4624d40c90a1c55095189fae7101[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Wed Oct 30 11:59:40 2024 +0200
+
+    Commented debug flags from makefile
+
+[33mcommit 4ef64761f34a57ef36e5e20b0855054d43ce9e15[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Wed Oct 30 11:58:26 2024 +0200
+
+    updated gitignore and added vg supressionfile
+
+[33mcommit 92249c5e411654c9f6e5ec27b48cfb42c54bd116[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Wed Oct 30 11:04:39 2024 +0200
+
+    Added more robust collision check
+
+[33mcommit b3c2fd8aecd020fc5b4631c5aa6c43ea8aa7276c[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Sun Oct 27 12:42:25 2024 +0200
+
+    Initial commit2
+
+[33mcommit dcf1280347fbf5485f7266a2e431ef5df4eaea58[m
+Author: julmajustus <julmajustus@tutanota.com>
+Date:   Sun Oct 27 12:41:59 2024 +0200
+
+    Initial commit
+
+[33mcommit 0baf3ea4a3473c6713d9a19b8469f6aedc4c7be2[m
+Author: julmajustus <79751825+julmajustus@users.noreply.github.com>
+Date:   Sun Oct 27 12:30:47 2024 +0200
+
+    Initial commit
