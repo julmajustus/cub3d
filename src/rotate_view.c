@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:56:02 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 15:25:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:55:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,23 @@ void	check_cursor_movement(t_caster *c)
 
 int	rotate_view_mouse(t_caster *c)
 {
-	int	retval;
+	int		retval;
+	double	mouse_sensitivity;
+	double	scaled_rotation;
 
 	retval = 0;
-	if (c->cursor_pos > 0)
+	mouse_sensitivity = 0.025;
+	scaled_rotation = -c->cursor_pos * mouse_sensitivity * c->speed_multiplier;
+	if (c->cursor_pos != 0)
 	{
-		c->view_angle -= 1.1 * c->speed_multiplier;
-		if (c->view_angle < -M_PI)
+		c->view_angle += scaled_rotation;
+		if (c->view_angle > -M_PI)
 			c->view_angle += 2 * M_PI;
-		retval = 1;
-		c->plane_x = -0.66 * sin(c->view_angle);
-		c->plane_y = 0.66 * cos(c->view_angle);
-	}
-	else if (c->cursor_pos < 0)
-	{
-		c->view_angle += 1.1 * c->speed_multiplier;
-		if (c->view_angle < M_PI)
+		else if (c->view_angle < M_PI)
 			c->view_angle -= 2 * M_PI;
-		retval = 1;
 		c->plane_x = -0.66 * sin(c->view_angle);
 		c->plane_y = 0.66 * cos(c->view_angle);
+		retval = 1;
 	}
 	return (retval);
 }
