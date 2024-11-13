@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 02:04:14 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/13 11:57:43 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@
 # ifndef COLLISION_RADIUS
 #  define COLLISION_RADIUS 0.15
 # endif
-# ifndef DOOR_TOGGLE_DISTANCE
-#  define DOOR_TOGGLE_DISTANCE 1.0
+# ifndef ACTION_DISTANCE
+#  define ACTION_DISTANCE 1.5
 # endif
 
 typedef struct s_line
@@ -73,7 +73,7 @@ typedef struct s_line
 	int		line_index;
 }	t_line;
 
-typedef enum e_dir
+typedef enum s_dir
 {
 	NO,
 	SO,
@@ -115,7 +115,35 @@ typedef struct s_door
 	int		is_open;
 }	t_door;
 
-typedef struct s_get_door
+typedef struct s_sprite
+{
+	mlx_texture_t	*texture;
+	double			x;
+	double			y;
+	int				is_visible;
+	int				frame_count;
+	int				current_frame;
+	double			last_frame_time;
+	int				frame_offset;
+	int				tex_y;
+	int				tex_x;
+	int				tex_index;
+	uint32_t		color;
+	double			dx;
+	double			dy;
+	int				screen_y;
+	int				screen_x;
+	int				scale;
+	double			cam_inv;
+	double			cam_x;
+	double			cam_y;
+	int				collect_count;
+	double			last_spwan_time;
+	int				remaining_frames;
+	int				is_animating;
+}   t_sprite;
+
+typedef struct s_toggle_action
 {
 	double	ray_x;
 	double	ray_y;
@@ -123,7 +151,7 @@ typedef struct s_get_door
 	double	ray_step_y;
 	int		map_x;
 	int		map_y;
-}	t_get_door;
+}	t_toggle_action;
 
 typedef struct s_textures
 {
@@ -144,6 +172,8 @@ typedef struct s_window
 	mlx_t			*handle;
 	mlx_image_t		*view;
 	mlx_image_t		*minimap;
+	mlx_image_t		*sprite;
+	mlx_image_t		*gun;
 }	t_window;
 
 typedef struct s_caster
@@ -187,7 +217,9 @@ typedef struct s_caster
 	double			sin_table[WIDTH];
 	t_door			*doors;
 	int				door_count;
-	t_get_door		*get_door;
+	t_toggle_action	*ta;
+	t_sprite		*sp;
+	t_sprite		*gun;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -230,12 +262,24 @@ void	store_door_info(t_caster *c, const char *line);
 int		is_door_open(t_caster *c, int y, int x);
 t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
+////////////////////////////////////////////////////////
 
-/////////
-void draw_player(t_caster *c);
-void put_player_in_middle(t_caster *c);
-void draw_tiles(t_caster *c, int x, int y, int flag);
-void draw_sprites(t_caster *c);
-void restrict_sizes_to_mimmap(int *x, int *y);
-void find_which_tiles(t_caster *c, int x, int y);
+void	draw_player(t_caster *c);
+void	put_player_in_middle(t_caster *c);
+void	draw_tiles(t_caster *c, int x, int y, int flag);
+void	draw_sprites(t_caster *c);
+void	restrict_sizes_to_mimmap(int *x, int *y);
+void	find_which_tiles(t_caster *c, int x, int y);
+
+////////////////////////////////////
+
+void    init_squirrel(t_caster *c);
+void    render_squirrel(t_caster *c);
+void	check_squirrel_hit(t_caster *c);
+void	spawn_squirrel(t_caster *c);
+
+void	init_shotgun(t_caster *c);
+void	render_gun(t_caster *c);
+void	start_gun_fire_animation(t_sprite *gun);
+void	gun_fire_animation(t_caster *c);
 #endif

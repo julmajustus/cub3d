@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/12 14:26:36 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/13 11:51:10 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,15 @@ static void	free_textures(t_caster *c)
 			mlx_delete_texture(c->textures->west_texture);
 		if (c->textures->door_texture)
 			mlx_delete_texture(c->textures->door_texture);
+		if (c->sp->texture)
+			mlx_delete_texture(c->sp->texture);
+		if (c->gun->texture)
+			mlx_delete_texture(c->gun->texture);
 		free(c->textures);
+		if (c->sp)
+			free(c->sp);
+		if (c->gun)
+			free(c->gun);
 	}
 	if (c->mmap)
 	{
@@ -55,8 +63,8 @@ void	exit_mlx(t_caster *c)
 		free(c->window);
 	if (c->doors)
 		free(c->doors);
-	if (c->get_door)
-		free(c->get_door);
+	if (c->ta)
+		free(c->ta);
 	free_textures(c);
 	exit(EXIT_SUCCESS);
 }
@@ -77,8 +85,8 @@ void	exit_failure(t_caster *c, char *msg)
 		free(c->window);
 	if (c->doors)
 		free(c->doors);
-	if (c->get_door)
-		free(c->get_door);
+	if (c->ta)
+		free(c->ta);
 	free_textures(c);
 	perror(msg);
 	exit(EXIT_FAILURE);

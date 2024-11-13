@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 02:00:01 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/12 02:03:57 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/13 13:42:09 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void draw_tiles(t_caster *c, int x, int y, int flag)
 {
     mlx_texture_t *img;
 
+    img = NULL;
     if (flag == 1)
         img = c->mmap->wall;
     if (flag == 0)
@@ -83,7 +84,8 @@ void draw_tiles(t_caster *c, int x, int y, int flag)
     }
     if (flag == 3)
         img = c->mmap->door;
-    draw_scaled_img_to_tile(c, x, y, img);
+    if (img)
+        draw_scaled_img_to_tile(c, x, y, img);
 }
 
 void find_which_tiles(t_caster *c, int x, int y)

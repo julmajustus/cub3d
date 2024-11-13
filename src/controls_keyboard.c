@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/09 14:53:50 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:53:38 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,15 @@ static void	keys_utils(mlx_key_data_t key, t_caster *c)
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
 	{
 		printf("SPaceRegisterd\n");
-		toggle_door(c, 1.0);
+		start_gun_fire_animation(c->gun);
+		check_squirrel_hit(c);
 		render_engine(c);
 	}
-	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
-		;
+	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
+	{
+		toggle_door(c, ACTION_DISTANCE);
+		render_engine(c);
+	}
 }
 
 void	keyboard_listener(mlx_key_data_t key, void *param)

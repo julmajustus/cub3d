@@ -6,18 +6,18 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/11 20:47:34 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/13 11:52:48 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	init_get_door(t_caster *c)
+static void	init_toggle_action(t_caster *c)
 {
-	c->get_door = malloc(sizeof(t_get_door));
-	if (!c->get_door)
-		exit_failure(c, "get_door struct malloc failed");
-	ft_bzero(c->get_door, sizeof(t_get_door));
+	c->ta = malloc(sizeof(t_toggle_action));
+	if (!c->ta)
+		exit_failure(c, "ta struct malloc failed");
+	ft_bzero(c->ta, sizeof(t_toggle_action));
 }
 
 static void	init_map(t_caster *c, char **av)
@@ -65,10 +65,11 @@ void	init(t_caster *c, char **av)
 		exit_failure(c, "window struct malloc failed");
 	ft_bzero(c->window, sizeof(t_window));
 	c->speed_multiplier = 0.02;
-	c->plane_x = 0.66;// * sin(c->view_angle);
-	c->plane_y = 0;
+	c->plane_x = 0.66;
 	init_map(c, av);
 	init_textures(c);
 	init_mlx(c);
-	init_get_door(c);
+	init_toggle_action(c);
+	init_squirrel(c);
+	init_shotgun(c);
 }
