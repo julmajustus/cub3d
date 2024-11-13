@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 04:41:17 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:24:22 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	spawn_squirrel(t_caster *c)
 	current_time = mlx_get_time();
 	while (!new_spawn)
 	{
-		seed_y = ft_abs((size_t)(current_time * mlx_get_time() \
+		seed_y = ft_abs((long long)(current_time * mlx_get_time() \
 				* -923423) % c->map->map_height);
-		seed_x = ft_abs((size_t)(current_time * mlx_get_time() \
+		seed_x = ft_abs((long long)(current_time * mlx_get_time() \
 				* 72393823) % c->map->map_width);
 		if (seed_y < c->map->map_height)
 		{

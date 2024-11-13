@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 15:46:26 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:07:39 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	set_images_to_window(t_caster *c)
 
 void	render_engine(t_caster *c)
 {
-//	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
-//	printf("Check py: %f px: %f sp pos y: %f x: %f sp collect_count: %d\n"\
-//		, c->py, c->px, c->sp->y, c->sp->x, c->sp->collect_count);
+	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
+	printf("Check py: %f px: %f sp pos y: %f x: %f sp collect_count: %d\n"\
+		, c->py, c->px, c->sp->y, c->sp->x, c->sp->collect_count);
 	raycaster(c);
 	parse_minimap(c);
 }
@@ -65,6 +65,7 @@ int	main(int ac, char **av)
 	}
 	init(&c, av);
 	read_description(&c);
+	printf("Check does it get here\n");
 	render_engine(&c);
 	render_gun(&c);
 	spawn_squirrel(&c);
