@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 14:42:44 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:19:02 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	update_squirrel_texture_frame(t_sprite *sp)
 		sp->x -= 0.15;
 	else if (sp->current_frame == 4)
 		sp->y += 0.15;
-	sp->y += 0.15 * sin(mlx_get_time() * 5); // Oscillates based on time
+	sp->y += 0.15 * sin(mlx_get_time() * 5);
 	sp->current_frame = (sp->current_frame + 1) % sp->frame_count;
 	sp->frame_offset = sp->current_frame * 64 * 64 * 4;
 }
