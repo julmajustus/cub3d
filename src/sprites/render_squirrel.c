@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 04:57:46 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:10:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,15 @@ static void	draw_squirrel(t_caster *c, int scr_x, int scr_y, int size)
 {
 	int		y;
 	int		x;
-	double	step;
 
-	step = 64.0 / size;
 	y = -1;
 	while (++y < size)
 	{
-		c->sp->tex_y = (int)(y * step);
+		c->sp->tex_y = (int)(y * TEXTURE_WIDTH / size);
 		x = -1;
 		while (++x < size)
 		{
-			c->sp->tex_x = (int)(x * step);
+			c->sp->tex_x = (int)(x * TEXTURE_WIDTH / size);
 			c->sp->tex_index = c->sp->frame_offset \
 				+ (c->sp->tex_y * 64 + c->sp->tex_x) * 4;
 			c->sp->color = (c->sp->texture->pixels[c->sp->tex_index] << 24) \
@@ -48,7 +46,7 @@ static void	draw_squirrel(t_caster *c, int scr_x, int scr_y, int size)
 				| (c->sp->texture->pixels[c->sp->tex_index + 2] << 8) \
 				| c->sp->texture->pixels[c->sp->tex_index + 3];
 			if ((c->sp->color >> 24) == 0)
-				continue;
+				continue ;
 			if (scr_x + x >= 0 && scr_x + x < WIDTH \
 				&& scr_y + y >= 0 && scr_y + y < HEIGHT)
 				mlx_put_pixel(c->window->view, \
