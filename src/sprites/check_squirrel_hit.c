@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 04:04:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 04:41:17 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	spawn_squirrel(t_caster *c)
 	while (!new_spawn)
 	{
 		seed_y = ft_abs((size_t)(current_time * mlx_get_time() \
-				  * -923423) % c->map->map_height);
+				* -923423) % c->map->map_height);
 		seed_x = ft_abs((size_t)(current_time * mlx_get_time() \
-				  * 72393823) % c->map->map_width);
+				* 72393823) % c->map->map_width);
 		if (seed_y < c->map->map_height)
 		{
 			if ((size_t)seed_x < ft_strlen(c->map->map_arr[seed_y]) \
@@ -45,8 +45,9 @@ int	is_squirrel_in_view(t_caster *c, double dy, double dx, double max_distance)
 {
 	int		ray;
 	double	ray_travel_dist;
-	double	tolerance = 0.5;
+	double	tolerance;
 
+	tolerance = 0.5;
 	ray = (WIDTH / 2) - 10;
 	while (++ray < (WIDTH / 2) + 10)
 	{
@@ -71,7 +72,6 @@ int	is_squirrel_in_view(t_caster *c, double dy, double dx, double max_distance)
 
 void	check_squirrel_hit(t_caster *c)
 {
-	//spawn_sprite(c);
 	double	dx;
 	double	dy;
 	double	distance_to_squirrel;
