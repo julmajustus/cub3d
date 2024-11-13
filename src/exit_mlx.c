@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 04:31:49 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:36:42 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ static void	free_textures(t_caster *c)
 			free(c->sp);
 		if (c->gun)
 			free(c->gun);
+	}
+	if (c->mmap)
+	{
+		if (c->mmap->wall)
+			mlx_delete_texture(c->mmap->wall);
+		if (c->mmap->space)
+			mlx_delete_texture(c->mmap->space);
+		free(c->mmap);
 	}
 }
 

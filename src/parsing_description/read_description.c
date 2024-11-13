@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:00:52 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/12 17:57:11 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:38:22 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void print_map(t_caster *c)
 		printf("\n");
 		y++;
 	}
+	printf("\n");
 }
 
 void	read_description(t_caster *c)
 {
 	file_exist(c, c->map->map_path, ".cub", MAP);
 	check_map(c);
+	// print_map(c);
 	find_player_pos(c);
 	check_wall(c);
 	print_map(c);

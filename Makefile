@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/13 04:10:30 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/13 15:34:01 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ INC_DIR         = inc
 
 SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/init.c \
-                  $(SRC_DIR)/parse_minimap.c \
+                  $(SRC_DIR)/minimap/parse_minimap.c\
+				  $(SRC_DIR)/minimap/draw_ply.c\
+				  $(SRC_DIR)/minimap/draw_sprites.c\
                   $(SRC_DIR)/raycaster/raycaster.c \
                   $(SRC_DIR)/raycaster/get_ray_texture.c \
                   $(SRC_DIR)/raycaster/render_ray.c \
