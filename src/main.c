@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 00:37:12 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:57:40 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	set_images_to_window(t_caster *c)
 	c->window->view->instances[0].z = 0;
 	c->window->gun->instances[0].z = 2;
 	c->window->minimap->instances[0].z = 1;
-	init_shotgun(c);
 }
 
 void	render_engine(t_caster *c)
