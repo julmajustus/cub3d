@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 02:00:01 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 18:49:30 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:14:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	find_which_tiles(t_caster *c, int x, int y)
 	int	minimap_x;
 	int	minimap_y;
 
-	minimap_x = (int)(x * c->map->scale_x) - c->mmap->camera_offset_x;
-	minimap_y = (int)(y * c->map->scale_y) - c->mmap->camera_offset_y;
+	minimap_x = (int)(x * c->map->scale_x) - c->mmap->cam_x;
+	minimap_y = (int)(y * c->map->scale_y) - c->mmap->cam_y;
 	restrict_sizes_to_mimmap(&minimap_x, &minimap_x);
 	if (c->map->map_arr[y][x] == '1')
 		draw_tiles(c, minimap_x, minimap_y, 1);
