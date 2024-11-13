@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 04:04:30 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 04:31:03 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_door
 
 typedef struct s_sprite
 {
-	mlx_texture_t	*sprite_texture;
+	mlx_texture_t	*texture;
 	double			x;
 	double			y;
 	int				is_visible;
