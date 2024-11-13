@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 15:35:37 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:01:14 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,15 @@ typedef struct s_map
 
 typedef struct s_minmap
 {
-	int camera_offset_x;
-	int camera_offset_y;
-	uint32_t color;
+	int			cam_x;
+	int			cam_y;
+	double		ray_len;
+	double		ray_angle;
+	double		ray_y;
+	double		ray_x;
+	int			map_x;
+	int			map_y;
+	uint32_t	color;
 	// mlx_texture_t *minimap_window;
 	mlx_texture_t *wall;
 	mlx_texture_t *space;
