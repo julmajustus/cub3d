@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:55:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 00:48:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:03:46 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_shotgun(t_caster *c)
 {
 	c->gun = malloc(sizeof(t_sprite));
 	if (!c->gun)
-		exit_failure(c, "Failed to allocate memory for shotgun");
+		exit_failure(c, "Failed to allocate memory for shotgun sprite");
 	c->gun->texture = mlx_load_png("./textures/shotgun_sprite.png");
 	if (!c->gun->texture)
 		exit_failure(c, "Failed to load shotgun texture");
@@ -33,10 +33,9 @@ void	init_shotgun(t_caster *c)
 
 void	init_squirrel(t_caster *c)
 {
-
 	c->sp = malloc(sizeof(t_sprite));
 	if (!c->sp)
-		exit_failure(c, "Failed to allocate memory for sprite");
+		exit_failure(c, "Failed to allocate memory for squirrel sprite");
 	c->sp->texture = mlx_load_png("./textures/squirrel.png");
 	if (!c->sp->texture)
 		exit_failure(c, "Failed to load sprite texture");
