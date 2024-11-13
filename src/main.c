@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 13:42:50 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:56:15 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,29 @@ void	set_images_to_window(t_caster *c)
 
 void	render_engine(t_caster *c)
 {
-	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
-	printf("Check py: %f px: %f sp pos y: %f x: %f sp collect_count: %d\n"\
-		, c->py, c->px, c->sp->y, c->sp->x, c->sp->collect_count);
+//	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
+//	printf("Check py: %f px: %f sp pos y: %f x: %f sp collect_count: %d\n"\
+//		, c->py, c->px, c->sp->y, c->sp->x, c->sp->collect_count);
 	raycaster(c);
 	parse_minimap(c);
-	if (BONUS && c->sp->is_visible)
-		render_squirrel(c);
 }
 
 void	game_loop(void *param)
 {
 	t_caster	*c;
-	int			redraw;
 
 	c = (t_caster *)param;
-	redraw = 0;
 	c->cursor_pos = 0;
 	c->speed_multiplier = c->window->handle->delta_time * 2.2;
 	if (BONUS)
 		check_cursor_movement(c);
-	redraw |= movement_up_down(c);
-	redraw |= rotate_view_mouse(c);
-	redraw |= movement_left_right(c);
-	redraw |= rotate_view_keyboard(c);
-	if (redraw)
-		render_engine(c);
+	movement_up_down(c);
+	rotate_view_mouse(c);
+	movement_left_right(c);
+	rotate_view_keyboard(c);
+	render_engine(c);
+	if (BONUS && c->sp->is_visible)
+		render_squirrel(c);
 	gun_fire_animation(c);
 }
 
