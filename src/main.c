@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 04:44:37 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:42:50 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,11 @@ void	game_loop(void *param)
 	if (BONUS)
 		check_cursor_movement(c);
 	redraw |= movement_up_down(c);
+	redraw |= rotate_view_mouse(c);
 	redraw |= movement_left_right(c);
 	redraw |= rotate_view_keyboard(c);
-	redraw |= rotate_view_mouse(c);
 	if (redraw)
-	{
 		render_engine(c);
-		render_gun(c);
-	}
 	gun_fire_animation(c);
 }
 
