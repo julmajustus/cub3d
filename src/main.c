@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 22:07:39 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:37:12 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	main(int ac, char **av)
 	}
 	init(&c, av);
 	read_description(&c);
-	printf("Check does it get here\n");
 	render_engine(&c);
 	render_gun(&c);
 	spawn_squirrel(&c);
