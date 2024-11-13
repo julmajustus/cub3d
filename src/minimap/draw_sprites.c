@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 02:00:01 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 13:42:09 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:13:40 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void draw_scaled_img_to_tile(t_caster *c, int x, int y, mlx_texture_t *img)
             if (x + j < (int)c->window->minimap->width && y + i < (int)c->window->minimap->height)
             {
                 color = mlx_get_texture_pixel(img, (i * img->width) / c->map->scale_y, (j * img->height) / c->map->scale_x);
-                mlx_put_pixel(c->window->minimap, x + j, y + i, color);
+				if (x + j < MINIMAP_SIZE && y + i < MINIMAP_SIZE && x + j > 0 && y + i > 0)
+                	mlx_put_pixel(c->window->minimap, x + j, y + i, color);
             }
         }
     }

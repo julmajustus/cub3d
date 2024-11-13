@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 11:57:43 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:15:04 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,14 +249,13 @@ int		check_collision(t_caster *c, double new_px, double new_py);
 
 void	exit_mlx(t_caster *c);
 void	exit_failure(t_caster *c, char *msg);
-//////////////////////////////////////////////////////
+
 void	read_description(t_caster *c);
 void	file_exist(t_caster *c, char *file, char *extension, int i);
 void	check_wall(t_caster *c);
 void	find_player_pos(t_caster *c);
 void	check_map(t_caster *c);
 void	parse_plain_colors(t_caster *c, char *line);
-// void	update_minimap(t_caster *c);
 
 void	store_door_info(t_caster *c, const char *line);
 int		is_door_open(t_caster *c, int y, int x);
