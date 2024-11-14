@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 01:56:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/14 00:25:22 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:10:27 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_ray(t_caster *c, int player_x, int player_y)
 				/ c->map->scale_y);
 			if (c->mmap->map_y < 0 || c->mmap->map_y >= c->map->map_height - 1 \
 				|| c->mmap->map_x < 0 || c->mmap->map_x >= \
-				(int)ft_strlen(c->map->map_arr[c->mmap->map_y]) - 1 \
+				c->map_row_len_buffer[c->mmap->map_y] \
 				|| c->map->map_arr[c->mmap->map_y][c->mmap->map_x] == '1')
 				break ;
 			draw_pixel(c, (int)(c->mmap->ray_x + 2.5), \

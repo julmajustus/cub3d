@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 15:18:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:40:14 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	spawn_squirrel(t_caster *c)
 			c->sp[i]->is_visible = 0;
 			spawn_index = ft_abs((long long)((current_time * mlx_get_time() \
 							* 942983343)) % c->total_spawn_points);
-			printf("Check i: %d active sprites :%d spawn index %d/%d\n", \
-				i, c->active_sprite_count, spawn_index, c->total_spawn_points);
+//			printf("Check i: %d active sprites :%d spawn index %d/%d\n", \
+//				i, c->active_sprite_count, spawn_index, c->total_spawn_points);
 			c->sp[i]->x = c->valid_spawn_points[spawn_index].x;
 			c->sp[i]->y = c->valid_spawn_points[spawn_index].y;
 			c->sp[i]->last_spwan_time = current_time;

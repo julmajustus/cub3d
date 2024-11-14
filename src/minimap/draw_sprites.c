@@ -6,11 +6,10 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 02:00:01 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 19:14:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:34:36 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42.h"
 #include "cube.h"
 
 void	draw_pixels(t_caster *c, int x, int y, int ratio)
