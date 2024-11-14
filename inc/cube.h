@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 22:35:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:45:43 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ typedef struct s_map
 	char	**map_arr;
 	double	scale_x;
 	double	scale_y;
+	int		spawn_location_x;
+	int		spawn_location_y;
 }	t_map;
 
 typedef struct s_minmap
@@ -179,6 +181,9 @@ typedef struct s_textures
 	mlx_texture_t	*east_texture;
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*sp_texture;
+	mlx_texture_t	*menu_screen;
+	mlx_texture_t	*start_screen;
+	mlx_texture_t	*death_screen;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
 	// mlx_texture_t	*mmap_wall;
@@ -198,6 +203,7 @@ typedef struct s_window
 typedef struct s_caster
 {
 	char			*window_title;
+	int				game_status;
 	t_window		*window;
 	t_map			*map;
 	t_textures		*textures;
@@ -307,4 +313,6 @@ void	draw_tiles(t_caster *c, int x, int y, int flag);
 void	draw_sprites(t_caster *c);
 void	restrict_sizes_to_mimmap(int *x, int *y);
 void	find_which_tiles(t_caster *c, int x, int y);
+
+void	check_game_status(t_caster *c);
 #endif

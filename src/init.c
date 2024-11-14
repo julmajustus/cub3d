@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 23:08:37 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:46:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void	init_textures(t_caster *c)
 	if (!c->textures)
 		exit_failure(c, "textures struct malloc failed");
 	ft_bzero(c->textures, sizeof(t_textures));
+	c->textures->menu_screen = mlx_load_png("./textures/howto.png");
+	c->textures->start_screen = mlx_load_png("./textures/start_screen.png");
+	c->textures->death_screen = mlx_load_png("./textures/death_screen.png");
 }
 
 static void	init_mlx(t_caster *c)
@@ -70,6 +73,7 @@ void	init(t_caster *c, char **av)
 	c->is_sprite_visible = 1;
 	c->max_sprite_count = 135;
 	c->active_sprite_count = 1;
+	c->game_status = 0;
 	init_map(c, av);
 	init_textures(c);
 	init_mlx(c);

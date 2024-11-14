@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 22:36:58 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:40:53 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	movement_left_right(t_caster *c)
 	return (0);
 }
 
-static void	keys_utils(mlx_key_data_t key, t_caster *c)
+static void	game_controls(mlx_key_data_t key, t_caster *c)
 {
 	if (key.key == MLX_KEY_ESCAPE)
 	{
@@ -72,10 +72,32 @@ static void	keys_utils(mlx_key_data_t key, t_caster *c)
 	}
 }
 
+static void	menu_controls(mlx_key_data_t key, t_caster *c)
+{
+	if (key.key == MLX_KEY_ENTER && key.action == MLX_PRESS)
+	{
+		if (c->game_status == 0 || c->game_status == 1)
+		{
+			c->game_status += 1;
+			if (c->game_status == 2)
+				render_gun(c);
+		}
+	}
+	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
+	{
+		if (c->game_status == -1)
+		{
+			c->game_status = 2;
+			render_gun(c);
+		}
+	}
+}
+
 void	keyboard_listener(mlx_key_data_t key, void *param)
 {
 	t_caster	*c;
 
 	c = (t_caster *)param;
-	keys_utils(key, c);
+	game_controls(key, c);
+	menu_controls(key, c);
 }

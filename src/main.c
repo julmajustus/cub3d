@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 22:36:26 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:35:31 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 void	set_images_to_window(t_caster *c)
 {
+	if (c->window->view)
+		mlx_delete_image(c->window->handle, c->window->view);
+	if (c->window->gun)
+		mlx_delete_image(c->window->handle, c->window->gun);
+	if (c->window->minimap)
+		mlx_delete_image(c->window->handle, c->window->minimap);
 	c->window->view = mlx_new_image(c->window->handle, WIDTH, HEIGHT);
 	c->window->gun = mlx_new_image(c->window->handle, WIDTH, HEIGHT);
 	c->window->minimap = mlx_new_image(c->window->handle, 200, 200);
@@ -46,17 +52,22 @@ void	game_loop(void *param)
 
 	c = (t_caster *)param;
 	c->cursor_pos = 0;
-	c->speed_multiplier = c->window->handle->delta_time * 2.2;
-	if (BONUS)
-		check_cursor_movement(c);
-	movement_up_down(c);
-	rotate_view_mouse(c);
-	movement_left_right(c);
-	rotate_view_keyboard(c);
-	render_engine(c);
-	if (BONUS)
-		render_sprites(c);
-	gun_fire_animation(c);
+	if (c->game_status == 2)
+	{
+		c->speed_multiplier = c->window->handle->delta_time * 2.2;
+		if (BONUS)
+			check_cursor_movement(c);
+		movement_up_down(c);
+		rotate_view_mouse(c);
+		movement_left_right(c);
+		rotate_view_keyboard(c);
+		render_engine(c);
+		if (BONUS)
+			render_sprites(c);
+		gun_fire_animation(c);
+	}
+	else
+		check_game_status(c);
 }
 
 int	main(int ac, char **av)
@@ -71,10 +82,7 @@ int	main(int ac, char **av)
 	init(&c, av);
 	read_description(&c);
 	init_buffers(&c);
-	render_engine(&c);
-	render_gun(&c);
 	spawn_sprite(&c);
-	//printf("Initial sprite location: y: %f x: %f\n", c.sp->y, c.sp->x);
 	mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);
 	mlx_loop(c.window->handle);
