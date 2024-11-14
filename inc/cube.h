@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 19:01:14 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:54:05 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ typedef struct s_door
 	int		is_open;
 }	t_door;
 
+typedef struct s_spawn_point
+{
+    int	x;
+    int	y;
+}	t_spawn_point;
+
 typedef struct s_sprite
 {
 	mlx_texture_t	*texture;
@@ -143,10 +149,16 @@ typedef struct s_sprite
 	double			cam_inv;
 	double			cam_x;
 	double			cam_y;
-	int				collect_count;
 	double			last_spwan_time;
-	int				remaining_frames;
 	int				is_animating;
+	int				remaining_frames;
+	double			dir_x;
+	double			dir_y;
+	double			dist;
+	double			speed;
+	int				next_tile_x;
+	int				next_tile_y;
+	double			dist_to_player;
 }   t_sprite;
 
 typedef struct s_toggle_action
@@ -166,6 +178,7 @@ typedef struct s_textures
 	mlx_texture_t	*west_texture;
 	mlx_texture_t	*east_texture;
 	mlx_texture_t	*door_texture;
+	mlx_texture_t	*sp_texture;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
 	// mlx_texture_t	*mmap_wall;
@@ -223,9 +236,14 @@ typedef struct s_caster
 	double			sin_table[WIDTH];
 	t_door			*doors;
 	int				door_count;
+	int				max_sprite_count;
+	int				active_sprite_count;
+	int				is_sprite_visible;
 	t_toggle_action	*ta;
-	t_sprite		*sp;
+	t_sprite		**sp;
 	t_sprite		*gun;
+	t_spawn_point	*valid_spawn_points;
+	int				total_spawn_points;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -269,6 +287,8 @@ t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
 
 void    init_squirrel(t_caster *c);
+void	init_spawn_points(t_caster *c);
+void	is_sprite_visible(t_caster *c, int y, int x);
 void    render_squirrel(t_caster *c);
 void	check_squirrel_hit(t_caster *c);
 void	spawn_squirrel(t_caster *c);

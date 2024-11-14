@@ -6,11 +6,21 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 01:03:08 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:56:00 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static void	free_sprites(t_caster *c)
+{
+	int	i;
+
+	i = -1;
+	while (++i < c->max_sprite_count)
+		free(c->sp[i]);
+	free(c->sp);
+}
 
 static void	free_structs(t_caster *c)
 {
@@ -22,12 +32,12 @@ static void	free_structs(t_caster *c)
 		free(c->doors);
 	if (c->ta)
 		free(c->ta);
-	if (c->sp)
-		free(c->sp);
 	if (c->gun)
 		free(c->gun);
 	if (c->mmap)
 		free(c->mmap);
+	if (c->valid_spawn_points)
+		free(c->valid_spawn_points);
 }
 
 static void	free_textures(t_caster *c)
@@ -44,8 +54,8 @@ static void	free_textures(t_caster *c)
 			mlx_delete_texture(c->textures->west_texture);
 		if (c->textures->door_texture)
 			mlx_delete_texture(c->textures->door_texture);
-		if (c->sp->texture)
-			mlx_delete_texture(c->sp->texture);
+		if (c->textures->sp_texture)
+			mlx_delete_texture(c->textures->sp_texture);
 		if (c->gun->texture)
 			mlx_delete_texture(c->gun->texture);
 		if (c->mmap->wall)
@@ -69,6 +79,7 @@ void	exit_mlx(t_caster *c)
 		close(c->map->texture_fd);
 	free_textures(c);
 	free_structs(c);
+	free_sprites(c);
 	exit(EXIT_SUCCESS);
 }
 
@@ -84,6 +95,7 @@ void	exit_failure(t_caster *c, char *msg)
 		close(c->map->texture_fd);
 	free_textures(c);
 	free_structs(c);
+	free_sprites(c);
 	perror(msg);
 	exit(EXIT_FAILURE);
 }

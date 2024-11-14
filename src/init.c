@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 22:31:25 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:03:31 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void	init(t_caster *c, char **av)
 	c->speed_multiplier = 0.02;
 	c->plane_x = 0.66;
 	c->plane_y = 0;
+	c->is_sprite_visible = 1;
+	c->max_sprite_count = 35;
+	c->active_sprite_count = 1;
 	init_map(c, av);
 	init_textures(c);
 	init_mlx(c);
