@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 00:57:40 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:43:07 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ void	set_images_to_window(t_caster *c)
 
 void	render_engine(t_caster *c)
 {
+	int i = -1;
 	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
-	printf("Check py: %f px: %f sp pos y: %f x: %f sp collect_count: %d\n"\
-		, c->py, c->px, c->sp->y, c->sp->x, c->sp->collect_count);
+	printf("Check py: %f px: %f\n", c->py, c->px);
+	while (++i < c->active_sprite_count)
+		printf("Check sp[%d] pos y: %f x: %f is_visible: %d\n", i, c->sp[i]->y, c->sp[i]->x, c->sp[i]->is_visible);
 	raycaster(c);
 	parse_minimap(c);
 }
@@ -48,7 +50,7 @@ void	game_loop(void *param)
 	movement_left_right(c);
 	rotate_view_keyboard(c);
 	render_engine(c);
-	if (BONUS && c->sp->is_visible)
+	if (BONUS)
 		render_squirrel(c);
 	gun_fire_animation(c);
 }
@@ -64,10 +66,11 @@ int	main(int ac, char **av)
 	}
 	init(&c, av);
 	read_description(&c);
+	init_spawn_points(&c);
 	render_engine(&c);
 	render_gun(&c);
 	spawn_squirrel(&c);
-	printf("Initial sprite location: y: %f x: %f\n", c.sp->y, c.sp->x);
+	//printf("Initial sprite location: y: %f x: %f\n", c.sp->y, c.sp->x);
 	mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);
 	mlx_loop(c.window->handle);
