@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 23:07:23 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:42:35 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,14 @@ void	render_sprites(t_caster *c)
 		c->sp[i]->dx = c->px - c->sp[i]->x;
 		c->sp[i]->dist_to_player = \
 			sqrt(c->sp[i]->dx * c->sp[i]->dx + c->sp[i]->dy * c->sp[i]->dy);
-		if (c->sp[i]->dist_to_player > 0.3)
+		if (c->sp[i]->dist_to_player < 0.7)
+			c->game_status = -1;
+		current_time = mlx_get_time();
+		if (current_time - c->sp[i]->last_frame_time >= 0.15)
 		{
-			current_time = mlx_get_time();
-			if (current_time - c->sp[i]->last_frame_time >= 0.15)
-			{
-				update_sprite_position(c, c->sp[i]);
-				c->sp[i]->last_frame_time = current_time;
-			}
-			get_sprite_size_and_pos(c, c->sp[i]);
+			update_sprite_position(c, c->sp[i]);
+			c->sp[i]->last_frame_time = current_time;
 		}
+		get_sprite_size_and_pos(c, c->sp[i]);
 	}
 }
