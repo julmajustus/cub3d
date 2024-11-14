@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/14 15:31:45 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/14 20:28:01 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ INC_DIR         = inc
 
 SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/init.c \
+                  $(SRC_DIR)/init_buffers.c \
                   $(SRC_DIR)/minimap/parse_minimap.c\
 				  $(SRC_DIR)/minimap/draw_ply.c\
 				  $(SRC_DIR)/minimap/draw_sprites.c\
@@ -55,7 +56,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
                   -I$(GLFW_INCLUDE_PATH) -O3 \
-                  -g -ggdb3 -fsanitize=address
+                  #-g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 

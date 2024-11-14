@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 15:55:15 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:34:32 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void	draw_squirrel(t_caster *c, t_sprite *sp, int size)
 			if ((sp->color >> 24) == 0)
 				continue ;
 			if (sp->screen_x + x >= 0 && sp->screen_x + x < WIDTH \
-				&& sp->screen_y + y >= 0 && sp->screen_y + y < HEIGHT)
+				&& sp->screen_y + y >= 0 && sp->screen_y + y < HEIGHT \
+				&& sp->cam_y < c->depth_buffer[sp->screen_x + x])
 				mlx_put_pixel(c->window->view, \
 					sp->screen_x + x, sp->screen_y + y, sp->color);
 		}
@@ -82,15 +83,15 @@ static void	get_squirrel_size_and_pos(t_caster *c, t_sprite *sp)
 	sp->dy = sp->y - c->py;
 	sp->cam_inv = 1.0 / (c->plane_x * sin(c->view_angle) \
 		- cos(c->view_angle) * c->plane_y);
+	sp->cam_y = sp->cam_inv * (-c->plane_y * sp->dx + c->plane_x * sp->dy);
 	sp->cam_x = sp->cam_inv * (sin(c->view_angle) * sp->dx \
 		- cos(c->view_angle) * sp->dy);
-	sp->cam_y = sp->cam_inv * (-c->plane_y * sp->dx + c->plane_x * sp->dy);
 	if (sp->cam_y > 0)
 	{
 		sp->screen_x = (int)((WIDTH / 2) * (1 + sp->cam_x / sp->cam_y));
-		sp->scale = (int)fabs(HEIGHT / (sp->cam_y * 2));
-		sp->screen_y = (HEIGHT / 2) + (sp->scale / 2);
-		sp->screen_y += sp->scale / 4;
+		sp->scale = (int)fabs(HEIGHT / (sp->cam_y));
+		sp->screen_y = (HEIGHT / 2) - (sp->scale / 1.7);
+		sp->screen_y += sp->scale / 3;
 		sp->screen_x = sp->screen_x - sp->scale / 2;
 		draw_squirrel(c, sp, sp->scale);
 	}

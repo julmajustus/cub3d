@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 12:39:25 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:35:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	raycaster(t_caster *c)
 		init_ray_dir_and_cast_position(c);
 		trace_ray_until_wall_hit(c);
 		get_wall_dist_and_height(c);
+		c->depth_buffer[x] = c->wall_dist;
 		get_wall_texture(c);
 		get_texture_offset(c);
 		render_wall_column(c, x);

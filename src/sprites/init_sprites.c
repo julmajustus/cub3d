@@ -6,39 +6,11 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:55:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 15:55:36 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:27:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-void	init_spawn_points(t_caster *c)
-{
-	int	y;
-	int	x;
-	int	count;
-
-	c->valid_spawn_points = \
-		malloc(c->map->map_height * c->map->map_width * sizeof(t_spawn_point));
-	if (!c->valid_spawn_points)
-		exit_failure(c, "Failed to allocate memory for valid_spawn_points");
-	count = 0;
-	y = -1;
-	while (++y < c->map->map_height)
-	{
-		x = -1;
-		while (++x < (int)ft_strlen(c->map->map_arr[y]))
-		{
-			if (c->map->map_arr[y][x] == '0')
-			{
-				c->valid_spawn_points[count].x = x;
-				c->valid_spawn_points[count].y = y;
-				count++;
-			}
-		}
-	}
-	c->total_spawn_points = count;
-}
 
 void	init_shotgun(t_caster *c)
 {
@@ -59,29 +31,31 @@ void	init_shotgun(t_caster *c)
 	c->gun->remaining_frames = 0;
 }
 
-void	init_squirrel(t_caster *c)
+void	init_sprites(t_caster *c)
 {
 	int	i;
 
 	i = -1;
-	c->textures->sp_texture = mlx_load_png("./textures/squirrel.png");
+	c->textures->sp_texture = mlx_load_png("./textures/zombie_no_shadow.png");
 	if (!c->textures->sp_texture)
 		exit_failure(c, "Failed to load sprite texture");
 	c->sp = malloc(sizeof(t_sprite *) * c->max_sprite_count);
 	if (!c->sp)
-		exit_failure(c, "Failed to allocate memory for squirrel sprite");
+		exit_failure(c, "Failed to allocate memory for sprite array");
 	while (++i < c->max_sprite_count)
 	{
 		c->sp[i] = malloc(sizeof(t_sprite));
 		if (!c->sp[i])
-			exit_failure(c, "Failed to allocate memory for squirrel sprite");
-		c->sp[i]->frame_count = 5;
+			exit_failure(c, "Failed to allocate memory for sprites");
+		c->sp[i]->frame_count = 24;
 		c->sp[i]->current_frame = 0;
 		c->sp[i]->frame_offset = c->sp[i]->current_frame * 64 * 64 * 4;
 		c->sp[i]->last_frame_time = 0.0;
 		c->sp[i]->x = -1.0;
 		c->sp[i]->y = -1.0;
 		c->sp[i]->is_visible = 0;
+		c->sp[i]->cam_y = 0;
+		c->sp[i]->cam_x = 0;
 		c->sp[i]->last_frame_time = mlx_get_time();
 	}
 }
