@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/14 20:28:01 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/14 22:32:54 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,8 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/parsing_description/check_wall.c \
                   $(SRC_DIR)/handle_doors.c \
                   $(SRC_DIR)/sprites/init_sprites.c \
-                  $(SRC_DIR)/sprites/render_squirrel.c \
-                  $(SRC_DIR)/sprites/check_squirrel_hit.c \
+                  $(SRC_DIR)/sprites/render_sprites.c \
+                  $(SRC_DIR)/sprites/check_sprite_hit.c \
                   $(SRC_DIR)/sprites/render_shotgun.c
 
 OBJ_DIR         = obj

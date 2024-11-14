@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 20:27:17 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:35:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,9 +292,9 @@ void	toggle_door(t_caster *c, double max_distance);
 void    init_sprites(t_caster *c);
 void	init_spawn_points(t_caster *c);
 void	is_sprite_visible(t_caster *c, int y, int x);
-void    render_squirrel(t_caster *c);
-void	check_squirrel_hit(t_caster *c);
-void	spawn_squirrel(t_caster *c);
+void    render_sprites(t_caster *c);
+void	check_sprite_hit(t_caster *c);
+void	spawn_sprite(t_caster *c);
 
 void	init_shotgun(t_caster *c);
 void	render_gun(t_caster *c);

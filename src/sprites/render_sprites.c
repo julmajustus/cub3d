@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_squirrel.c                                  :+:      :+:    :+:   */
+/*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 19:34:32 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:07:23 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	update_squirrel_position(t_caster *c, t_sprite *sp)
+static void	update_sprite_position(t_caster *c, t_sprite *sp)
 {
+	sp->current_frame = (sp->current_frame + 1) % sp->frame_count;
+	sp->frame_offset = sp->current_frame * 64 * 64 * 4;
 	if (sp->dist_to_player > 0)
 	{
 		sp->dx /= sp->dist_to_player;
 		sp->dy /= sp->dist_to_player;
 	}
-	sp->speed = 0.10;
 	sp->x += sp->dx * sp->speed;
 	sp->y += sp->dy * sp->speed;
 	sp->next_tile_x = (int)(sp->x);
@@ -40,13 +41,16 @@ static void	update_squirrel_position(t_caster *c, t_sprite *sp)
 	}
 }
 
-static void	update_squirrel_texture_frame(t_sprite *sp)
+static int	check_draw_limits(t_caster *c, t_sprite *sp, int y, int x)
 {
-	sp->current_frame = (sp->current_frame + 1) % sp->frame_count;
-	sp->frame_offset = sp->current_frame * 64 * 64 * 4;
+	if (sp->screen_x + x >= 0 && sp->screen_x + x < WIDTH \
+		&& sp->screen_y + y >= 0 && sp->screen_y + y < HEIGHT \
+		&& sp->cam_y < c->depth_buffer[sp->screen_x + x])
+		return (1);
+	return (0);
 }
 
-static void	draw_squirrel(t_caster *c, t_sprite *sp, int size)
+static void	draw_sprite(t_caster *c, t_sprite *sp, int size)
 {
 	int		y;
 	int		x;
@@ -67,16 +71,14 @@ static void	draw_squirrel(t_caster *c, t_sprite *sp, int size)
 				| c->textures->sp_texture->pixels[sp->tex_index + 3];
 			if ((sp->color >> 24) == 0)
 				continue ;
-			if (sp->screen_x + x >= 0 && sp->screen_x + x < WIDTH \
-				&& sp->screen_y + y >= 0 && sp->screen_y + y < HEIGHT \
-				&& sp->cam_y < c->depth_buffer[sp->screen_x + x])
+			if (check_draw_limits(c, sp, y, x))
 				mlx_put_pixel(c->window->view, \
 					sp->screen_x + x, sp->screen_y + y, sp->color);
 		}
 	}
 }
 
-static void	get_squirrel_size_and_pos(t_caster *c, t_sprite *sp)
+static void	get_sprite_size_and_pos(t_caster *c, t_sprite *sp)
 {
 	sp->is_visible = 0;
 	sp->dx = sp->x - c->px;
@@ -90,14 +92,16 @@ static void	get_squirrel_size_and_pos(t_caster *c, t_sprite *sp)
 	{
 		sp->screen_x = (int)((WIDTH / 2) * (1 + sp->cam_x / sp->cam_y));
 		sp->scale = (int)fabs(HEIGHT / (sp->cam_y));
+		if (sp->scale > HEIGHT)
+			sp->scale = HEIGHT;
 		sp->screen_y = (HEIGHT / 2) - (sp->scale / 1.7);
 		sp->screen_y += sp->scale / 3;
 		sp->screen_x = sp->screen_x - sp->scale / 2;
-		draw_squirrel(c, sp, sp->scale);
+		draw_sprite(c, sp, sp->scale);
 	}
 }
 
-void	render_squirrel(t_caster *c)
+void	render_sprites(t_caster *c)
 {
 	int		i;
 	double	current_time;
@@ -111,16 +115,15 @@ void	render_squirrel(t_caster *c)
 		c->sp[i]->dx = c->px - c->sp[i]->x;
 		c->sp[i]->dist_to_player = \
 			sqrt(c->sp[i]->dx * c->sp[i]->dx + c->sp[i]->dy * c->sp[i]->dy);
-		if (c->sp[i]->dist_to_player > 0.7)
+		if (c->sp[i]->dist_to_player > 0.3)
 		{
 			current_time = mlx_get_time();
 			if (current_time - c->sp[i]->last_frame_time >= 0.15)
 			{
-				update_squirrel_position(c, c->sp[i]);
-				update_squirrel_texture_frame(c->sp[i]);
+				update_sprite_position(c, c->sp[i]);
 				c->sp[i]->last_frame_time = current_time;
 			}
-			get_squirrel_size_and_pos(c, c->sp[i]);
+			get_sprite_size_and_pos(c, c->sp[i]);
 		}
 	}
 }
