@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_squirrel_hit.c                               :+:      :+:    :+:   */
+/*   check_sprite_hit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 20:40:14 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:46:33 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	is_sprite_visible(t_caster *c, int y, int x)
 	}
 }
 
-void	spawn_squirrel(t_caster *c)
+void	spawn_sprite(t_caster *c)
 {
 	double	current_time;
 	int		spawn_index;
@@ -39,8 +39,6 @@ void	spawn_squirrel(t_caster *c)
 			c->sp[i]->is_visible = 0;
 			spawn_index = ft_abs((long long)((current_time * mlx_get_time() \
 							* 942983343)) % c->total_spawn_points);
-//			printf("Check i: %d active sprites :%d spawn index %d/%d\n", \
-//				i, c->active_sprite_count, spawn_index, c->total_spawn_points);
 			c->sp[i]->x = c->valid_spawn_points[spawn_index].x;
 			c->sp[i]->y = c->valid_spawn_points[spawn_index].y;
 			c->sp[i]->last_spwan_time = current_time;
@@ -48,13 +46,13 @@ void	spawn_squirrel(t_caster *c)
 	}
 }
 
-static int	is_squirrel_in_view(t_caster *c, t_sprite *sp, double dy, double dx)
+static int	is_sprite_in_view(t_caster *c, t_sprite *sp, double dy, double dx)
 {
 	int		ray;
 	double	ray_travel_dist;
 	double	tolerance;
 
-	tolerance = 0.5;
+	tolerance = 0.3;
 	ray = (WIDTH / 2) - 10;
 	while (++ray < (WIDTH / 2) + 10)
 	{
@@ -77,7 +75,7 @@ static int	is_squirrel_in_view(t_caster *c, t_sprite *sp, double dy, double dx)
 	return (0);
 }
 
-void	check_squirrel_hit(t_caster *c)
+void	check_sprite_hit(t_caster *c)
 {
 	int		i;
 	double	dx;
@@ -91,13 +89,13 @@ void	check_squirrel_hit(t_caster *c)
 		dy = c->sp[i]->y - c->py;
 		distance_to_squirrel = sqrt(dx * dx + dy * dy);
 		if (distance_to_squirrel < 4.0 \
-			&& is_squirrel_in_view(c, c->sp[i], dy, dx))
+			&& is_sprite_in_view(c, c->sp[i], dy, dx))
 		{
 			c->sp[i]->x = -1;
 			c->sp[i]->y = -1;
 			if (c->active_sprite_count < c->max_sprite_count)
 				c->active_sprite_count++;
-			spawn_squirrel(c);
+			spawn_sprite(c);
 		}
 	}
 }

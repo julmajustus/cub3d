@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 00:55:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:36:58 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	keys_utils(mlx_key_data_t key, t_caster *c)
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
 	{
 		start_gun_fire_animation(c->gun);
-		check_squirrel_hit(c);
+		check_sprite_hit(c);
 		render_engine(c);
 	}
 	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
