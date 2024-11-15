@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 00:45:27 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:05:55 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static void	free_sprites(t_caster *c)
 
 	i = -1;
 	while (++i < c->max_sprite_count)
-		free(c->sp[i]);
-	free(c->sp);
+	{
+		if (c->sp[i])
+			free(c->sp[i]);
+	}
+	if (c->sp)
+		free(c->sp);
 }
 
 static void	free_structs(t_caster *c)

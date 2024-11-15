@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 00:35:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:22:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	game_loop(void *param)
 		if (BONUS)
 			check_cursor_movement(c);
 		movement_up_down(c);
-		rotate_view_mouse(c);
 		movement_left_right(c);
+		rotate_view_mouse(c);
 		rotate_view_keyboard(c);
 		render_engine(c);
 		if (BONUS)

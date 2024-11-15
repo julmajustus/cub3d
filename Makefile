@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/15 00:49:07 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/15 15:12:06 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/handle_doors.c \
                   $(SRC_DIR)/sprites/init_sprites.c \
                   $(SRC_DIR)/sprites/render_sprites.c \
+                  $(SRC_DIR)/sprites/draw_sprite.c \
                   $(SRC_DIR)/sprites/check_sprite_hit.c \
                   $(SRC_DIR)/sprites/render_shotgun.c
 
@@ -57,7 +58,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
                   -I$(GLFW_INCLUDE_PATH) -O3 \
-                  #-g -ggdb3 -fsanitize=address
+                  -g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 

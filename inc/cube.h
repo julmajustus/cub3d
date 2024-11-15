@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 00:45:43 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:08:41 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ typedef struct s_sprite
 	double			y;
 	int				is_visible;
 	int				frame_count;
+	int				death_frame_count;
+	int				is_hit;
 	int				current_frame;
 	double			last_frame_time;
 	int				frame_offset;
@@ -299,6 +301,10 @@ void    init_sprites(t_caster *c);
 void	init_spawn_points(t_caster *c);
 void	is_sprite_visible(t_caster *c, int y, int x);
 void    render_sprites(t_caster *c);
+void	draw_sprite(t_caster *c, t_sprite *sp, \
+						mlx_texture_t *texture, int size);
+void	get_sprite_size_and_pos(t_caster *c, \
+							 t_sprite *sp, mlx_texture_t *texture);
 void	check_sprite_hit(t_caster *c);
 void	spawn_sprite(t_caster *c);
 
