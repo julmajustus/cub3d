@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 00:40:53 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:19:23 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ static void	game_controls(mlx_key_data_t key, t_caster *c)
 		exit_mlx(c);
 		return ;
 	}
-	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
+	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS \
+		&& c->game_status == 2)
 	{
 		start_gun_fire_animation(c->gun);
 		check_sprite_hit(c);
 		render_engine(c);
 	}
-	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
+	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS \
+		&& c->game_status == 2)
 	{
 		toggle_door(c, ACTION_DISTANCE);
 		render_engine(c);

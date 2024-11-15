@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 22:46:33 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:38:22 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,8 @@ void	check_sprite_hit(t_caster *c)
 		if (distance_to_squirrel < 4.0 \
 			&& is_sprite_in_view(c, c->sp[i], dy, dx))
 		{
-			c->sp[i]->x = -1;
-			c->sp[i]->y = -1;
-			if (c->active_sprite_count < c->max_sprite_count)
-				c->active_sprite_count++;
-			spawn_sprite(c);
+			c->sp[i]->is_hit = 1;
+			c->sp[i]->current_frame = 24;
 		}
 	}
 }

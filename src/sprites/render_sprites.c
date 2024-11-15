@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 00:42:35 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:38:56 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,44 +41,8 @@ static void	update_sprite_position(t_caster *c, t_sprite *sp)
 	}
 }
 
-static int	check_draw_limits(t_caster *c, t_sprite *sp, int y, int x)
-{
-	if (sp->screen_x + x >= 0 && sp->screen_x + x < WIDTH \
-		&& sp->screen_y + y >= 0 && sp->screen_y + y < HEIGHT \
-		&& sp->cam_y < c->depth_buffer[sp->screen_x + x])
-		return (1);
-	return (0);
-}
-
-static void	draw_sprite(t_caster *c, t_sprite *sp, int size)
-{
-	int		y;
-	int		x;
-
-	y = -1;
-	while (++y < size)
-	{
-		sp->tex_y = (int)(y * TEXTURE_WIDTH / size);
-		x = -1;
-		while (++x < size)
-		{
-			sp->tex_x = (int)(x * TEXTURE_WIDTH / size);
-			sp->tex_index = sp->frame_offset \
-				+ (sp->tex_y * 64 + sp->tex_x) * 4;
-			sp->color = (c->textures->sp_texture->pixels[sp->tex_index] << 24) \
-				| (c->textures->sp_texture->pixels[sp->tex_index + 1] << 16) \
-				| (c->textures->sp_texture->pixels[sp->tex_index + 2] << 8) \
-				| c->textures->sp_texture->pixels[sp->tex_index + 3];
-			if ((sp->color >> 24) == 0)
-				continue ;
-			if (check_draw_limits(c, sp, y, x))
-				mlx_put_pixel(c->window->view, \
-					sp->screen_x + x, sp->screen_y + y, sp->color);
-		}
-	}
-}
-
-static void	get_sprite_size_and_pos(t_caster *c, t_sprite *sp)
+void	get_sprite_size_and_pos(t_caster *c, \
+					t_sprite *sp, mlx_texture_t *texture)
 {
 	sp->is_visible = 0;
 	sp->dx = sp->x - c->px;
@@ -97,14 +61,52 @@ static void	get_sprite_size_and_pos(t_caster *c, t_sprite *sp)
 		sp->screen_y = (HEIGHT / 2) - (sp->scale / 1.7);
 		sp->screen_y += sp->scale / 3;
 		sp->screen_x = sp->screen_x - sp->scale / 2;
-		draw_sprite(c, sp, sp->scale);
+		draw_sprite(c, sp, texture, sp->scale);
 	}
+}
+
+static void	death_animation(t_caster *c, t_sprite *sp)
+{
+	double	current_time;
+
+	current_time = mlx_get_time();
+	if (current_time - sp->last_frame_time >= 0.15)
+	{
+		sp->current_frame++;
+		sp->frame_offset = sp->current_frame * 64 * 64 * 4;
+		sp->last_frame_time = current_time;
+		if (sp->current_frame >= sp->death_frame_count)
+		{
+			sp->x = -1;
+			sp->y = -1;
+			sp->is_hit = 0;
+			if (c->active_sprite_count < c->max_sprite_count)
+			{
+				spawn_sprite(c);
+				c->active_sprite_count++;
+			}
+			return ;
+		}
+	}
+	get_sprite_size_and_pos(c, sp, c->textures->sp_texture);
+}
+
+static void	animation(t_caster *c, t_sprite *sp)
+{
+	double	current_time;
+
+	current_time = mlx_get_time();
+	if (current_time - sp->last_frame_time >= 0.15)
+	{
+		update_sprite_position(c, sp);
+		sp->last_frame_time = current_time;
+	}
+	get_sprite_size_and_pos(c, sp, c->textures->sp_texture);
 }
 
 void	render_sprites(t_caster *c)
 {
 	int		i;
-	double	current_time;
 
 	i = -1;
 	while (++i < c->active_sprite_count)
@@ -115,14 +117,11 @@ void	render_sprites(t_caster *c)
 		c->sp[i]->dx = c->px - c->sp[i]->x;
 		c->sp[i]->dist_to_player = \
 			sqrt(c->sp[i]->dx * c->sp[i]->dx + c->sp[i]->dy * c->sp[i]->dy);
-		if (c->sp[i]->dist_to_player < 0.7)
+		if (c->sp[i]->dist_to_player < 0.7 && !c->sp[i]->is_hit)
 			c->game_status = -1;
-		current_time = mlx_get_time();
-		if (current_time - c->sp[i]->last_frame_time >= 0.15)
-		{
-			update_sprite_position(c, c->sp[i]);
-			c->sp[i]->last_frame_time = current_time;
-		}
-		get_sprite_size_and_pos(c, c->sp[i]);
+		if (c->sp[i]->is_hit)
+			death_animation(c, c->sp[i]);
+		else
+			animation(c, c->sp[i]);
 	}
 }

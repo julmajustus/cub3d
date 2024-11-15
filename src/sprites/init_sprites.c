@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:55:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 23:07:00 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:35:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ void	init_sprites(t_caster *c)
 {
 	int	i;
 
-	c->textures->sp_texture = mlx_load_png("./textures/zombie_no_shadow.png");
-	if (!c->textures->sp_texture)
-		exit_failure(c, "Failed to load sprite texture");
 	c->sp = malloc(sizeof(t_sprite *) * c->max_sprite_count);
 	if (!c->sp)
 		exit_failure(c, "Failed to allocate memory for sprite array");
@@ -47,7 +44,9 @@ void	init_sprites(t_caster *c)
 		c->sp[i] = malloc(sizeof(t_sprite));
 		if (!c->sp[i])
 			exit_failure(c, "Failed to allocate memory for sprites");
+		ft_bzero(c->sp[i], sizeof(t_sprite));
 		c->sp[i]->frame_count = 24;
+		c->sp[i]->death_frame_count = 29;
 		c->sp[i]->current_frame = 0;
 		c->sp[i]->frame_offset = c->sp[i]->current_frame * 64 * 64 * 4;
 		c->sp[i]->last_frame_time = 0.0;

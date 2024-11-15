@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 00:46:08 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:21:27 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	draw_screens(t_caster *c, mlx_texture_t *texture)
 
 void	check_game_status(t_caster *c)
 {
-	if (c->game_status == 0)
+	if (c->game_status == 1)
 		draw_screens(c, c->textures->menu_screen);
-	else if (c->game_status == 1)
+	else if (c->game_status == 0)
 		draw_screens(c, c->textures->start_screen);
 	else if (c->game_status == -1)
 	{
