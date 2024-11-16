@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/16 19:29:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:33:46 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 # include <MLX42/MLX42.h>
-// # include "MLX42.h"
+# include <sys/time.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -26,6 +26,10 @@
 # ifndef BONUS
 #  define BONUS 0
 # endif
+
+#ifndef TIMEOUT
+#define TIMEOUT 120.0
+#endif
 
 # ifndef MINIMAP_SIZE
 #  define MINIMAP_SIZE 200
@@ -101,19 +105,18 @@ typedef struct s_map
 
 typedef struct s_minmap
 {
-	int			cam_x;
-	int			cam_y;
-	double		ray_len;
-	double		ray_angle;
-	double		ray_y;
-	double		ray_x;
-	int			map_x;
-	int			map_y;
-	uint32_t	color;
-	// mlx_texture_t *minimap_window;
-	mlx_texture_t *wall;
-	mlx_texture_t *space;
-	mlx_texture_t *door;
+	int				cam_x;
+	int				cam_y;
+	double			ray_len;
+	double			ray_angle;
+	double			ray_y;
+	double			ray_x;
+	int				map_x;
+	int				map_y;
+	uint32_t		color;
+	mlx_texture_t	*wall;
+	mlx_texture_t	*space;
+	mlx_texture_t	*door;
 }	t_minmap;
 
 typedef struct s_door
@@ -125,8 +128,8 @@ typedef struct s_door
 
 typedef struct s_spawn_point
 {
-    int	x;
-    int	y;
+	int	x;
+	int	y;
 }	t_spawn_point;
 
 typedef struct s_sprite
@@ -163,7 +166,7 @@ typedef struct s_sprite
 	int				next_tile_x;
 	int				next_tile_y;
 	double			dist_to_player;
-}   t_sprite;
+}	t_sprite;
 
 typedef struct s_toggle_action
 {
@@ -188,8 +191,6 @@ typedef struct s_textures
 	mlx_texture_t	*death_screen;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
-	// mlx_texture_t	*mmap_wall;
-	// mlx_texture_t	*mmap_space;
 	mlx_texture_t	*player;
 }	t_textures;
 
@@ -254,71 +255,67 @@ typedef struct s_caster
 	int				total_spawn_points;
 	double			*depth_buffer;
 	int				*map_row_len_buffer;
+	double			player_moved;
+	double			player_rotated;
+	double			elapsed_time;
+	mlx_image_t		*time_text_img;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
 void	init_buffers(t_caster *c);
 void	set_images_to_window(t_caster *c);
-// void read_map(t_caster *c, char **av);
-
 int		movement_up_down(t_caster *c);
 int		movement_left_right(t_caster *c);
 int		rotate_view_keyboard(t_caster *c);
 int		rotate_view_mouse(t_caster *c);
 void	keyboard_listener(mlx_key_data_t key, void *param);
-
 void	parse_minimap(t_caster *c);
 void	draw_player_to_minimap(t_caster *c);
-
+void	draw_ray(t_caster *c, int player_x, int player_y);
 void	raycaster(t_caster *c);
 void	get_wall_texture(t_caster *c);
 void	get_texture_offset(t_caster *c);
 void	render_wall_column(t_caster *c, int x);
 void	render_floor_and_ceiling(t_caster *c, int draw_end, int x);
-
 void	render_engine(t_caster *c);
 void	game_loop(void *param);
 void	check_cursor_movement(t_caster *c);
 int		check_movement(t_caster *c);
 int		check_collision(t_caster *c, double new_px, double new_py);
-
 void	exit_mlx(t_caster *c);
 void	exit_failure(t_caster *c, char *msg);
-
+void	free_textures(t_caster *c);
 void	read_description(t_caster *c);
 void	file_exist(t_caster *c, char *file, char *extension, int i);
 void	check_wall(t_caster *c);
 void	find_player_pos(t_caster *c);
 void	check_map(t_caster *c);
 void	parse_plain_colors(t_caster *c, char *line);
-
 void	store_door_info(t_caster *c, const char *line);
 int		is_door_open(t_caster *c, int y, int x);
 t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
-
-void    init_sprites(t_caster *c);
+void	init_sprites(t_caster *c);
 void	init_spawn_points(t_caster *c);
 void	is_sprite_visible(t_caster *c, int y, int x);
-void    render_sprites(t_caster *c);
+void	render_sprites(t_caster *c);
 void	draw_sprite(t_caster *c, t_sprite *sp, \
-						mlx_texture_t *texture, int size);
+mlx_texture_t *texture, int size);
 void	get_sprite_size_and_pos(t_caster *c, \
-							 t_sprite *sp, mlx_texture_t *texture);
+t_sprite *sp, mlx_texture_t *texture);
 void	check_sprite_hit(t_caster *c);
 void	spawn_sprite(t_caster *c);
-
 void	init_shotgun(t_caster *c);
 void	render_gun(t_caster *c);
 void	start_gun_fire_animation(t_sprite *gun);
 void	gun_fire_animation(t_caster *c);
-
 void	draw_player(t_caster *c);
 void	put_player_in_middle(t_caster *c);
 void	draw_tiles(t_caster *c, int x, int y, int flag);
 void	draw_sprites(t_caster *c);
 void	restrict_sizes_to_mimmap(int *x, int *y);
 void	find_which_tiles(t_caster *c, int x, int y);
-
 void	check_game_status(t_caster *c);
+void	check_timeout(t_caster *c);
+void	draw_elapsed_time(t_caster *c);
 #endif

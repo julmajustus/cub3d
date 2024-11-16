@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/15 15:12:06 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/16 11:55:42 by skwon2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,13 @@ SRC_DIR         = src
 INC_DIR         = inc
 
 SRC             = $(SRC_DIR)/main.c \
+				  $(SRC_DIR)/check_timeout.c \
                   $(SRC_DIR)/init.c \
                   $(SRC_DIR)/init_buffers.c \
                   $(SRC_DIR)/check_game_status.c \
                   $(SRC_DIR)/minimap/parse_minimap.c\
 				  $(SRC_DIR)/minimap/draw_ply.c\
+			      $(SRC_DIR)/minimap/draw_ray.c\
 				  $(SRC_DIR)/minimap/draw_sprites.c\
                   $(SRC_DIR)/raycaster/raycaster.c \
                   $(SRC_DIR)/raycaster/get_ray_texture.c \
@@ -30,6 +32,7 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/controls_keyboard.c \
                   $(SRC_DIR)/check_collision.c \
                   $(SRC_DIR)/exit_mlx.c \
+				  $(SRC_DIR)/free_textures.c \
                   $(SRC_DIR)/parsing_description/file_exist.c \
                   $(SRC_DIR)/parsing_description/map_configuration.c \
                   $(SRC_DIR)/parsing_description/read_description.c \

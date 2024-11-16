@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 15:38:56 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:19:56 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	animation(t_caster *c, t_sprite *sp)
 	double	current_time;
 
 	current_time = mlx_get_time();
-	if (current_time - sp->last_frame_time >= 0.15)
+	if (current_time - sp->last_frame_time >= 0.12)
 	{
 		update_sprite_position(c, sp);
 		sp->last_frame_time = current_time;
