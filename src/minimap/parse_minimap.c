@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:31 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/13 19:06:00 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/16 09:31:50 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_bgcolor_minmap(t_caster *c)
 	{
 		j = -1;
 		while (++j < MINIMAP_SIZE)
-			mlx_put_pixel(window, j, i, 0x8B4513FF);
+			mlx_put_pixel(window, j, i, 0x000000FF);
 	}
 }
 
