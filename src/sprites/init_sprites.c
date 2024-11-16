@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:55:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 14:35:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:20:43 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_sprites(t_caster *c)
 		c->sp[i]->current_frame = 0;
 		c->sp[i]->frame_offset = c->sp[i]->current_frame * 64 * 64 * 4;
 		c->sp[i]->last_frame_time = 0.0;
-		c->sp[i]->speed = 0.10;
+		c->sp[i]->speed = 0.20;
 		c->sp[i]->x = -1.0;
 		c->sp[i]->y = -1.0;
 		c->sp[i]->is_visible = 0;

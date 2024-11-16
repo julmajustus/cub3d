@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 01:56:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/14 20:10:27 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/16 11:30:28 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,42 +32,38 @@ void	put_player_in_middle(t_caster *c)
 			* c->map->scale_y) - MINIMAP_SIZE;
 }
 
-void	draw_pixel(t_caster *c, int x, int y, int color)
+void	restrict_sizes_to_minimap(int *x, int *y)
 {
-	if (x >= 0 && x < MINIMAP_SIZE && y >= 0 && y < MINIMAP_SIZE)
-	{
-		mlx_put_pixel(c->window->minimap, x, y, color);
-	}
+	if (*x < 0)
+		*x = 0;
+	if (*x >= MINIMAP_SIZE)
+		*x = MINIMAP_SIZE - 1;
+	if (*y < 0)
+		*y = 0;
+	if (*y >= MINIMAP_SIZE)
+		*y = MINIMAP_SIZE - 1;
 }
 
-void	draw_ray(t_caster *c, int player_x, int player_y)
+void	update_player_state(t_caster *c)
 {
-	int		i;
+	static float	prev_view_angle;
+	static float	prev_px;
+	static float	prev_py;
 
-	i = -1;
-	while (++i < 66)
-	{
-		c->mmap->ray_x = player_x;
-		c->mmap->ray_y = player_y;
-		while (c->mmap->ray_x >= 0 && c->mmap->ray_x < MINIMAP_SIZE \
-			&& c->mmap->ray_y >= 0 && c->mmap->ray_y < MINIMAP_SIZE)
-		{
-			c->mmap->map_x = (int)((c->mmap->ray_x + c->mmap->cam_x) \
-				/ c->map->scale_x);
-			c->mmap->map_y = (int)((c->mmap->ray_y + c->mmap->cam_y) \
-				/ c->map->scale_y);
-			if (c->mmap->map_y < 0 || c->mmap->map_y >= c->map->map_height - 1 \
-				|| c->mmap->map_x < 0 || c->mmap->map_x >= \
-				c->map_row_len_buffer[c->mmap->map_y] \
-				|| c->map->map_arr[c->mmap->map_y][c->mmap->map_x] == '1')
-				break ;
-			draw_pixel(c, (int)(c->mmap->ray_x + 2.5), \
-				(int)(c->mmap->ray_y + 2.5), 0xFF0000FF);
-			c->mmap->ray_x += cos(c->mmap->ray_angle) * c->mmap->ray_len;
-			c->mmap->ray_y += sin(c->mmap->ray_angle) * c->mmap->ray_len;
-		}
-		c->mmap->ray_angle += c->plane_x / 100.0;
-	}
+	prev_view_angle = 0.0f;
+	prev_px = 0.0f;
+	prev_py = 0.0f;
+	if (c->view_angle != prev_view_angle)
+		c->player_rotated = 1;
+	else
+		c->player_rotated = 0;
+	if (c->px != prev_px || c->py != prev_py)
+		c->player_moved = 1;
+	else
+		c->player_moved = 0;
+	prev_view_angle = c->view_angle;
+	prev_px = c->px;
+	prev_py = c->py;
 }
 
 void	draw_player(t_caster *c)
@@ -77,9 +73,12 @@ void	draw_player(t_caster *c)
 
 	player_x = c->mmap_px - c->mmap->cam_x;
 	player_y = c->mmap_py - c->mmap->cam_y;
-	restrict_sizes_to_mimmap(&player_x, &player_y);
-	c->mmap->ray_len = 0.1;
-	c->mmap->ray_angle = c->view_angle - (c->plane_x / 2);
-	draw_ray(c, player_x, player_y);
+	restrict_sizes_to_minimap(&player_x, &player_y);
+	update_player_state(c);
+	if (c->player_moved || c->player_rotated)
+	{
+		c->mmap->ray_len = 0.1;
+		draw_ray(c, player_x, player_y);
+	}
 	draw_tiles(c, player_x, player_y, 2);
 }

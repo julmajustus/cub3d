@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 15:05:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/16 11:41:51 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,40 +42,6 @@ static void	free_structs(t_caster *c)
 		free(c->mmap);
 	if (c->valid_spawn_points)
 		free(c->valid_spawn_points);
-}
-
-static void	free_textures(t_caster *c)
-{
-	if (c->textures)
-	{
-		if (c->textures->north_texture)
-			mlx_delete_texture(c->textures->north_texture);
-		if (c->textures->south_texture)
-			mlx_delete_texture(c->textures->south_texture);
-		if (c->textures->east_texture)
-			mlx_delete_texture(c->textures->east_texture);
-		if (c->textures->west_texture)
-			mlx_delete_texture(c->textures->west_texture);
-		if (c->textures->door_texture)
-			mlx_delete_texture(c->textures->door_texture);
-		if (c->textures->sp_texture)
-			mlx_delete_texture(c->textures->sp_texture);
-		if (c->textures->start_screen)
-			mlx_delete_texture(c->textures->start_screen);
-		if (c->textures->menu_screen)
-			mlx_delete_texture(c->textures->menu_screen);
-		if (c->textures->death_screen)
-			mlx_delete_texture(c->textures->death_screen);
-		if (c->gun->texture)
-			mlx_delete_texture(c->gun->texture);
-		if (c->mmap->wall)
-			mlx_delete_texture(c->mmap->wall);
-		if (c->mmap->space)
-			mlx_delete_texture(c->mmap->space);
-		if (c->mmap->door)
-			mlx_delete_texture(c->mmap->door);
-		free(c->textures);
-	}
 }
 
 void	exit_mlx(t_caster *c)
