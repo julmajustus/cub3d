@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 16:29:53 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 17:01:48 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static void	get_wall_dist_and_height(t_caster *c)
 			(1 - c->step_y) / 2) / c->ray_dir_y;
 	c->wall_height = (int)(HEIGHT / c->wall_dist);
 	c->draw_start = -c->wall_height / 2 + HEIGHT / 2;
-	if (c->draw_start < 0)
+	if (c->draw_start < 0 || c->draw_start > HEIGHT)
 		c->draw_start = 0;
 	c->draw_end = c->wall_height / 2 + HEIGHT / 2;
-	if (c->draw_end >= HEIGHT)
+	if (c->draw_end >= HEIGHT || c->draw_end < 0)
 		c->draw_end = HEIGHT;
 }
 

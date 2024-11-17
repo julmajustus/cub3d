@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:55:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 13:17:02 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:31:06 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	check_collision_left_right(t_caster *c, int *moved, double new_px)
 		c->px = new_px;
 		*moved = 1;
 	}
+	if (c->map->map_arr[(int)c->py][(int)x_radius] == 'X')
+		c->game_status = -2;
 }
 
 static void	check_collision_up_down(t_caster *c, int *moved, double new_py)
@@ -52,6 +54,8 @@ static void	check_collision_up_down(t_caster *c, int *moved, double new_py)
 		c->py = new_py;
 		*moved = 1;
 	}
+	if (c->map->map_arr[(int)y_radius][(int)c->px] == 'X')
+		c->game_status = -2;
 }
 
 int	check_collision(t_caster *c, double new_px, double new_py)

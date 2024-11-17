@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 16:27:58 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 17:03:13 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct s_map
 	char	**map_arr;
 	double	scale_x;
 	double	scale_y;
-	int		spawn_location_x;
-	int		spawn_location_y;
+	double	spawn_location_x;
+	double	spawn_location_y;
 }	t_map;
 
 typedef struct s_minmap
