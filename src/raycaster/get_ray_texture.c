@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:20:13 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 22:16:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:49:48 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_wall_texture(t_caster *c)
 	if (c->map->map_arr[c->map_y][c->map_x] == 'X')
 	{
 		c->wall_texture = c->textures->exit;
-		apply_glow_effect(c);
+		//apply_glow_effect(c);
 		return;
 	}
 	if (c->wall_hit_is_horizontal == 0)
