@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 19:35:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:29:53 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,34 +48,6 @@ static void	init_ray_dir_and_cast_position(t_caster *c)
 	{
 		c->step_y = 1;
 		c->dist_to_grid_y = (c->map_y + 1.0 - c->py) * c->dist_increment_y;
-	}
-}
-
-static void	trace_ray_until_wall_hit(t_caster *c)
-{
-	int	hit;
-
-	hit = 0;
-	while (!hit)
-	{
-		if (c->dist_to_grid_x < c->dist_to_grid_y)
-		{
-			c->dist_to_grid_x += c->dist_increment_x;
-			c->map_x += c->step_x;
-			c->wall_hit_is_horizontal = 0;
-		}
-		else
-		{
-			c->dist_to_grid_y += c->dist_increment_y;
-			c->map_y += c->step_y;
-			c->wall_hit_is_horizontal = 1;
-		}
-		is_sprite_visible(c, c->map_y, c->map_x);
-		if (c->map->map_arr[c->map_y][c->map_x] == 'D' \
-			&& !is_door_open(c, c->map_y, c->map_x))
-			hit = 1;
-		else if (c->map->map_arr[c->map_y][c->map_x] == '1')
-			hit = 1;
 	}
 }
 

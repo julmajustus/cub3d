@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   get_ray_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:20:13 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 22:25:40 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:49:10 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+void apply_glow_effect(t_caster *c)
+{
+	int y;
+	int x;
+	int thick;
+	int index;
+
+	y = 0;
+	thick = 3;
+	while (y < (int)c->wall_texture->height)
+	{
+		x = 0;
+		while (x < (int)c->wall_texture->width)
+		{
+			index = (y * (int)c->wall_texture->width + x) * 4;
+
+			if ( x <= thick || x >= (int)c->wall_texture->width - thick \
+			|| y <= thick || y >= (int)c->wall_texture->height - thick)
+			{
+				c->wall_texture->pixels[index] = 255;
+				c->wall_texture->pixels[index + 1] = 0;
+				c->wall_texture->pixels[index + 2] = 0;
+				c->wall_texture->pixels[index + 3] = 255;
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
 void	get_wall_texture(t_caster *c)
 {
@@ -18,6 +48,12 @@ void	get_wall_texture(t_caster *c)
 	{
 		c->wall_texture = c->textures->door_texture;
 		return ;
+	}
+	if (c->map->map_arr[c->map_y][c->map_x] == 'X')
+	{
+		c->wall_texture = c->textures->exit;
+		apply_glow_effect(c);
+		return;
 	}
 	if (c->wall_hit_is_horizontal == 0)
 	{
