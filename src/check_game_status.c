@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_game_status.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 13:21:27 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:30:30 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ void	check_game_status(t_caster *c)
 		draw_screens(c, c->textures->menu_screen);
 	else if (c->game_status == 0)
 		draw_screens(c, c->textures->start_screen);
-	else if (c->game_status == -1)
+	else if (c->game_status == -1 || c->game_status == -2)
 	{
 		c->py = c->map->spawn_location_y;
 		c->px = c->map->spawn_location_x;
 		set_images_to_window(c);
 		c->active_sprite_count = 1;
-		draw_screens(c, c->textures->death_screen);
+		if (c->game_status == -1)
+			draw_screens(c, c->textures->death_screen);
+		if (c->game_status == -2)
+			draw_screens(c, c->textures->succeed_screen);
 	}
 }

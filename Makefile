@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/17 22:03:00 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/17 22:23:09 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
                   -I$(GLFW_INCLUDE_PATH) -O3 \
-                  #-g -ggdb3 -fsanitize=address
+                  -g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 

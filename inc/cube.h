@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 22:08:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:13:07 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,10 @@ typedef struct s_textures
 	mlx_texture_t	*menu_screen;
 	mlx_texture_t	*start_screen;
 	mlx_texture_t	*death_screen;
+	mlx_texture_t	*succeed_screen;
+	mlx_texture_t	*press_R;
+	mlx_texture_t	*press_Enter;
+	mlx_texture_t	*exit;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
 	mlx_texture_t	*player;
@@ -330,4 +334,5 @@ void	find_which_tiles(t_caster *c, int x, int y);
 void	check_game_status(t_caster *c);
 void	check_timeout(t_caster *c);
 void	draw_elapsed_time(t_caster *c);
+void	trace_ray_until_wall_hit(t_caster *c);
 #endif
