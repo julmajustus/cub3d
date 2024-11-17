@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 17:30:30 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 00:39:55 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	check_game_status(t_caster *c)
 		c->py = c->map->spawn_location_y;
 		c->px = c->map->spawn_location_x;
 		set_images_to_window(c);
-		c->active_sprite_count = 1;
+		c->active_sprite_count = ZOMBIE_COUNT;
 		if (c->game_status == -1)
 			draw_screens(c, c->textures->death_screen);
 		if (c->game_status == -2)

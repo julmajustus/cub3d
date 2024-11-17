@@ -6,16 +6,17 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:16:47 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 22:18:12 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:40:43 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void hit_check(t_caster *c, int *hit)
+static void	hit_check(t_caster *c, int *hit)
 {
 	is_sprite_visible(c, c->map_y, c->map_x);
-	if (c->map->map_arr[c->map_y][c->map_x] == 'D' && !is_door_open(c, c->map_y, c->map_x))
+	if (c->map->map_arr[c->map_y][c->map_x] == 'D' \
+		&& !is_door_open(c, c->map_y, c->map_x))
 		*hit = 1;
 	else if (c->map->map_arr[c->map_y][c->map_x] == 'X')
 		*hit = 1;

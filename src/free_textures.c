@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:35:27 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/17 22:13:21 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:46:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	delete_walls(t_caster *c)
 		mlx_delete_texture(c->textures->west_texture);
 }
 
-static void delete_scenes(t_caster *c)
+static void	delete_scenes(t_caster *c)
 {
 	if (c->textures->start_screen)
 		mlx_delete_texture(c->textures->start_screen);
