@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:47:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/16 13:11:38 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 21:27:34 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	draw_elapsed_time(t_caster *c)
 		leftover_time = ft_strjoin(leftover_time, decimal_part);
 		leftover_time = ft_strjoin("TIME : ", leftover_time);
 		c->time_text_img = mlx_put_string(c->window->handle, leftover_time, (WIDTH / 2) - 10, (2 / HEIGHT) + 20);
+		free(leftover_time);
 	}
 }

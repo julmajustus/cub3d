@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 17:03:13 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 01:01:13 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct s_textures
 	mlx_texture_t	*succeed_screen;
 	mlx_texture_t	*press_R;
 	mlx_texture_t	*press_Enter;
+	mlx_texture_t	*press_menu_enter;
 	mlx_texture_t	*exit;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
@@ -207,6 +208,15 @@ typedef struct s_window
 	mlx_image_t		*gun;
 }	t_window;
 
+typedef struct s_scene
+{
+	int			spot_x;
+	int			spot_y;
+	int			y;
+	int			x;
+	int			offset;
+	uint32_t	color;
+}	t_scene;
 typedef struct s_caster
 {
 	char			*window_title;
@@ -263,6 +273,7 @@ typedef struct s_caster
 	double			player_rotated;
 	double			elapsed_time;
 	mlx_image_t		*time_text_img;
+	int				blink_state;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -323,4 +334,6 @@ void	check_game_status(t_caster *c);
 void	check_timeout(t_caster *c);
 void	draw_elapsed_time(t_caster *c);
 void	trace_ray_until_wall_hit(t_caster *c);
+void	draw_text(t_caster *c, mlx_texture_t *texture, int blink);
+void	draw_scene(t_caster *c, mlx_texture_t *texture, int height, int width);
 #endif

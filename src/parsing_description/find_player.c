@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:20:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/17 17:01:25 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 22:51:31 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	store_position_player(t_caster *c, int *found, size_t x, size_t y)
 		(*found)++;
 		c->px = x + 0.50;
 		c->py = y + 0.50;
-		c->mmap_px = x * MINIMAP_SCALE + 0.50;
-		c->mmap_py = y * MINIMAP_SCALE + 0.50;
+		c->mmap_px = x * MINIMAP_SCALE;
+		c->mmap_py = y * MINIMAP_SCALE;
 		c->map->spawn_location_x = c->px;
 		c->map->spawn_location_y = c->py;
 		set_player_direction(c, x, y);
