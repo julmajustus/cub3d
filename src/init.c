@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 15:08:08 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 03:55:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ static void	init_textures(t_caster *c)
 	c->textures->start_screen = mlx_load_png("./textures/start_screen.png");
 	c->textures->death_screen = mlx_load_png("./textures/death_screen.png");
 	c->textures->sp_texture = mlx_load_png("./textures/zombie_with_death.png");
+	c->textures->c_texture = mlx_load_png("./textures/brickceiling.png");
+	c->textures->f_texture = mlx_load_png("./textures/brickfloor.png");
 	if (!c->textures->menu_screen || !c->textures->start_screen \
-		|| !c->textures->death_screen || !c->textures->sp_texture)
+		|| !c->textures->death_screen || !c->textures->sp_texture \
+		|| !c->textures->c_texture || !c->textures->f_texture)
 		exit_failure(c, "Failed to load textures");
 }
 

@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/16 11:55:42 by skwon2           ###   ########.fr        #
+#    Updated: 2024/11/17 05:26:00 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/minimap/draw_sprites.c\
                   $(SRC_DIR)/raycaster/raycaster.c \
                   $(SRC_DIR)/raycaster/get_ray_texture.c \
-                  $(SRC_DIR)/raycaster/render_ray.c \
+                  $(SRC_DIR)/raycaster/render_wall.c \
+                  $(SRC_DIR)/raycaster/render_floor_and_ceiling.c \
                   $(SRC_DIR)/rotate_view.c \
                   $(SRC_DIR)/controls_keyboard.c \
                   $(SRC_DIR)/check_collision.c \
@@ -61,7 +62,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
                   -I$(GLFW_INCLUDE_PATH) -O3 \
-                  -g -ggdb3 -fsanitize=address
+                  #-g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 

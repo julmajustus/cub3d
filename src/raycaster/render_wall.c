@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:16:47 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/08 19:32:59 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 05:25:22 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,5 @@ void	render_wall_column(t_caster *c, int x)
 			| c->wall_texture->pixels[tex_index + 3];
 		mlx_put_pixel(c->window->view, x, y, c->pixel_color);
 		y++;
-	}
-}
-
-void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
-{
-	int	y_floor;
-	int	y_ceiling;
-
-	y_floor = draw_end;
-	y_ceiling = HEIGHT - draw_end - 1;
-	while (y_floor < HEIGHT && y_ceiling >= 0)
-	{
-		mlx_put_pixel(c->window->view, x, y_floor++, \
-				c->textures->floor_color);
-		mlx_put_pixel(c->window->view, x, y_ceiling--, \
-				c->textures->ceiling_color);
 	}
 }
