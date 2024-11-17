@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:35:27 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/16 11:42:08 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 03:57:07 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	free_textures(t_caster *c)
 			mlx_delete_texture(c->textures->death_screen);
 		if (c->gun->texture)
 			mlx_delete_texture(c->gun->texture);
+		if (c->textures->c_texture)
+			mlx_delete_texture(c->textures->c_texture);
+		if (c->textures->f_texture)
+			mlx_delete_texture(c->textures->f_texture);
 		delete_minmap_textures(c);
 		free(c->textures);
 	}

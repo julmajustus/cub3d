@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/16 19:33:46 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 05:00:03 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ typedef struct s_textures
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
 	mlx_texture_t	*east_texture;
+	mlx_texture_t	*c_texture;
+	mlx_texture_t	*f_texture;
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*sp_texture;
 	mlx_texture_t	*menu_screen;
@@ -239,6 +241,7 @@ typedef struct s_caster
 	mlx_texture_t	*wall_texture;
 	int				tex_x;
 	int				tex_y;
+	int				tex_index;
 	uint32_t		pixel_color;
 	double			cursor_pos;
 	double			cos_table[WIDTH];
@@ -259,6 +262,11 @@ typedef struct s_caster
 	double			player_rotated;
 	double			elapsed_time;
 	mlx_image_t		*time_text_img;
+	double			fc_row_dist;
+	double			fc_step_x;
+	double			fc_step_y;
+	double			fc_x;
+	double			fc_y;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -276,6 +284,7 @@ void	raycaster(t_caster *c);
 void	get_wall_texture(t_caster *c);
 void	get_texture_offset(t_caster *c);
 void	render_wall_column(t_caster *c, int x);
+void	color_floor_and_ceiling(t_caster *c, int draw_end, int x);
 void	render_floor_and_ceiling(t_caster *c, int draw_end, int x);
 void	render_engine(t_caster *c);
 void	game_loop(void *param);
