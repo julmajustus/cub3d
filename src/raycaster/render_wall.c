@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_ray.c                                       :+:      :+:    :+:   */
+/*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:16:47 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 05:25:22 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:51:09 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	render_wall_column(t_caster *c, int x)
 			| (c->wall_texture->pixels[tex_index + 1] << 16) \
 			| (c->wall_texture->pixels[tex_index + 2] << 8) \
 			| c->wall_texture->pixels[tex_index + 3];
-		mlx_put_pixel(c->window->view, x, y, c->pixel_color);
+		if (y > 0 && y < HEIGHT)
+			mlx_put_pixel(c->window->view, x, y, c->pixel_color);
 		y++;
 	}
 }

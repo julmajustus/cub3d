@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 05:00:03 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:08:57 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 #  define BONUS 0
 # endif
 
-#ifndef TIMEOUT
-#define TIMEOUT 120.0
-#endif
+# ifndef TIMEOUT
+#  define TIMEOUT 120.0
+# endif
 
 # ifndef MINIMAP_SIZE
 #  define MINIMAP_SIZE 200
@@ -256,17 +256,20 @@ typedef struct s_caster
 	t_sprite		*gun;
 	t_spawn_point	*valid_spawn_points;
 	int				total_spawn_points;
-	double			*depth_buffer;
+	double			depth_buffer[WIDTH];
 	int				*map_row_len_buffer;
 	double			player_moved;
 	double			player_rotated;
 	double			elapsed_time;
 	mlx_image_t		*time_text_img;
 	double			fc_row_dist;
+	double			fc_row_dist_buffer[HEIGHT];
 	double			fc_step_x;
 	double			fc_step_y;
 	double			fc_x;
 	double			fc_y;
+	double			fc_base_x;
+	double			fc_base_y;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
