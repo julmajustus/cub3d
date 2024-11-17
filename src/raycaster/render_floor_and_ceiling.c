@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 05:24:41 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 05:28:04 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:08:30 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,19 @@ void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
 {
 	int		y_floor;
 	int		y_ceiling;
-	double	inv_width;
 
 	y_floor = draw_end;
 	y_ceiling = HEIGHT - draw_end - 1;
-	inv_width = 1.0 / WIDTH;
+	c->fc_step_x = (c->cos_table[WIDTH - 1] - c->cos_table[0]) / WIDTH;
+	c->fc_step_y = (c->sin_table[WIDTH - 1] - c->sin_table[0]) / WIDTH;
 	while (y_floor < HEIGHT || y_ceiling >= 0)
 	{
-		if (y_floor < HEIGHT)
-			c->fc_row_dist = HEIGHT / (2.0 * y_floor - HEIGHT);
-		else
-			c->fc_row_dist = HEIGHT / (HEIGHT - 2.0 * y_ceiling);
-		c->fc_step_x = c->fc_row_dist \
-			* (c->cos_table[WIDTH - 1] - c->cos_table[0]) * inv_width;
-		c->fc_step_y = c->fc_row_dist \
-			* (c->sin_table[WIDTH - 1] - c->sin_table[0]) * inv_width;
-		c->fc_x = c->px + c->fc_row_dist * c->cos_table[0] + x * c->fc_step_x;
-		c->fc_y = c->py + c->fc_row_dist * c->sin_table[0] + x * c->fc_step_y;
+		c->fc_base_x = c->px + c->fc_row_dist_buffer[y_floor] * c->cos_table[0];
+		c->fc_base_y = c->py + c->fc_row_dist_buffer[y_floor] * c->sin_table[0];
+		c->fc_x = c->fc_base_x + x \
+			* c->fc_step_x * c->fc_row_dist_buffer[y_floor];
+		c->fc_y = c->fc_base_y + x \
+			* c->fc_step_y * c->fc_row_dist_buffer[y_floor];
 		get_fc_tex_index(c);
 		if (y_floor < HEIGHT)
 			render_floor(c, &y_floor, x);
