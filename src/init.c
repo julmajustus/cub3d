@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 17:04:32 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 23:40:14 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	init_textures(t_caster *c)
 	c->textures->press_R = mlx_load_png("./textures/press_R.png");
 	c->textures->exit = mlx_load_png("./textures/exit.png");
 	c->textures->press_Enter = mlx_load_png("./textures/press_Enter.png");
+	c->textures->press_menu_enter = mlx_load_png("./textures/press_menu_enter.png");
 	c->textures->sp_texture = mlx_load_png("./textures/zombie_with_death.png");
 	if (!c->textures->menu_screen || !c->textures->start_screen \
 		|| !c->textures->death_screen || !c->textures->sp_texture \
@@ -77,6 +78,7 @@ void	init(t_caster *c, char **av)
 	if (!c->window)
 		exit_failure(c, "window struct malloc failed");
 	ft_bzero(c->window, sizeof(t_window));
+	c->blink_state = 0;
 	c->speed_multiplier = 0.02;
 	c->plane_x = 0.66;
 	c->plane_y = 0;
