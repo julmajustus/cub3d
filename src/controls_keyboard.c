@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/15 13:19:23 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:29:52 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	menu_controls(mlx_key_data_t key, t_caster *c)
 	}
 	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
 	{
-		if (c->game_status == -1)
+		if (c->game_status == -1 || c->game_status == -2)
 		{
 			c->game_status = 2;
 			render_gun(c);

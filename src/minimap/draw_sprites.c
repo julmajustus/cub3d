@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 02:00:01 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/14 20:34:36 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:49:05 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ void	draw_tiles(t_caster *c, int x, int y, int flag)
 	}
 	if (flag == 3)
 		img = c->mmap->door;
-	draw_scaled_img_to_tile(c, x, y, img);
+    if (flag == 4)
+        img = c->mmap->door;
+    draw_scaled_img_to_tile(c, x, y, img);
 }
 
 void	find_which_tiles(t_caster *c, int x, int y)
@@ -99,7 +101,7 @@ void	find_which_tiles(t_caster *c, int x, int y)
 	restrict_sizes_to_mimmap(&minimap_x, &minimap_x);
 	if (c->map->map_arr[y][x] == '1')
 		draw_tiles(c, minimap_x, minimap_y, 1);
-	else if (c->map->map_arr[y][x] == '0')
+    else if (c->map->map_arr[y][x] == '0')
 		draw_tiles(c, minimap_x, minimap_y, 0);
 	else if (c->map->map_arr[y][x] == 'D')
 	{
@@ -108,4 +110,6 @@ void	find_which_tiles(t_caster *c, int x, int y)
 		else if (!is_door_open(c, y, x))
 			draw_tiles(c, minimap_x, minimap_y, 3);
 	}
+    else if (c->map->map_arr[y][x] == 'X')
+        draw_tiles(c, minimap_x, minimap_y, 4);
 }

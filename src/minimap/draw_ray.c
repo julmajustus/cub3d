@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:46:08 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/16 11:32:06 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 16:22:28 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	draw_one_ray(t_caster *c)
 		|| c->mmap->map_x >= c->map_row_len_buffer[c->mmap->map_y] \
 		|| c->map->map_arr[c->mmap->map_y][c->mmap->map_x] == '1' \
 		|| (c->map->map_arr[c->mmap->map_y][c->mmap->map_x] == 'D' \
-		&& !is_door_open(c, c->mmap->map_y, c->mmap->map_x)))
+		&& !is_door_open(c, c->mmap->map_y, c->mmap->map_x)) \
+		|| c->map->map_arr[c->mmap->map_y][c->mmap->map_x] == 'X')
 			break ;
 		draw_pixel(c, (int)(c->mmap->ray_x + 2.5), \
 		(int)(c->mmap->ray_y + 2.5), 0xFF0000FF);
