@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 13:53:41 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:54:40 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,8 @@ typedef struct s_textures
 	mlx_texture_t	*start_screen;
 	mlx_texture_t	*death_screen;
 	mlx_texture_t	*succeed_screen;
-	mlx_texture_t	*press_R;
-	mlx_texture_t	*press_Enter;
+	mlx_texture_t	*press_r;
+	mlx_texture_t	*press_enter;
 	mlx_texture_t	*press_menu_enter;
 	mlx_texture_t	*exit;
 	uint32_t		ceiling_color;

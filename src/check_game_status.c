@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 15:17:31 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:54:40 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	check_texture(t_caster *c, mlx_texture_t **texture)
 {
 	if (c->game_status == 0)
-		*texture = c->textures->press_Enter;
+		*texture = c->textures->press_enter;
 	else if (c->game_status == 1)
 		*texture = c->textures->press_menu_enter;
 	else if (c->game_status == -1 || c->game_status == -2)
-		*texture = c->textures->press_R;
+		*texture = c->textures->press_r;
 	else
 		return (1);
 	return (0);
