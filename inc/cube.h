@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 22:41:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:52:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 
 # ifndef BONUS
 #  define BONUS 0
+# endif
+
+# ifndef FC_TEXTURES
+#  define FC_TEXTURES 0
 # endif
 
 # ifndef ZOMBIE_COUNT
@@ -196,8 +200,9 @@ typedef struct s_textures
 	mlx_texture_t	*start_screen;
 	mlx_texture_t	*death_screen;
 	mlx_texture_t	*succeed_screen;
-	mlx_texture_t	*press_R;
-	mlx_texture_t	*press_Enter;
+	mlx_texture_t	*press_r;
+	mlx_texture_t	*press_enter;
+	mlx_texture_t	*press_menu_enter;
 	mlx_texture_t	*exit;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
@@ -212,6 +217,16 @@ typedef struct s_window
 	mlx_image_t		*sprite;
 	mlx_image_t		*gun;
 }	t_window;
+
+typedef struct s_scene
+{
+	int			spot_x;
+	int			spot_y;
+	int			y;
+	int			x;
+	int			offset;
+	uint32_t	color;
+}	t_scene;
 
 typedef struct s_caster
 {
@@ -255,6 +270,7 @@ typedef struct s_caster
 	int			wall_height[WIDTH];
 	char			hit_surface[WIDTH];
 	int			hit_is_horizontal[WIDTH];
+	double			wall_texture_offset_buffer[WIDTH];
 	uint32_t		*view_buffer;
 	t_door			*doors;
 	int				door_count;
@@ -279,6 +295,7 @@ typedef struct s_caster
 	double			fc_y;
 	double			fc_base_x;
 	double			fc_base_y;
+	int				blink_state;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -338,4 +355,6 @@ void	find_which_tiles(t_caster *c, int x, int y);
 void	check_game_status(t_caster *c);
 void	check_timeout(t_caster *c);
 void	draw_elapsed_time(t_caster *c);
+void	draw_text(t_caster *c, mlx_texture_t *texture, int blink);
+void	draw_scene(t_caster *c, mlx_texture_t *texture, int height, int width);
 #endif
