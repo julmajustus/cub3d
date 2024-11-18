@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 00:45:03 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 01:14:15 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	spawn_sprite(t_caster *c)
 							* 942983343)) % c->total_spawn_points);
 			c->sp[i]->x = c->valid_spawn_points[spawn_index].x;
 			c->sp[i]->y = c->valid_spawn_points[spawn_index].y;
-			if ((int)c->sp[i]->x == (int)c->px \
-				&& (int)c->sp[i]->y == (int)c->py)
+			if (((int)c->sp[i]->x == (int)c->px \
+				&& (int)c->sp[i]->y == (int)c->py) || \
+				((int)c->sp[i]->y == (int)c->map->spawn_location_y \
+				&& (int)c->sp[i]->x == (int)c->map->spawn_location_x))
 				continue ;
 			c->sp[i]->last_spwan_time = current_time;
 		}
