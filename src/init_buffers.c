@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 20:25:40 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 20:26:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:09:35 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@ void	init_buffers(t_caster *c)
 {
 	int	i;
 
-	i = -1;
 	c->map_row_len_buffer = malloc(sizeof(int) * c->map->map_height);
 	if (!c->map_row_len_buffer)
 		exit_failure(c, "Failed to allocate memory for map row length buffer");
+	i = -1;
 	while (++i < c->map->map_height)
 		c->map_row_len_buffer[i] = ft_strlen(c->map->map_arr[i]);
-	c->depth_buffer = malloc(sizeof(double) * WIDTH);
-	if (!c->depth_buffer)
-		exit_failure(c, "Failed to allocate memory for depth buffer");
+	i = -1;
+	while (++i < HEIGHT)
+	{
+		if (i < HEIGHT / 2)
+			c->fc_row_dist_buffer[i] = HEIGHT / (HEIGHT - 2.0 * i);
+		else
+			c->fc_row_dist_buffer[i] = HEIGHT / (2.0 * i - HEIGHT);
+	}
 	init_spawn_points(c);
 }
 

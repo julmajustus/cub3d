@@ -6,18 +6,18 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:20:13 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 16:49:10 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:18:53 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void apply_glow_effect(t_caster *c)
+void	apply_glow_effect(t_caster *c)
 {
-	int y;
-	int x;
-	int thick;
-	int index;
+	int	y;
+	int	x;
+	int	thick;
+	int	index;
 
 	y = 0;
 	thick = 3;
@@ -27,8 +27,7 @@ void apply_glow_effect(t_caster *c)
 		while (x < (int)c->wall_texture->width)
 		{
 			index = (y * (int)c->wall_texture->width + x) * 4;
-
-			if ( x <= thick || x >= (int)c->wall_texture->width - thick \
+			if (x <= thick || x >= (int)c->wall_texture->width - thick \
 			|| y <= thick || y >= (int)c->wall_texture->height - thick)
 			{
 				c->wall_texture->pixels[index] = 255;
@@ -52,8 +51,7 @@ void	get_wall_texture(t_caster *c)
 	if (c->map->map_arr[c->map_y][c->map_x] == 'X')
 	{
 		c->wall_texture = c->textures->exit;
-		apply_glow_effect(c);
-		return;
+		return ;
 	}
 	if (c->wall_hit_is_horizontal == 0)
 	{

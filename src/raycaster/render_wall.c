@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_ray.c                                       :+:      :+:    :+:   */
+/*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:16:47 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 21:26:13 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:10:44 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void hit_check(t_caster *c, int *hit)
+static void	hit_check(t_caster *c, int *hit)
 {
 	is_sprite_visible(c, c->map_y, c->map_x);
-	if (c->map->map_arr[c->map_y][c->map_x] == 'D' && !is_door_open(c, c->map_y, c->map_x))
+	if (c->map->map_arr[c->map_y][c->map_x] == 'D' \
+		&& !is_door_open(c, c->map_y, c->map_x))
 		*hit = 1;
-	else if (c->map->map_arr[c->map_y][c->map_x] == 'X' && c->elapsed_time >= TIMEOUT / 2)
+	else if (c->map->map_arr[c->map_y][c->map_x] == 'X' \
+	&& c->elapsed_time >= TIMEOUT / 2)
 		*hit = 1;
 	else if (c->map->map_arr[c->map_y][c->map_x] == '1')
 		*hit = 1;
 }
 
-void trace_ray_until_wall_hit(t_caster *c)
+void	trace_ray_until_wall_hit(t_caster *c)
 {
-	int hit;
+	int	hit;
 
 	hit = 0;
 	while (!hit)
@@ -66,23 +68,8 @@ void	render_wall_column(t_caster *c, int x)
 			| (c->wall_texture->pixels[tex_index + 1] << 16) \
 			| (c->wall_texture->pixels[tex_index + 2] << 8) \
 			| c->wall_texture->pixels[tex_index + 3];
-		mlx_put_pixel(c->window->view, x, y, c->pixel_color);
+		if (y > 0 && y < HEIGHT)
+			mlx_put_pixel(c->window->view, x, y, c->pixel_color);
 		y++;
-	}
-}
-
-void	render_floor_and_ceiling(t_caster *c, int draw_end, int x)
-{
-	int	y_floor;
-	int	y_ceiling;
-
-	y_floor = draw_end;
-	y_ceiling = HEIGHT - draw_end - 1;
-	while (y_floor < HEIGHT && y_ceiling >= 0)
-	{
-		mlx_put_pixel(c->window->view, x, y_floor++, \
-				c->textures->floor_color);
-		mlx_put_pixel(c->window->view, x, y_ceiling--, \
-				c->textures->ceiling_color);
 	}
 }

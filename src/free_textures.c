@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:35:27 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/17 23:42:47 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:49:45 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	delete_walls(t_caster *c)
 		mlx_delete_texture(c->textures->west_texture);
 }
 
-static void delete_scenes(t_caster *c)
+static void	delete_scenes(t_caster *c)
 {
 	if (c->textures->start_screen)
 		mlx_delete_texture(c->textures->start_screen);
@@ -66,6 +66,10 @@ void	free_textures(t_caster *c)
 			mlx_delete_texture(c->textures->exit);
 		if (c->gun->texture)
 			mlx_delete_texture(c->gun->texture);
+		if (c->textures->c_texture)
+			mlx_delete_texture(c->textures->c_texture);
+		if (c->textures->f_texture)
+			mlx_delete_texture(c->textures->f_texture);
 		delete_minmap_textures(c);
 		free(c->textures);
 	}

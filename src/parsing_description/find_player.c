@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:20:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/17 22:51:31 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:12:51 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,36 +54,36 @@ static void	store_position_player(t_caster *c, int *found, size_t x, size_t y)
 	}
 }
 
-void    check_condition(t_caster *c, int found, int exit)
+void	check_condition(t_caster *c, int found, int exit)
 {
-    if (BONUS && exit == 0)
-        exit_failure(c, "Exit not found.");
-    if (found == 0)
-        exit_failure(c, "Player not found.");
-    else if (found > 1)
-        exit_failure(c, "There is more than one player.");
+	if (BONUS && exit == 0)
+		exit_failure(c, "Exit not found.");
+	if (found == 0)
+		exit_failure(c, "Player not found.");
+	else if (found > 1)
+		exit_failure(c, "There is more than one player.");
 }
 
 void	find_player_pos(t_caster *c)
 {
 	size_t	x;
 	size_t	y;
-    int     exit;
+	int		exit;
 	int		found;
 
 	found = 0;
 	y = -1;
-    exit = 0;
+	exit = 0;
 	while (++y < (size_t)c->map->map_height)
 	{
 		x = -1;
 		while (++x < ft_strlen(c->map->map_arr[y]))
 		{
-            if (c->map->map_arr[y][x] == 'X')
-                exit = 1;
-            check_else_char(c, c->map->map_arr[y][x]);
+			if (c->map->map_arr[y][x] == 'X')
+				exit = 1;
+			check_else_char(c, c->map->map_arr[y][x]);
 			store_position_player(c, &found, x, y);
 		}
 	}
-    check_condition(c, found, exit);
+	check_condition(c, found, exit);
 }
