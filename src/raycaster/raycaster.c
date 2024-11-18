@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 17:01:48 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/17 22:16:51 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ void	raycaster(t_caster *c)
 		get_wall_texture(c);
 		get_texture_offset(c);
 		render_wall_column(c, x);
-		render_floor_and_ceiling(c, c->draw_end, x);
+		if (BONUS)
+			render_floor_and_ceiling(c, c->draw_end, x);
+		else
+			color_floor_and_ceiling(c, c->draw_end, x);
 	}
 }

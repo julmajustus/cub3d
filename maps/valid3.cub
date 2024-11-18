@@ -1,10 +1,10 @@
-NO ./textures/wall_big.png
+NO ./textures/brickwall10.png
 
-SO ./textures/wall_big.png
+SO ./textures/brickwall10.png
 
-WE ./textures/wall_big.png
+WE ./textures/brickwall10.png
 
-EA ./textures/wall_big.png
+EA ./textures/brickwall10.png
 
 
 F 10,5,0

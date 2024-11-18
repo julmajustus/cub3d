@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 23:40:14 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:13:51 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ static void	init_textures(t_caster *c)
 	c->textures->death_screen = mlx_load_png("./textures/death_screen.png");
 	c->textures->succeed_screen = mlx_load_png("./textures/succeed_screen.png");
 	c->textures->press_R = mlx_load_png("./textures/press_R.png");
-	c->textures->exit = mlx_load_png("./textures/exit.png");
+	c->textures->exit = mlx_load_png("./textures/brickexit2.png");
 	c->textures->press_Enter = mlx_load_png("./textures/press_Enter.png");
-	c->textures->press_menu_enter = mlx_load_png("./textures/press_menu_enter.png");
+	c->textures->press_menu_enter = mlx_load_png("./textures/menu_enter.png");
 	c->textures->sp_texture = mlx_load_png("./textures/zombie_with_death.png");
+	c->textures->c_texture = mlx_load_png("./textures/brickceiling2.png");
+	c->textures->f_texture = mlx_load_png("./textures/brickfloor2.png");
 	if (!c->textures->menu_screen || !c->textures->start_screen \
 		|| !c->textures->death_screen || !c->textures->sp_texture \
+		|| !c->textures->c_texture || !c->textures->f_texture \
 		|| ! c->textures->press_Enter || !c->textures->press_R \
 		|| ! c->textures->exit)
 		exit_failure(c, "Failed to load textures");
@@ -84,7 +87,7 @@ void	init(t_caster *c, char **av)
 	c->plane_y = 0;
 	c->is_sprite_visible = 1;
 	c->max_sprite_count = 135;
-	c->active_sprite_count = 1;
+	c->active_sprite_count = ZOMBIE_COUNT;
 	c->game_status = 0;
 	init_map(c, av);
 	init_shotgun(c);

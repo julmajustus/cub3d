@@ -6,13 +6,13 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 00:59:05 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:17:31 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int check_texture(t_caster *c, mlx_texture_t **texture)
+int	check_texture(t_caster *c, mlx_texture_t **texture)
 {
 	if (c->game_status == 0)
 		*texture = c->textures->press_Enter;
@@ -25,7 +25,7 @@ int check_texture(t_caster *c, mlx_texture_t **texture)
 	return (0);
 }
 
-static void blink_text(t_caster *c)
+static void	blink_text(t_caster *c)
 {
 	static struct timeval	last_blink_time;
 	struct timeval			current_time;
@@ -33,7 +33,7 @@ static void blink_text(t_caster *c)
 	mlx_texture_t			*texture;
 
 	if (check_texture(c, &texture) == 1)
-		return;
+		return ;
 	gettimeofday(&current_time, NULL);
 	elapsed_time = (current_time.tv_sec - last_blink_time.tv_sec) * 1000 + \
 	(current_time.tv_usec - last_blink_time.tv_usec) / 1000;
@@ -50,7 +50,7 @@ static void blink_text(t_caster *c)
 	draw_text(c, texture, c->blink_state);
 }
 
-void check_game_status(t_caster *c)
+void	check_game_status(t_caster *c)
 {
 	if (c->game_status == 0)
 	{
@@ -67,7 +67,7 @@ void check_game_status(t_caster *c)
 		c->py = c->map->spawn_location_y;
 		c->px = c->map->spawn_location_x;
 		set_images_to_window(c);
-		c->active_sprite_count = 1;
+		c->active_sprite_count = ZOMBIE_COUNT;
 		if (c->game_status == -1)
 			draw_scene(c, c->textures->death_screen, HEIGHT, WIDTH);
 		if (c->game_status == -2)

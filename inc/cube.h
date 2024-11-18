@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 01:01:13 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:53:41 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@
 #  define BONUS 0
 # endif
 
-#ifndef TIMEOUT
-#define TIMEOUT 120.0
-#endif
+# ifndef ZOMBIE_COUNT
+#  define ZOMBIE_COUNT 15
+# endif
+
+# ifndef TIMEOUT
+#  define TIMEOUT 120.0
+# endif
 
 # ifndef MINIMAP_SIZE
 #  define MINIMAP_SIZE 200
@@ -184,6 +188,8 @@ typedef struct s_textures
 	mlx_texture_t	*south_texture;
 	mlx_texture_t	*west_texture;
 	mlx_texture_t	*east_texture;
+	mlx_texture_t	*c_texture;
+	mlx_texture_t	*f_texture;
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*sp_texture;
 	mlx_texture_t	*menu_screen;
@@ -217,6 +223,7 @@ typedef struct s_scene
 	int			offset;
 	uint32_t	color;
 }	t_scene;
+
 typedef struct s_caster
 {
 	char			*window_title;
@@ -253,6 +260,7 @@ typedef struct s_caster
 	mlx_texture_t	*wall_texture;
 	int				tex_x;
 	int				tex_y;
+	int				tex_index;
 	uint32_t		pixel_color;
 	double			cursor_pos;
 	double			cos_table[WIDTH];
@@ -267,12 +275,20 @@ typedef struct s_caster
 	t_sprite		*gun;
 	t_spawn_point	*valid_spawn_points;
 	int				total_spawn_points;
-	double			*depth_buffer;
+	double			depth_buffer[WIDTH];
 	int				*map_row_len_buffer;
 	double			player_moved;
 	double			player_rotated;
 	double			elapsed_time;
 	mlx_image_t		*time_text_img;
+	double			fc_row_dist;
+	double			fc_row_dist_buffer[HEIGHT];
+	double			fc_step_x;
+	double			fc_step_y;
+	double			fc_x;
+	double			fc_y;
+	double			fc_base_x;
+	double			fc_base_y;
 	int				blink_state;
 }	t_caster;
 
@@ -291,6 +307,7 @@ void	raycaster(t_caster *c);
 void	get_wall_texture(t_caster *c);
 void	get_texture_offset(t_caster *c);
 void	render_wall_column(t_caster *c, int x);
+void	color_floor_and_ceiling(t_caster *c, int draw_end, int x);
 void	render_floor_and_ceiling(t_caster *c, int draw_end, int x);
 void	render_engine(t_caster *c);
 void	game_loop(void *param);
