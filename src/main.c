@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 22:50:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:42:33 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		printf("Error, invalid number of arguments.\n");
-		return (0);
+		return (1);
 	}
 	init(&c, av);
 	read_description(&c);

@@ -6,16 +6,17 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 21:57:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 23:14:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 00:43:51 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include <stdint.h>
 
 static void	get_fc_tex_index(t_caster *c)
 {
-	c->tex_x = (int)(c->fc_x * TEXTURE_WIDTH) % TEXTURE_WIDTH;
-	c->tex_y = (int)(c->fc_y * TEXTURE_HEIGHT) % TEXTURE_HEIGHT;
+	c->tex_x = ((int)(c->fc_x * TEXTURE_WIDTH)) & (TEXTURE_WIDTH - 1);
+	c->tex_y = ((int)(c->fc_y * TEXTURE_HEIGHT)) & (TEXTURE_HEIGHT - 1);
 	if (c->tex_x < 0)
 		c->tex_x += TEXTURE_WIDTH;
 	if (c->tex_y < 0)
@@ -27,9 +28,10 @@ static void	get_ceiling_colors(t_caster *c, int x, int *y)
 {
 	uint32_t	color;
 
+	*y = 0;
 	while (*y < c->draw_start[x])
 	{
-		if (BONUS)
+		if (FC_TEXTURES)
 		{
 			c->fc_base_x = c->px + c->fc_row_dist_buffer[*y] * c->cos_table[0];
 			c->fc_base_y = c->py + c->fc_row_dist_buffer[*y] * c->sin_table[0];
@@ -53,26 +55,20 @@ static void	get_ceiling_colors(t_caster *c, int x, int *y)
 static void	get_wall_colors(t_caster *c, int x, int *y)
 {
 	uint32_t	color;
-	double		wall_texture_offset;
 	int			pixel_pos;
 	int			tex_index;
 
 	while (*y < c->draw_end[x])
 	{
 		get_wall_texture(c, x);
-		if (c->hit_is_horizontal[x] == 0)
-			wall_texture_offset = c->py + c->wall_dist[x] * c->sin_table[x];
-		else
-			wall_texture_offset = c->px + c->wall_dist[x] * c->cos_table[x];
-		wall_texture_offset -= (int)(wall_texture_offset);
-		c->tex_x = (int)(wall_texture_offset * TEXTURE_WIDTH);
+		c->tex_x = (int)(c->wall_texture_offset_buffer[x] * TEXTURE_WIDTH);
 		pixel_pos = (*y - (-c->wall_height[x] / 2 + HEIGHT / 2));
 		c->tex_y = ((pixel_pos * TEXTURE_HEIGHT) / c->wall_height[x]);
 		tex_index = (c->tex_y * TEXTURE_WIDTH + c->tex_x) * 4;
 		color = (c->wall_texture->pixels[tex_index] << 24) \
-		| (c->wall_texture->pixels[tex_index + 1] << 16) \
-		| (c->wall_texture->pixels[tex_index + 2] << 8) \
-		| c->wall_texture->pixels[tex_index + 3];
+			| (c->wall_texture->pixels[tex_index + 1] << 16) \
+			| (c->wall_texture->pixels[tex_index + 2] << 8) \
+			| c->wall_texture->pixels[tex_index + 3];
 		c->view_buffer[*y * WIDTH + x] = color;
 		(*y)++;
 	}
@@ -82,9 +78,10 @@ static void	get_floor_colors(t_caster *c, int x, int *y)
 {
 	uint32_t	color;
 
+	*y = c->draw_end[x];
 	while (*y < HEIGHT)
 	{
-		if (BONUS)
+		if (FC_TEXTURES)
 		{
 			c->fc_base_x = c->px + c->fc_row_dist_buffer[*y] * c->cos_table[0];
 			c->fc_base_y = c->py + c->fc_row_dist_buffer[*y] * c->sin_table[0];
@@ -115,11 +112,20 @@ void	fill_view_buffer(t_caster *c)
 	x = -1;
 	while (++x < WIDTH)
 	{
-		y = 0;
+		if (c->hit_is_horizontal[x] == 0)
+			c->wall_texture_offset_buffer[x] = c->py + \
+				c->wall_dist[x] * c->sin_table[x];
+		else
+			c->wall_texture_offset_buffer[x] = c->px + \
+				c->wall_dist[x] * c->cos_table[x];
+		c->wall_texture_offset_buffer[x] -= \
+			(int)(c->wall_texture_offset_buffer[x]);
+	}
+	x = -1;
+	while (++x < WIDTH)
+	{
 		get_ceiling_colors(c, x, &y);
-		y = c->draw_start[x];
 		get_wall_colors(c, x, &y);
-		y = c->draw_end[x];
 		get_floor_colors(c, x, &y);
 	}
 }

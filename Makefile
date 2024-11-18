@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/18 23:01:53 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/19 00:48:20 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/check_timeout.c \
                   $(SRC_DIR)/init.c \
                   $(SRC_DIR)/init_buffers.c \
+				  $(SRC_DIR)/draw_scene.c \
                   $(SRC_DIR)/check_game_status.c \
                   $(SRC_DIR)/minimap/parse_minimap.c\
 				  $(SRC_DIR)/minimap/draw_ply.c\
@@ -67,6 +68,8 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 
+fc: BONUS_FLAGS += -DFC_TEXTURES=1
+fc: bonus
 bonus: BONUS_FLAGS += -DBONUS=1
 bonus: all
 
@@ -109,7 +112,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus fc
 
 Red = \033[0;31m
 Green = \033[0;32m

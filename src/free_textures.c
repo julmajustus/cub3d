@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:35:27 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/18 00:46:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:54:40 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void	free_textures(t_caster *c)
 			mlx_delete_texture(c->textures->door_texture);
 		if (c->textures->sp_texture)
 			mlx_delete_texture(c->textures->sp_texture);
-		if (c->textures->press_R)
-			mlx_delete_texture(c->textures->press_R);
-		if (c->textures->press_Enter)
-			mlx_delete_texture(c->textures->press_Enter);
+		if (c->textures->press_r)
+			mlx_delete_texture(c->textures->press_r);
+		if (c->textures->press_enter)
+			mlx_delete_texture(c->textures->press_enter);
+		if (c->textures->press_menu_enter)
+			mlx_delete_texture(c->textures->press_menu_enter);
 		if (c->textures->exit)
 			mlx_delete_texture(c->textures->exit);
 		if (c->gun->texture)

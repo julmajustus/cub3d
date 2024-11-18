@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 00:39:58 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:54:40 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ static void	init_textures(t_caster *c)
 	c->textures->start_screen = mlx_load_png("./textures/start_screen.png");
 	c->textures->death_screen = mlx_load_png("./textures/death_screen.png");
 	c->textures->succeed_screen = mlx_load_png("./textures/succeed_screen.png");
-	c->textures->press_R = mlx_load_png("./textures/press_R.png");
+	c->textures->press_r = mlx_load_png("./textures/press_R.png");
 	c->textures->exit = mlx_load_png("./textures/brickexit2.png");
-	c->textures->press_Enter = mlx_load_png("./textures/press_Enter.png");
+	c->textures->press_enter = mlx_load_png("./textures/press_Enter.png");
+	c->textures->press_menu_enter = mlx_load_png("./textures/menu_enter.png");
 	c->textures->sp_texture = mlx_load_png("./textures/zombie_with_death.png");
 	c->textures->c_texture = mlx_load_png("./textures/brickceiling2.png");
 	c->textures->f_texture = mlx_load_png("./textures/brickfloor2.png");
 	if (!c->textures->menu_screen || !c->textures->start_screen \
 		|| !c->textures->death_screen || !c->textures->sp_texture \
 		|| !c->textures->c_texture || !c->textures->f_texture \
-		|| ! c->textures->press_Enter || !c->textures->press_R \
+		|| ! c->textures->press_enter || !c->textures->press_r \
 		|| ! c->textures->exit)
 		exit_failure(c, "Failed to load textures");
 }
@@ -80,6 +81,7 @@ void	init(t_caster *c, char **av)
 	if (!c->window)
 		exit_failure(c, "window struct malloc failed");
 	ft_bzero(c->window, sizeof(t_window));
+	c->blink_state = 0;
 	c->speed_multiplier = 0.02;
 	c->plane_x = 0.66;
 	c->plane_y = 0;
