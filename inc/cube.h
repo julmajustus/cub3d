@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 00:40:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:41:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,11 +241,6 @@ typedef struct s_caster
 	int				step_y;
 	double			dist_to_grid_x;
 	double			dist_to_grid_y;
-	int				wall_hit_is_horizontal;
-	double			wall_dist;
-	int				wall_height;
-	int				draw_start;
-	int				draw_end;
 	mlx_texture_t	*wall_texture;
 	int				tex_x;
 	int				tex_y;
@@ -254,6 +249,13 @@ typedef struct s_caster
 	double			cursor_pos;
 	double			cos_table[WIDTH];
 	double			sin_table[WIDTH];
+	int			draw_start[WIDTH];
+	int			draw_end[WIDTH];
+	double			wall_dist[WIDTH];
+	int			wall_height[WIDTH];
+	char			hit_surface[WIDTH];
+	int			hit_is_horizontal[WIDTH];
+	uint32_t		*view_buffer;
 	t_door			*doors;
 	int				door_count;
 	int				max_sprite_count;
@@ -264,7 +266,6 @@ typedef struct s_caster
 	t_sprite		*gun;
 	t_spawn_point	*valid_spawn_points;
 	int				total_spawn_points;
-	double			depth_buffer[WIDTH];
 	int				*map_row_len_buffer;
 	double			player_moved;
 	double			player_rotated;
@@ -291,12 +292,11 @@ void	keyboard_listener(mlx_key_data_t key, void *param);
 void	parse_minimap(t_caster *c);
 void	draw_player_to_minimap(t_caster *c);
 void	draw_ray(t_caster *c, int player_x, int player_y);
-void	raycaster(t_caster *c);
-void	get_wall_texture(t_caster *c);
-void	get_texture_offset(t_caster *c);
-void	render_wall_column(t_caster *c, int x);
-void	color_floor_and_ceiling(t_caster *c, int draw_end, int x);
-void	render_floor_and_ceiling(t_caster *c, int draw_end, int x);
+void	cast_rays(t_caster *c);
+void	trace_ray(t_caster *c, int x);
+void	fill_view_buffer(t_caster *c);
+void	render_view(t_caster *c);
+void	get_wall_texture(t_caster *c, int x);
 void	render_engine(t_caster *c);
 void	game_loop(void *param);
 void	check_cursor_movement(t_caster *c);
@@ -338,5 +338,4 @@ void	find_which_tiles(t_caster *c, int x, int y);
 void	check_game_status(t_caster *c);
 void	check_timeout(t_caster *c);
 void	draw_elapsed_time(t_caster *c);
-void	trace_ray_until_wall_hit(t_caster *c);
 #endif

@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 22:15:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:50:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	render_engine(t_caster *c)
 		printf("Check sp[%d] pos y: %f x: %f is_visible: %d\n", \
 		i, c->sp[i]->y, c->sp[i]->x, c->sp[i]->is_visible);
 	}
-	raycaster(c);
+	cast_rays(c);
+	fill_view_buffer(c);
+	render_view(c);
 	parse_minimap(c);
 }
 

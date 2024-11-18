@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 20:25:40 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 22:09:35 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:46:44 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ void	init_buffers(t_caster *c)
 {
 	int	i;
 
+	c->view_buffer = malloc(sizeof(uint32_t) * (WIDTH * HEIGHT));
+	if (!c->view_buffer)
+		exit_failure(c, "Failed to allocate memory for view buffer");
+	ft_memset(c->view_buffer, 0, sizeof(uint32_t) * (WIDTH * HEIGHT));
 	c->map_row_len_buffer = malloc(sizeof(int) * c->map->map_height);
 	if (!c->map_row_len_buffer)
 		exit_failure(c, "Failed to allocate memory for map row length buffer");
