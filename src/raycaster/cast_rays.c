@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/17 22:16:51 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:04:17 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,24 @@ static void	init_ray_dir_and_cast_position(t_caster *c)
 	}
 }
 
-static void	get_wall_dist_and_height(t_caster *c)
+static void	get_wall_dist_and_height(t_caster *c, int x)
 {
-	if (c->wall_hit_is_horizontal == 0)
-		c->wall_dist = (c->map_x - c->px + \
+	if (c->hit_is_horizontal[x] == 0)
+		c->wall_dist[x] = (c->map_x - c->px + \
 			(1 - c->step_x) / 2) / c->ray_dir_x;
 	else
-		c->wall_dist = (c->map_y - c->py + \
+		c->wall_dist[x] = (c->map_y - c->py + \
 			(1 - c->step_y) / 2) / c->ray_dir_y;
-	c->wall_height = (int)(HEIGHT / c->wall_dist);
-	c->draw_start = -c->wall_height / 2 + HEIGHT / 2;
-	if (c->draw_start < 0 || c->draw_start > HEIGHT)
-		c->draw_start = 0;
-	c->draw_end = c->wall_height / 2 + HEIGHT / 2;
-	if (c->draw_end >= HEIGHT || c->draw_end < 0)
-		c->draw_end = HEIGHT;
+	c->wall_height[x] = (int)(HEIGHT / c->wall_dist[x]);
+	c->draw_start[x] = -c->wall_height[x] / 2 + HEIGHT / 2;
+	if (c->draw_start[x] < 0 || c->draw_start[x] > HEIGHT)
+		c->draw_start[x] = 0;
+	c->draw_end[x] = c->wall_height[x] / 2 + HEIGHT / 2;
+	if (c->draw_end[x] >= HEIGHT || c->draw_end < 0)
+		c->draw_end[x] = HEIGHT;
 }
 
-void	raycaster(t_caster *c)
+void	cast_rays(t_caster *c)
 {
 	int	x;
 
@@ -81,15 +81,7 @@ void	raycaster(t_caster *c)
 		c->map_x = (int)c->px;
 		c->map_y = (int)c->py;
 		init_ray_dir_and_cast_position(c);
-		trace_ray_until_wall_hit(c);
-		get_wall_dist_and_height(c);
-		c->depth_buffer[x] = c->wall_dist;
-		get_wall_texture(c);
-		get_texture_offset(c);
-		render_wall_column(c, x);
-		if (BONUS)
-			render_floor_and_ceiling(c, c->draw_end, x);
-		else
-			color_floor_and_ceiling(c, c->draw_end, x);
+		trace_ray(c, x);
+		get_wall_dist_and_height(c, x);
 	}
 }
