@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/18 15:57:04 by skwon2           ###   ########.fr        #
+#    Updated: 2024/11/19 14:21:51 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,10 +63,12 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
                   -I$(LIBFT_DIR) \
                   -I$(MLX42_DIR)/include \
                   -I$(GLFW_INCLUDE_PATH) -O3 \
-                  #-g -ggdb3 -fsanitize=address
+                  -g -ggdb3 -fsanitize=address
 
 all: $(LIBFT) $(MLX42_LIB) $(NAME)
 
+fc: BONUS_FLAGS += -DFC_TEXTURES=1
+fc: bonus
 bonus: BONUS_FLAGS += -DBONUS=1
 bonus: all
 
@@ -109,7 +111,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus fc
 
 Red = \033[0;31m
 Green = \033[0;32m
