@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 19:11:26 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 22:36:15 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:58:50 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	render_fc_plain_colors(t_caster *c, int draw_end, int x)
 
 static int	get_fc_tex_index(t_caster *c)
 {
-	int tex_x;
+	int	tex_x;
 	int	tex_y;
 
 	tex_x = (int)(c->fc_x * TEXTURE_WIDTH) % TEXTURE_WIDTH;

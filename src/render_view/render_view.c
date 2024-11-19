@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:03:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 22:31:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:58:35 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	render_wall(t_caster *c, int x, int y)
 {
 	uint32_t	color;
 	uint8_t		*pixels;
-	int		pixel_pos;
-	int		i;
+	int			pixel_pos;
+	int			i;
 
 	get_wall_texture(c, x);
 	pixels = c->wall_texture->pixels;
@@ -59,6 +59,6 @@ void	render_view(t_caster *c)
 		if (FC_TEXTURES)
 			render_fc_textures(c, c->draw_end[x], x);
 		else
-		 	render_fc_plain_colors(c, c->draw_end[x], x);
+			render_fc_plain_colors(c, c->draw_end[x], x);
 	}
 }
