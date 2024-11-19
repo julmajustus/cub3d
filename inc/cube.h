@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 11:58:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:13:45 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,9 @@ typedef struct s_sprite
 	int				next_tile_x;
 	int				next_tile_y;
 	double			dist_to_player;
+	int			sprite_dx;
+	int	    		sprite_dy;
+	int			distance_to_sprite;
 }	t_sprite;
 
 typedef struct s_toggle_action
@@ -297,6 +300,10 @@ typedef struct s_caster
 	double			fc_base_y;
 	int				blink_state;
 	double			distance_to_sprite;
+	struct timeval		start_time;
+	struct timeval		current_time;
+	double			sp_current_time;
+	int			spawn_index;
 }	t_caster;
 
 void	init(t_caster *c, char **av);

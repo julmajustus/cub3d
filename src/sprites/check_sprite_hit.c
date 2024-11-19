@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 11:56:12 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:17:16 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,38 @@ void	is_sprite_visible(t_caster *c, int y, int x)
 	}
 }
 
+static void	get_spawn_distance(t_caster *c, int i)
+{
+	c->sp[i]->sprite_dx = c->sp[i]->x - (int)c->px;
+	c->sp[i]->sprite_dy = c->sp[i]->y - (int)c->py;
+	c->sp[i]->distance_to_sprite = sqrt(c->sp[i]->sprite_dx * \
+	c->sp[i]->sprite_dx + c->sp[i]->sprite_dy * c->sp[i]->sprite_dy);
+}
+
 void	spawn_sprite(t_caster *c)
 {
-	double	current_time;
-	int		spawn_index;
-	int		i;
+	int	i;
 
 	i = -1;
 	while (++i < c->active_sprite_count)
 	{
-		current_time = mlx_get_time();
+		c->sp_current_time = mlx_get_time();
 		if (c->sp[i]->y == -1 && c->sp[i]->x == -1)
 		{
 			c->sp[i]->is_visible = 0;
-			spawn_index = ft_abs((long long)((current_time * mlx_get_time() \
-							* 942983343)) % c->total_spawn_points);
-			c->sp[i]->x = c->valid_spawn_points[spawn_index].x;
-			c->sp[i]->y = c->valid_spawn_points[spawn_index].y;
-			if (((int)c->sp[i]->x == (int)c->px \
-				&& (int)c->sp[i]->y == (int)c->py) || \
-				((int)c->sp[i]->y == (int)c->map->spawn_location_y \
-				&& (int)c->sp[i]->x == (int)c->map->spawn_location_x))
+			c->spawn_index = ft_abs((long long)((c->sp_current_time \
+				* mlx_get_time() * 942983343)) % c->total_spawn_points);
+			c->sp[i]->x = c->valid_spawn_points[c->spawn_index].x;
+			c->sp[i]->y = c->valid_spawn_points[c->spawn_index].y;
+			get_spawn_distance(c, i);
+			if (c->sp[i]->distance_to_sprite < 3)
+			{
+				c->sp[i]->x = -1;
+				c->sp[i]->y = -1;
+				i = -1;
 				continue ;
-			c->sp[i]->last_spwan_time = current_time;
+			}
+			c->sp[i]->last_spwan_time = c->sp_current_time;
 		}
 	}
 }
@@ -82,10 +91,10 @@ static int	is_sprite_in_view(t_caster *c, t_sprite *sp, double dy, double dx)
 
 void	check_sprite_hit(t_caster *c)
 {
-	int		i;
-	double	dx;
-	double	dy;
-	double	distance_to_sprite;
+	int	i;
+	int	dx;
+	int	dy;
+	int	distance_to_sprite;
 
 	i = -1;
 	while (++i < c->active_sprite_count)
