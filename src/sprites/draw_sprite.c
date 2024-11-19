@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:11:20 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 15:46:28 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:39:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_draw_limits(t_caster *c, t_sprite *sp, int y, int x)
 {
 	if (sp->screen_x + x >= 0 && sp->screen_x + x < WIDTH \
 		&& sp->screen_y + y >= 0 && sp->screen_y + y < HEIGHT \
-		&& sp->cam_y < c->wall_dist[sp->screen_x + x])
+		&& sp->cam_y < c->rays[sp->screen_x + x].wall_dist)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 20:25:40 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 16:46:44 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 09:36:59 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	init_buffers(t_caster *c)
 {
 	int	i;
 
+	c->rays = malloc(sizeof(t_ray) * WIDTH);
+	if (!c->rays)
+		exit_failure(c, "Failed to allocate memory for rays array");
 	c->view_buffer = malloc(sizeof(uint32_t) * (WIDTH * HEIGHT));
 	if (!c->view_buffer)
 		exit_failure(c, "Failed to allocate memory for view buffer");

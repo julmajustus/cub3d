@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 01:18:33 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:28:17 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,33 @@ typedef struct s_scene
 	uint32_t	color;
 }	t_scene;
 
+typedef struct s_ray
+{
+	double			view_offset;
+	double			dx;
+	double			dy;
+	int				map_x;
+	int				map_y;
+	double			dist_increment_x;
+	double			dist_increment_y;
+	int				step_x;
+	int				step_y;
+	double			dist_to_grid_x;
+	double			dist_to_grid_y;
+	mlx_texture_t	*wall_texture;
+	int				tex_x;
+	int				tex_y;
+	int				tex_index;
+	uint32_t		pixel_color;
+	int			draw_start;
+	int			draw_end;
+	double			wall_dist;
+	int			wall_height;
+	int			hit_is_horizontal;
+	char			hit_surface;
+	double			wall_texture_offset;
+}	t_ray;
+
 typedef struct s_caster
 {
 	char			*window_title;
@@ -245,33 +272,9 @@ typedef struct s_caster
 	double			view_angle;
 	double			plane_x;
 	double			plane_y;
-	double			view_offset;
-	double			ray_dir_x;
-	double			ray_dir_y;
-	int				map_x;
-	int				map_y;
-	double			dist_increment_x;
-	double			dist_increment_y;
-	int				step_x;
-	int				step_y;
-	double			dist_to_grid_x;
-	double			dist_to_grid_y;
-	mlx_texture_t	*wall_texture;
-	int				tex_x;
-	int				tex_y;
-	int				tex_index;
-	uint32_t		pixel_color;
-	double			cursor_pos;
-	double			cos_table[WIDTH];
-	double			sin_table[WIDTH];
-	int			draw_start[WIDTH];
-	int			draw_end[WIDTH];
-	double			wall_dist[WIDTH];
-	int			wall_height[WIDTH];
-	char			hit_surface[WIDTH];
-	int			hit_is_horizontal[WIDTH];
-	double			wall_texture_offset_buffer[WIDTH];
+	t_ray			*rays;
 	uint32_t		*view_buffer;
+	double			cursor_pos;
 	t_door			*doors;
 	int				door_count;
 	int				max_sprite_count;
@@ -287,6 +290,8 @@ typedef struct s_caster
 	double			player_rotated;
 	double			elapsed_time;
 	mlx_image_t		*time_text_img;
+	double			cos_table[WIDTH];
+	double			sin_table[WIDTH];
 	double			fc_row_dist;
 	double			fc_row_dist_buffer[HEIGHT];
 	double			fc_step_x;
