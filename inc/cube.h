@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 16:13:45 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:43:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,8 @@ void	draw_player_to_minimap(t_caster *c);
 void	draw_ray(t_caster *c, int player_x, int player_y);
 void	cast_rays(t_caster *c);
 void	trace_ray(t_caster *c, int x);
+void	fill_fc_plain_colors(t_caster *c, int draw_end, int x);
+void	fill_fc_texture_colors(t_caster *c, int draw_end, int x);
 void	fill_view_buffer(t_caster *c);
 void	render_view(t_caster *c);
 void	get_wall_texture(t_caster *c, int x);
