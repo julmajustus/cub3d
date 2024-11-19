@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 13:57:02 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:43:53 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,9 @@ typedef struct s_sprite
 	int				next_tile_x;
 	int				next_tile_y;
 	double			dist_to_player;
-	int			sprite_dx;
-	int	    		sprite_dy;
-	int			distance_to_sprite;
+	int				sprite_dx;
+	int				sprite_dy;
+	int				distance_to_sprite;
 }	t_sprite;
 
 typedef struct s_toggle_action
@@ -233,74 +233,74 @@ typedef struct s_scene
 
 typedef struct s_caster
 {
-	char			*window_title;
-	int				game_status;
-	t_window		*window;
-	t_map			*map;
-	t_textures		*textures;
-	t_minmap		*mmap;
-	char			**av;
-	double			speed_multiplier;
-	double			px;
-	double			py;
-	double			mmap_px;
-	double			mmap_py;
-	double			view_angle;
-	double			plane_x;
-	double			plane_y;
-	double			view_offset;
-	double			ray_dir_x;
-	double			ray_dir_y;
-	int				map_x;
-	int				map_y;
-	double			dist_increment_x;
-	double			dist_increment_y;
-	int				step_x;
-	int				step_y;
-	double			dist_to_grid_x;
-	double			dist_to_grid_y;
-	int				wall_hit_is_horizontal;
-	double			wall_dist;
-	int				wall_height;
-	int				draw_start;
-	int				draw_end;
-	mlx_texture_t	*wall_texture;
-	int				tex_x;
-	int				tex_y;
-	int				tex_index;
-	uint32_t		pixel_color;
-	double			cursor_pos;
-	double			cos_table[WIDTH];
-	double			sin_table[WIDTH];
-	t_door			*doors;
-	int				door_count;
-	int				max_sprite_count;
-	int				active_sprite_count;
-	int				is_sprite_visible;
-	t_toggle_action	*ta;
-	t_sprite		**sp;
-	t_sprite		*gun;
-	t_spawn_point	*valid_spawn_points;
-	int				total_spawn_points;
-	double			depth_buffer[WIDTH];
-	int				*map_row_len_buffer;
-	double			player_moved;
-	double			player_rotated;
-	double			elapsed_time;
-	mlx_image_t		*time_text_img;
-	double			fc_row_dist;
-	double			fc_row_dist_buffer[HEIGHT];
-	double			fc_step_x;
-	double			fc_step_y;
-	double			fc_x;
-	double			fc_y;
-	double			fc_base_x;
-	double			fc_base_y;
-	int				blink_state;
+	char				*window_title;
+	int					game_status;
+	t_window			*window;
+	t_map				*map;
+	t_textures			*textures;
+	t_minmap			*mmap;
+	char				**av;
+	double				speed_multiplier;
+	double				px;
+	double				py;
+	double				mmap_px;
+	double				mmap_py;
+	double				view_angle;
+	double				plane_x;
+	double				plane_y;
+	double				view_offset;
+	double				ray_dir_x;
+	double				ray_dir_y;
+	int					map_x;
+	int					map_y;
+	double				dist_increment_x;
+	double				dist_increment_y;
+	int					step_x;
+	int					step_y;
+	double				dist_to_grid_x;
+	double				dist_to_grid_y;
+	int					wall_hit_is_horizontal;
+	double				wall_dist;
+	int					wall_height;
+	int					draw_start;
+	int					draw_end;
+	mlx_texture_t		*wall_texture;
+	int					tex_x;
+	int					tex_y;
+	int					tex_index;
+	uint32_t			pixel_color;
+	double				cursor_pos;
+	double				cos_table[WIDTH];
+	double				sin_table[WIDTH];
+	t_door				*doors;
+	int					door_count;
+	int					max_sprite_count;
+	int					active_sprite_count;
+	int					is_sprite_visible;
+	t_toggle_action		*ta;
+	t_sprite			**sp;
+	t_sprite			*gun;
+	t_spawn_point		*valid_spawn_points;
+	int					total_spawn_points;
+	double				depth_buffer[WIDTH];
+	int					*map_row_len_buffer;
+	double				player_moved;
+	double				player_rotated;
+	double				elapsed_time;
+	mlx_image_t			*time_text_img;
+	double				fc_row_dist;
+	double				fc_row_dist_buffer[HEIGHT];
+	double				fc_step_x;
+	double				fc_step_y;
+	double				fc_x;
+	double				fc_y;
+	double				fc_base_x;
+	double				fc_base_y;
+	int					blink_state;
 	struct timeval		start_time;
 	struct timeval		current_time;
-	double			sp_current_time;
-	int			spawn_index;
+	double				sp_current_time;
+	int					spawn_index;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
