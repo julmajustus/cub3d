@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/19 16:19:59 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/19 19:41:30 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC             = $(SRC_DIR)/main.c \
                   $(SRC_DIR)/raycaster/cast_rays.c \
                   $(SRC_DIR)/raycaster/trace_ray.c \
                   $(SRC_DIR)/render_view/get_wall_texture.c \
+                  $(SRC_DIR)/render_view/get_ceiling_and_floor_colors.c \
                   $(SRC_DIR)/render_view/fill_view_buffer.c \
                   $(SRC_DIR)/render_view/render_view.c \
                   $(SRC_DIR)/rotate_view.c \
