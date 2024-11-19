@@ -6,45 +6,16 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:38:18 by jmakkone         ###   ########.fr       */
-/*   Updated: 2024/11/03 11:54:22 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/19 01:26:00 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int check_collision(t_caster *c, double new_px, double new_py)
+int	movement_up_down(t_caster *c)
 {
-	int can_move_x;
-	int can_move_y;
-	double dir_x;
-	double dir_y;
-
-	can_move_x = 1;
-	can_move_y = 1;
-	dir_x = cos(c->view_angle) * 0.15;
-	dir_y = sin(c->view_angle) * 0.15;
-	if (c->map->map_arr[(int)(new_py)][(int)(new_px)] != '0')
-		return (0);
-	if (c->map->map_arr[(int)c->py][(int)(new_px + dir_x)] == '1' ||
-		c->map->map_arr[(int)c->py][(int)(new_px - dir_x)] == '1')
-		can_move_x = 0;
-	if (c->map->map_arr[(int)(new_py + dir_y)][(int)c->px] == '1' ||
-		c->map->map_arr[(int)(new_py - dir_y)][(int)c->px] == '1')
-		can_move_y = 0;
-	if (can_move_x)
-		c->px = new_px;
-	if (can_move_y)
-		c->py = new_py;
-	c->mmap_px = c->px * c->map->scale_x;
-	c->mmap_py = c->py * c->map->scale_y;
-	return (can_move_x || can_move_y);
-}
-
-int movement_up_down(t_caster *c)
-{
-	double new_px;
-	double new_py;
+	double	new_px;
+	double	new_py;
 
 	if (mlx_is_key_down(c->window->handle, MLX_KEY_W))
 	{
@@ -61,10 +32,10 @@ int movement_up_down(t_caster *c)
 	return (0);
 }
 
-int movement_left_right(t_caster *c)
+int	movement_left_right(t_caster *c)
 {
-	double new_px;
-	double new_py;
+	double	new_px;
+	double	new_py;
 
 	if (mlx_is_key_down(c->window->handle, MLX_KEY_A))
 	{
@@ -81,24 +52,54 @@ int movement_left_right(t_caster *c)
 	return (0);
 }
 
-static void keys_utils(mlx_key_data_t key, t_caster *c)
+static void	game_controls(mlx_key_data_t key, t_caster *c)
 {
 	if (key.key == MLX_KEY_ESCAPE)
 	{
 		exit_mlx(c);
-		return;
+		return ;
 	}
-	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
-		;
-	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
-		;
+	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS \
+		&& c->game_status == 2)
+	{
+		start_gun_fire_animation(c->gun);
+		check_sprite_hit(c);
+		render_engine(c);
+	}
+	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS \
+		&& c->game_status == 2)
+	{
+		toggle_door(c, ACTION_DISTANCE);
+		render_engine(c);
+	}
 }
 
-void keyboard_listener(mlx_key_data_t key, void *param)
+static void	menu_controls(mlx_key_data_t key, t_caster *c)
 {
-	t_caster *c;
+	if (key.key == MLX_KEY_ENTER && key.action == MLX_PRESS)
+	{
+		if (c->game_status == 0 || c->game_status == 1)
+		{
+			c->game_status += 1;
+			if (c->game_status == 2)
+				render_gun(c);
+		}
+	}
+	else if (key.key == MLX_KEY_R && key.action == MLX_PRESS)
+	{
+		if (c->game_status == -1 || c->game_status == -2)
+		{
+			c->game_status = 2;
+			render_gun(c);
+		}
+	}
+}
+
+void	keyboard_listener(mlx_key_data_t key, void *param)
+{
+	t_caster	*c;
 
 	c = (t_caster *)param;
-	keys_utils(key, c);
+	game_controls(key, c);
+	menu_controls(key, c);
 }
-
