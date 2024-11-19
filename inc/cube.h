@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 19:43:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:44:36 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,22 +233,16 @@ typedef struct s_scene
 
 typedef struct s_caster
 {
-	char			*window_title;
 	int				game_status;
-	t_window		*window;
-	t_map			*map;
-	t_textures		*textures;
-	t_minmap		*mmap;
-	char			**av;
 	double			speed_multiplier;
 	double			px;
 	double			py;
-	double			mmap_px;
-	double			mmap_py;
 	double			view_angle;
 	double			plane_x;
 	double			plane_y;
 	double			view_offset;
+	double			cos_table[WIDTH];
+	double			sin_table[WIDTH];
 	double			ray_dir_x;
 	double			ray_dir_y;
 	int				map_x;
@@ -259,22 +253,24 @@ typedef struct s_caster
 	int				step_y;
 	double			dist_to_grid_x;
 	double			dist_to_grid_y;
+	int			hit_is_horizontal[WIDTH];
+	char			hit_surface[WIDTH];
+	double			wall_dist[WIDTH];
+	int			wall_height[WIDTH];
+	int			draw_start[WIDTH];
+	int			draw_end[WIDTH];
+	double			wall_texture_offset_buffer[WIDTH];
 	mlx_texture_t	*wall_texture;
 	int				tex_x;
 	int				tex_y;
-	int				tex_index;
-	uint32_t		pixel_color;
+	double			fc_step_x;
+	double			fc_step_y;
+	double			fc_base_x;
+	double			fc_base_y;
+	double			fc_row_dist_buffer[HEIGHT];
+	double			fc_x;
+	double			fc_y;
 	double			cursor_pos;
-	double			cos_table[WIDTH];
-	double			sin_table[WIDTH];
-	int			draw_start[WIDTH];
-	int			draw_end[WIDTH];
-	double			wall_dist[WIDTH];
-	int			wall_height[WIDTH];
-	char			hit_surface[WIDTH];
-	int			hit_is_horizontal[WIDTH];
-	double			wall_texture_offset_buffer[WIDTH];
-	uint32_t		*view_buffer;
 	t_door			*doors;
 	int				door_count;
 	int				max_sprite_count;
@@ -284,26 +280,26 @@ typedef struct s_caster
 	t_sprite		**sp;
 	t_sprite		*gun;
 	t_spawn_point	*valid_spawn_points;
+	t_window		*window;
+	t_map			*map;
+	t_textures		*textures;
+	t_minmap		*mmap;
 	int				total_spawn_points;
 	int				*map_row_len_buffer;
+	double			mmap_px;
+	double			mmap_py;
 	double			player_moved;
 	double			player_rotated;
 	double			elapsed_time;
 	mlx_image_t		*time_text_img;
-	double			fc_row_dist;
-	double			fc_row_dist_buffer[HEIGHT];
-	double			fc_step_x;
-	double			fc_step_y;
-	double			fc_x;
-	double			fc_y;
-	double			fc_base_x;
-	double			fc_base_y;
 	int				blink_state;
 	double			distance_to_sprite;
 	struct timeval		start_time;
 	struct timeval		current_time;
 	double			sp_current_time;
 	int			spawn_index;
+	char			**av;
+	char			*window_title;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -319,9 +315,8 @@ void	draw_player_to_minimap(t_caster *c);
 void	draw_ray(t_caster *c, int player_x, int player_y);
 void	cast_rays(t_caster *c);
 void	trace_ray(t_caster *c, int x);
-void	fill_fc_plain_colors(t_caster *c, int draw_end, int x);
-void	fill_fc_texture_colors(t_caster *c, int draw_end, int x);
-void	fill_view_buffer(t_caster *c);
+void	render_fc_plain_colors(t_caster *c, int draw_end, int x);
+void	render_fc_textures(t_caster *c, int draw_end, int x);
 void	render_view(t_caster *c);
 void	get_wall_texture(t_caster *c, int x);
 void	render_engine(t_caster *c);
