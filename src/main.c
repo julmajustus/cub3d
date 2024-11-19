@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 19:57:01 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 22:01:12 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	render_engine(t_caster *c)
 		i, c->sp[i]->y, c->sp[i]->x, c->sp[i]->is_visible);
 	}
 	cast_rays(c);
-	//fill_view_buffer(c);
 	render_view(c);
 	parse_minimap(c);
 }
