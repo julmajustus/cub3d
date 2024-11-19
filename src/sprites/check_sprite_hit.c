@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 01:14:15 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:56:12 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ void	check_sprite_hit(t_caster *c)
 	int		i;
 	double	dx;
 	double	dy;
-	double	distance_to_squirrel;
+	double	distance_to_sprite;
 
 	i = -1;
 	while (++i < c->active_sprite_count)
 	{
 		dx = c->sp[i]->x - c->px;
 		dy = c->sp[i]->y - c->py;
-		distance_to_squirrel = sqrt(dx * dx + dy * dy);
-		if (distance_to_squirrel < 4.0 \
+		distance_to_sprite = sqrt(dx * dx + dy * dy);
+		if (distance_to_sprite < 4.0 \
 			&& is_sprite_in_view(c, c->sp[i], dy, dx))
 		{
 			c->sp[i]->is_hit = 1;
