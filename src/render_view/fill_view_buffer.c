@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 21:57:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 19:44:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:56:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static void	fill_wall_colors(t_caster *c, int x, int y)
 			| (pixels[i + 1] << 16) \
 			| (pixels[i + 2] << 8) \
 			| pixels[i + 3];
-		c->view_buffer[y * WIDTH + x] = color;
+		//c->view_buffer[y * WIDTH + x] = color;
+		mlx_put_pixel(c->window->view, x, y, color);
 		y++;
 	}
 }
@@ -109,7 +110,7 @@ static void	fill_wall_colors(t_caster *c, int x, int y)
 //	}
 //}
 
-void	fill_view_buffer(t_caster *c)
+void	render_view(t_caster *c)
 {
 	int		x;
 

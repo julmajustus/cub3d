@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 19:11:26 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 19:43:23 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:54:15 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	render_ceiling(t_caster *c, int *y_ceiling, int x)
 		| (c->textures->c_texture->pixels[c->tex_index + 1] << 16) \
 		| (c->textures->c_texture->pixels[c->tex_index + 2] << 8) \
 		| c->textures->c_texture->pixels[c->tex_index + 3];
-	//mlx_put_pixel(c->window->view, x, (*y_ceiling)--, c->pixel_color);
-	c->view_buffer[(*y_ceiling)-- * WIDTH + x] = c->pixel_color;
+	mlx_put_pixel(c->window->view, x, (*y_ceiling)--, c->pixel_color);
+	//c->view_buffer[(*y_ceiling)-- * WIDTH + x] = c->pixel_color;
 }
 
 static void	render_floor(t_caster *c, int *y_floor, int x)
@@ -53,8 +53,8 @@ static void	render_floor(t_caster *c, int *y_floor, int x)
 		| (c->textures->f_texture->pixels[c->tex_index + 1] << 16) \
 		| (c->textures->f_texture->pixels[c->tex_index + 2] << 8) \
 		| c->textures->f_texture->pixels[c->tex_index + 3];
-	//mlx_put_pixel(c->window->view, x, (*y_floor)++, c->pixel_color);
-	c->view_buffer[(*y_floor)++ * WIDTH + x] = c->pixel_color;
+	mlx_put_pixel(c->window->view, x, (*y_floor)++, c->pixel_color);
+	//c->view_buffer[(*y_floor)++ * WIDTH + x] = c->pixel_color;
 }
 
 void	fill_fc_texture_colors(t_caster *c, int draw_end, int x)
