@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 15:54:40 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:08:28 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,24 @@ static void	blink_text(t_caster *c)
 	draw_text(c, texture, c->blink_state);
 }
 
+static void	reset_values(t_caster *c)
+{
+	int	i;
+
+	i = -1;
+	while (++i < c->active_sprite_count)
+	{
+		c->sp[i]->x = -1;
+		c->sp[i]->y = -1;
+	}
+	c->start_time.tv_sec = 0;
+	c->start_time.tv_usec = 0;
+	c->py = c->map->spawn_location_y;
+	c->px = c->map->spawn_location_x;
+	c->active_sprite_count = ZOMBIE_COUNT;
+	spawn_sprite(c);
+}
+
 void	check_game_status(t_caster *c)
 {
 	if (c->game_status == 0)
@@ -64,10 +82,8 @@ void	check_game_status(t_caster *c)
 	}
 	else if (c->game_status == -1 || c->game_status == -2)
 	{
-		c->py = c->map->spawn_location_y;
-		c->px = c->map->spawn_location_x;
 		set_images_to_window(c);
-		c->active_sprite_count = ZOMBIE_COUNT;
+		reset_values(c);
 		if (c->game_status == -1)
 			draw_scene(c, c->textures->death_screen, HEIGHT, WIDTH);
 		if (c->game_status == -2)

@@ -6,29 +6,35 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 21:57:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 00:43:51 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:48:45 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-#include <stdint.h>
 
-static void	get_fc_tex_index(t_caster *c)
+static int	get_fc_tex_index(t_caster *c)
 {
-	c->tex_x = ((int)(c->fc_x * TEXTURE_WIDTH)) & (TEXTURE_WIDTH - 1);
-	c->tex_y = ((int)(c->fc_y * TEXTURE_HEIGHT)) & (TEXTURE_HEIGHT - 1);
-	if (c->tex_x < 0)
-		c->tex_x += TEXTURE_WIDTH;
-	if (c->tex_y < 0)
-		c->tex_y += TEXTURE_HEIGHT;
-	c->tex_index = (c->tex_y * TEXTURE_WIDTH + c->tex_x) * 4;
+	int tex_x;
+	int tex_y;
+
+
+	tex_x = ((int)(c->fc_x * TEXTURE_WIDTH)) & (TEXTURE_WIDTH - 1);
+	tex_y = ((int)(c->fc_y * TEXTURE_HEIGHT)) & (TEXTURE_HEIGHT - 1);
+	if (tex_x < 0)
+		tex_x += TEXTURE_WIDTH;
+	if (tex_y < 0)
+		tex_y += TEXTURE_HEIGHT;
+	return ((tex_y * TEXTURE_WIDTH + tex_x) * 4);
 }
 
 static void	get_ceiling_colors(t_caster *c, int x, int *y)
 {
+	uint8_t		*pixels;
+	int		i;
 	uint32_t	color;
 
 	*y = 0;
+	pixels = c->textures->c_texture->pixels;
 	while (*y < c->draw_start[x])
 	{
 		if (FC_TEXTURES)
@@ -39,11 +45,9 @@ static void	get_ceiling_colors(t_caster *c, int x, int *y)
 				* c->fc_step_x * c->fc_row_dist_buffer[*y];
 			c->fc_y = c->fc_base_y + x \
 				* c->fc_step_y * c->fc_row_dist_buffer[*y];
-			get_fc_tex_index(c);
-			color = (c->textures->c_texture->pixels[c->tex_index] << 24) \
-			| (c->textures->c_texture->pixels[c->tex_index + 1] << 16) \
-			| (c->textures->c_texture->pixels[c->tex_index + 2] << 8) \
-			| c->textures->c_texture->pixels[c->tex_index + 3];
+			i = get_fc_tex_index(c);
+			color = (pixels[i] << 24) | (pixels[i + 1] << 16) \
+			| (pixels[i + 2] << 8) | pixels[i + 3];
 		}
 		else
 			color = c->textures->ceiling_color;
@@ -55,20 +59,22 @@ static void	get_ceiling_colors(t_caster *c, int x, int *y)
 static void	get_wall_colors(t_caster *c, int x, int *y)
 {
 	uint32_t	color;
-	int			pixel_pos;
-	int			tex_index;
+	uint8_t		*pixels;
+	int		pixel_pos;
+	int		i;
 
+	get_wall_texture(c, x);
+	pixels = c->wall_texture->pixels;
 	while (*y < c->draw_end[x])
 	{
-		get_wall_texture(c, x);
 		c->tex_x = (int)(c->wall_texture_offset_buffer[x] * TEXTURE_WIDTH);
 		pixel_pos = (*y - (-c->wall_height[x] / 2 + HEIGHT / 2));
 		c->tex_y = ((pixel_pos * TEXTURE_HEIGHT) / c->wall_height[x]);
-		tex_index = (c->tex_y * TEXTURE_WIDTH + c->tex_x) * 4;
-		color = (c->wall_texture->pixels[tex_index] << 24) \
-			| (c->wall_texture->pixels[tex_index + 1] << 16) \
-			| (c->wall_texture->pixels[tex_index + 2] << 8) \
-			| c->wall_texture->pixels[tex_index + 3];
+		i = (c->tex_y * TEXTURE_WIDTH + c->tex_x) * 4;
+		color = (pixels[i] << 24) \
+			| (pixels[i + 1] << 16) \
+			| (pixels[i + 2] << 8) \
+			| pixels[i + 3];
 		c->view_buffer[*y * WIDTH + x] = color;
 		(*y)++;
 	}
@@ -76,8 +82,11 @@ static void	get_wall_colors(t_caster *c, int x, int *y)
 
 static void	get_floor_colors(t_caster *c, int x, int *y)
 {
+	uint8_t		*pixels;
+	int		i;
 	uint32_t	color;
 
+	pixels = c->textures->f_texture->pixels;
 	*y = c->draw_end[x];
 	while (*y < HEIGHT)
 	{
@@ -89,11 +98,9 @@ static void	get_floor_colors(t_caster *c, int x, int *y)
 				* c->fc_step_x * c->fc_row_dist_buffer[*y];
 			c->fc_y = c->fc_base_y + x \
 				* c->fc_step_y * c->fc_row_dist_buffer[*y];
-			get_fc_tex_index(c);
-			color = (c->textures->f_texture->pixels[c->tex_index] << 24) \
-			| (c->textures->f_texture->pixels[c->tex_index + 1] << 16) \
-			| (c->textures->f_texture->pixels[c->tex_index + 2] << 8) \
-			| c->textures->f_texture->pixels[c->tex_index + 3];
+			i = get_fc_tex_index(c);
+			color = (pixels[i] << 24) | (pixels[i + 1] << 16) \
+				| (pixels[i + 2] << 8) | pixels[i + 3];
 		}
 		else
 			color = c->textures->floor_color;
