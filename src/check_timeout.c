@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:47:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/18 16:05:57 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/19 11:54:56 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_timeout(t_caster *c)
 	static struct timeval	start_time;
 	struct timeval			current_time;
 
-	if (c->game_status == 0)
+	if (c->game_status == -1 || c->game_status == -2)
 	{
 		start_time.tv_sec = 0;
 		start_time.tv_usec = 0;
