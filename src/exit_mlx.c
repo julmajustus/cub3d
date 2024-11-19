@@ -6,13 +6,45 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/05 09:39:09 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/18 23:00:59 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void exit_mlx(t_caster *c)
+static void	free_sprites(t_caster *c)
+{
+	int	i;
+
+	i = -1;
+	while (++i < c->max_sprite_count)
+	{
+		if (c->sp[i])
+			free(c->sp[i]);
+	}
+	if (c->sp)
+		free(c->sp);
+}
+
+static void	free_structs(t_caster *c)
+{
+	if (c->map)
+		free(c->map);
+	if (c->window)
+		free(c->window);
+	if (c->doors)
+		free(c->doors);
+	if (c->ta)
+		free(c->ta);
+	if (c->gun)
+		free(c->gun);
+	if (c->mmap)
+		free(c->mmap);
+	if (c->valid_spawn_points)
+		free(c->valid_spawn_points);
+}
+
+void	exit_mlx(t_caster *c)
 {
 	mlx_terminate(c->window->handle);
 	if (c->map->map_arr)
@@ -21,28 +53,17 @@ void exit_mlx(t_caster *c)
 		close(c->map->map_fd);
 	if (c->map->texture_fd > -1)
 		close(c->map->texture_fd);
-	if (c->map->texture_path)
-		free(c->map->texture_path);
-	if (c->map)
-		free(c->map);
-	if (c->window)
-		free(c->window);
-	if (c->textures)
-	{
-		if (c->textures->north_texture)
-			mlx_delete_texture(c->textures->north_texture);
-		if (c->textures->south_texture)
-			mlx_delete_texture(c->textures->south_texture);
-		if (c->textures->east_texture)
-			mlx_delete_texture(c->textures->east_texture);
-		if (c->textures->west_texture)
-			mlx_delete_texture(c->textures->west_texture);
-		free(c->textures);
-	}
+	if (c->map_row_len_buffer)
+		free(c->map_row_len_buffer);
+	if (c->view_buffer)
+		free(c->view_buffer);
+	free_textures(c);
+	free_structs(c);
+	free_sprites(c);
 	exit(EXIT_SUCCESS);
 }
 
-void exit_failure(t_caster *c, char *msg)
+void	exit_failure(t_caster *c, char *msg)
 {
 	if (c->window && c->window->handle)
 		mlx_terminate(c->window->handle);
@@ -52,25 +73,13 @@ void exit_failure(t_caster *c, char *msg)
 		close(c->map->map_fd);
 	if (c->map->texture_fd > -1)
 		close(c->map->texture_fd);
-	if (c->map->texture_path)
-		free(c->map->texture_path);
-	if (c->map)
-		free(c->map);
-	if (c->window)
-		free(c->window);
-	if (c->textures)
-	{
-		if (c->textures->north_texture)
-			mlx_delete_texture(c->textures->north_texture);
-		if (c->textures->south_texture)
-			mlx_delete_texture(c->textures->south_texture);
-		if (c->textures->east_texture)
-			mlx_delete_texture(c->textures->east_texture);
-		if (c->textures->west_texture)
-			mlx_delete_texture(c->textures->west_texture);
-		free(c->textures);
-	}
-	// printf("%s\n", msg);
+	if (c->map_row_len_buffer)
+		free(c->map_row_len_buffer);
+	if (c->view_buffer)
+		free(c->view_buffer);
+	free_textures(c);
+	free_structs(c);
+	free_sprites(c);
 	perror(msg);
 	exit(EXIT_FAILURE);
 }
