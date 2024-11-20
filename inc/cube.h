@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 10:43:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:49:53 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # endif
 
 # ifndef ZOMBIE_COUNT
-#  define ZOMBIE_COUNT 95
+#  define ZOMBIE_COUNT 15
 # endif
 
 # ifndef TIMEOUT
