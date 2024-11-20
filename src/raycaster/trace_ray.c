@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:28:12 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 15:41:05 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:15:02 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	hit_check(t_caster *c, int x)
 		c->hit_surface[x] = 'D';
 		return (1);
 	}
-	else if (c->map->map_arr[c->map_y][c->map_x] == 'X')
+	else if (c->map->map_arr[c->map_y][c->map_x] == 'X' \
+		&& c->elapsed_time >= TIMEOUT / 2)
 	{
 		c->hit_surface[x] = 'X';
 		return (1);
