@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:54:48 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 16:16:03 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:21:41 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void	precalculate_ray_directions(t_caster *c)
 	}
 }
 
-static void	init_ray_dir_and_cast_position(t_caster *c)
+static void	init_ray_dir_and_cast_position(t_caster *c, int x)
 {
-	c->dist_increment_x = fabs(1 / c->ray_dir_x);
-	c->dist_increment_y = fabs(1 / c->ray_dir_y);
-	if (c->ray_dir_x < 0)
+	c->dist_increment_x = fabs(1 / c->cos_table[x]);
+	c->dist_increment_y = fabs(1 / c->sin_table[x]);
+	if (c->cos_table[x] < 0)
 	{
 		c->step_x = -1;
 		c->dist_to_grid_x = (c->px - c->map_x) * c->dist_increment_x;
@@ -39,7 +39,7 @@ static void	init_ray_dir_and_cast_position(t_caster *c)
 		c->step_x = 1;
 		c->dist_to_grid_x = (c->map_x + 1.0 - c->px) * c->dist_increment_x;
 	}
-	if (c->ray_dir_y < 0)
+	if (c->sin_table[x] < 0)
 	{
 		c->step_y = -1;
 		c->dist_to_grid_y = (c->py - c->map_y) * c->dist_increment_y;
@@ -55,10 +55,10 @@ static void	get_wall_dist_and_height(t_caster *c, int x)
 {
 	if (c->hit_is_horizontal[x] == 0)
 		c->wall_dist[x] = (c->map_x - c->px + \
-			(1 - c->step_x) / 2) / c->ray_dir_x;
+			(1 - c->step_x) / 2) / c->cos_table[x];
 	else
 		c->wall_dist[x] = (c->map_y - c->py + \
-			(1 - c->step_y) / 2) / c->ray_dir_y;
+			(1 - c->step_y) / 2) / c->sin_table[x];
 	c->wall_height[x] = (int)(HEIGHT / c->wall_dist[x]);
 	c->draw_start[x] = -c->wall_height[x] / 2 + HEIGHT / 2;
 	if (c->draw_start[x] < 0 || c->draw_start[x] > HEIGHT)
@@ -76,11 +76,9 @@ void	cast_rays(t_caster *c)
 	x = -1;
 	while (++x < WIDTH)
 	{
-		c->ray_dir_x = c->cos_table[x];
-		c->ray_dir_y = c->sin_table[x];
 		c->map_x = (int)c->px;
 		c->map_y = (int)c->py;
-		init_ray_dir_and_cast_position(c);
+		init_ray_dir_and_cast_position(c, x);
 		trace_ray(c, x);
 		get_wall_dist_and_height(c, x);
 	}

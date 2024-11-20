@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 22:44:36 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:21:47 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,8 +243,6 @@ typedef struct s_caster
 	double			view_offset;
 	double			cos_table[WIDTH];
 	double			sin_table[WIDTH];
-	double			ray_dir_x;
-	double			ray_dir_y;
 	int				map_x;
 	int				map_y;
 	double			dist_increment_x;
