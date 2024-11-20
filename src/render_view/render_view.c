@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:03:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 11:31:07 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:42:38 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	render_view(t_caster *c)
 			render_fc_textures(c, c->draw_end[x], x);
 		else
 			render_fc_plain_colors(c, c->draw_end[x], x);
-		render_wall(c, x + 1, c->draw_start[x]);
+		render_wall(c, x + 1, c->draw_start[x + 1]);
 		if (FC_TEXTURES)
 			render_fc_textures(c, c->draw_end[x + 1], x + 1);
 		else
