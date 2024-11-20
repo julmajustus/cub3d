@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 22:01:12 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:51:38 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@ void	set_images_to_window(t_caster *c)
 
 void	render_engine(t_caster *c)
 {
-	int	i;
-
-	i = -1;
+//	int	i;
+//
+//	i = -1;
 	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
-	printf("Check py: %f px: %f\n", c->py, c->px);
-	while (++i < c->active_sprite_count)
-	{
-		printf("Check scale: %d cam_y %f cam_x %f\n", \
-		c->sp[i]->scale, c->sp[i]->cam_y, c->sp[i]->cam_x);
-		printf("Check screen_y: %d screen_x: %d\n", \
-		c->sp[i]->screen_y, c->sp[i]->screen_x);
-		printf("Check sp[%d] pos y: %f x: %f is_visible: %d\n", \
-		i, c->sp[i]->y, c->sp[i]->x, c->sp[i]->is_visible);
-	}
+//	printf("Check py: %f px: %f\n", c->py, c->px);
+//	while (++i < c->active_sprite_count)
+//	{
+//		printf("Check scale: %d cam_y %f cam_x %f\n", \
+//		c->sp[i]->scale, c->sp[i]->cam_y, c->sp[i]->cam_x);
+//		printf("Check screen_y: %d screen_x: %d\n", \
+//		c->sp[i]->screen_y, c->sp[i]->screen_x);
+//		printf("Check sp[%d] pos y: %f x: %f is_visible: %d\n", \
+//		i, c->sp[i]->y, c->sp[i]->x, c->sp[i]->is_visible);
+//	}
 	cast_rays(c);
 	render_view(c);
 	parse_minimap(c);

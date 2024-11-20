@@ -1,0 +1,485 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 38.55      4.85     4.85                             mlx_put_pixel
+ 28.56      8.44     3.59  3313920     0.00     0.00  render_fc_textures
+ 15.75     10.42     1.98  3313920     0.00     0.00  render_wall
+  7.00     11.30     0.88     3300     0.27     0.27  draw_sprite
+  2.94     11.67     0.37   113916     0.00     0.00  draw_one_ray
+  2.31     11.96     0.29  1026970     0.00     0.00  draw_scaled_img_to_tile
+  1.51     12.15     0.19 17823929     0.00     0.00  is_sprite_visible
+  0.88     12.26     0.11       52     2.12     2.12  draw_scene
+  0.56     12.33     0.07  3313920     0.00     0.00  trace_ray
+  0.44     12.38     0.06                             mlx_draw_pixel
+  0.32     12.42     0.04       91     0.44     0.44  draw_gun_pixel
+  0.32     12.46     0.04                             lodepng_inflatev
+  0.24     12.49     0.03     1726     0.02     0.17  cast_rays
+  0.08     12.50     0.01  1116722     0.00     0.00  restrict_sizes_to_mimmap
+  0.08     12.51     0.01     1752     0.01     0.01  draw_elapsed_time
+  0.08     12.52     0.01     1700     0.01     0.01  check_cursor_movement
+  0.08     12.53     0.01     1700     0.01     0.18  parse_minimap
+  0.08     12.54     0.01                             _init
+  0.08     12.55     0.01                             lodepng_chunk_next
+  0.08     12.56     0.01                             mlx_put_string
+  0.08     12.57     0.01                             render_fc_plain_colors
+  0.00     12.57     0.00  3313920     0.00     0.00  get_wall_texture
+  0.00     12.57     0.00  1116722     0.00     0.00  find_which_tiles
+  0.00     12.57     0.00    41146     0.00     0.00  is_door_open
+  0.00     12.57     0.00     3300     0.00     0.00  get_sprite_size_and_pos
+  0.00     12.57     0.00     2113     0.00     0.00  check_collision
+  0.00     12.57     0.00     1752     0.00     0.00  check_timeout
+  0.00     12.57     0.00     1752     0.00     4.20  game_loop
+  0.00     12.57     0.00     1726     0.00     0.00  printf(char const*, ... pass_object_size1)
+  0.00     12.57     0.00     1726     0.00     0.21  draw_ray
+  0.00     12.57     0.00     1726     0.00     0.00  put_player_in_middle
+  0.00     12.57     0.00     1726     0.00     3.23  render_view
+  0.00     12.57     0.00     1700     0.00     0.22  draw_player
+  0.00     12.57     0.00     1700     0.00     0.00  draw_tiles
+  0.00     12.57     0.00     1700     0.00     0.02  gun_fire_animation
+  0.00     12.57     0.00     1700     0.00     0.00  movement_left_right
+  0.00     12.57     0.00     1700     0.00     0.00  movement_up_down
+  0.00     12.57     0.00     1700     0.00     0.52  render_sprites
+  0.00     12.57     0.00     1700     0.00     0.00  rotate_view_keyboard
+  0.00     12.57     0.00     1700     0.00     0.00  rotate_view_mouse
+  0.00     12.57     0.00     1340     0.00     0.00  printf(char const*, ... pass_object_size1)
+  0.00     12.57     0.00       52     0.00     0.00  blink_text
+  0.00     12.57     0.00       52     0.00     2.12  check_game_status
+  0.00     12.57     0.00       52     0.00     0.00  draw_text
+  0.00     12.57     0.00       28     0.00     0.00  process_line
+  0.00     12.57     0.00       26     0.00     0.00  check_sprite_hit
+  0.00     12.57     0.00       26     0.00     0.00  start_gun_fire_animation
+  0.00     12.57     0.00       16     0.00     0.00  spawn_sprite
+  0.00     12.57     0.00        5     0.00     0.00  file_exist
+  0.00     12.57     0.00        4     0.00     0.00  store_door_info
+  0.00     12.57     0.00        2     0.00     0.00  parse_plain_colors
+  0.00     12.57     0.00        1     0.00     0.00  check_dfs
+  0.00     12.57     0.00        1     0.00     0.00  check_map
+  0.00     12.57     0.00        1     0.00     0.00  check_wall
+  0.00     12.57     0.00        1     0.00     0.00  find_player_pos
+  0.00     12.57     0.00        1     0.00     0.00  free_sprites
+  0.00     12.57     0.00        1     0.00     0.00  free_structs
+  0.00     12.57     0.00        1     0.00     0.00  free_textures
+  0.00     12.57     0.00        1     0.00     0.00  init
+  0.00     12.57     0.00        1     0.00     0.00  init_buffers
+  0.00     12.57     0.00        1     0.00     0.00  init_shotgun
+  0.00     12.57     0.00        1     0.00     0.00  init_sprites
+  0.00     12.57     0.00        1     0.00     0.00  read_description
+  0.00     12.57     0.00        1     0.00     0.00  set_images_to_window
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2024 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.08% of 12.57 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     59.7    0.00    7.50                 mlx_loop [1]
+                0.00    7.35    1752/1752        game_loop [2]
+                0.00    0.11      52/52          check_game_status [18]
+                0.00    0.04    1700/1700        gun_fire_animation [22]
+                0.00    0.00      52/52          draw_text [44]
+                0.00    0.00      52/52          blink_text [43]
+-----------------------------------------------
+                0.00    7.35    1752/1752        mlx_loop [1]
+[2]     58.5    0.00    7.35    1752         game_loop [2]
+                0.00    5.49    1700/1726        render_view [3]
+                0.00    0.88    1700/1700        render_sprites [8]
+                0.00    0.37    1700/1700        draw_player [11]
+                0.01    0.30    1700/1700        parse_minimap [12]
+                0.03    0.26    1700/1726        cast_rays [14]
+                0.01    0.00    1752/1752        draw_elapsed_time [26]
+                0.01    0.00    1700/1700        check_cursor_movement [27]
+                0.00    0.00    2113/2113        check_collision [35]
+                0.00    0.00    1752/1752        check_timeout [36]
+                0.00    0.00    1700/1700        movement_left_right [39]
+                0.00    0.00    1700/1700        movement_up_down [40]
+                0.00    0.00    1700/1700        rotate_view_keyboard [41]
+                0.00    0.00    1700/1700        rotate_view_mouse [42]
+                0.00    0.00    1700/1726        printf(char const*, ... pass_object_size1) [267]
+                0.00    0.00    1700/1700        draw_tiles [38]
+-----------------------------------------------
+                0.00    0.08      26/1726        render_engine [20]
+                0.00    5.49    1700/1726        game_loop [2]
+[3]     44.3    0.00    5.57    1726         render_view [3]
+                3.59    0.00 3313920/3313920     render_fc_textures [5]
+                1.98    0.00 3313920/3313920     render_wall [6]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]     38.5    4.85    0.00                 mlx_put_pixel [4]
+-----------------------------------------------
+                3.59    0.00 3313920/3313920     render_view [3]
+[5]     28.6    3.59    0.00 3313920         render_fc_textures [5]
+-----------------------------------------------
+                1.98    0.00 3313920/3313920     render_view [3]
+[6]     15.8    1.98    0.00 3313920         render_wall [6]
+                0.00    0.00 3313920/3313920     get_wall_texture [32]
+-----------------------------------------------
+                0.88    0.00    3300/3300        render_sprites [8]
+[7]      7.0    0.88    0.00    3300         draw_sprite [7]
+-----------------------------------------------
+                0.00    0.88    1700/1700        game_loop [2]
+[8]      7.0    0.00    0.88    1700         render_sprites [8]
+                0.88    0.00    3300/3300        draw_sprite [7]
+                0.00    0.00    3300/3300        get_sprite_size_and_pos [34]
+                0.00    0.00      15/16          spawn_sprite [48]
+-----------------------------------------------
+                0.37    0.00  113916/113916      draw_ray [10]
+[9]      2.9    0.37    0.00  113916         draw_one_ray [9]
+                0.00    0.00     755/41146       is_door_open [33]
+-----------------------------------------------
+                0.00    0.37    1726/1726        draw_player [11]
+[10]     2.9    0.00    0.37    1726         draw_ray [10]
+                0.37    0.00  113916/113916      draw_one_ray [9]
+-----------------------------------------------
+                0.00    0.37    1700/1700        game_loop [2]
+[11]     2.9    0.00    0.37    1700         draw_player [11]
+                0.00    0.37    1726/1726        draw_ray [10]
+-----------------------------------------------
+                0.01    0.30    1700/1700        game_loop [2]
+[12]     2.5    0.01    0.30    1700         parse_minimap [12]
+                0.00    0.30 1116722/1116722     find_which_tiles [13]
+                0.00    0.00    1726/1726        put_player_in_middle [37]
+-----------------------------------------------
+                0.00    0.30 1116722/1116722     parse_minimap [12]
+[13]     2.4    0.00    0.30 1116722         find_which_tiles [13]
+                0.29    0.00 1026970/1026970     draw_scaled_img_to_tile [15]
+                0.01    0.00 1116722/1116722     restrict_sizes_to_mimmap [25]
+                0.00    0.00   13808/41146       is_door_open [33]
+-----------------------------------------------
+                0.00    0.00      26/1726        render_engine [20]
+                0.03    0.26    1700/1726        game_loop [2]
+[14]     2.3    0.03    0.26    1726         cast_rays [14]
+                0.07    0.19 3313920/3313920     trace_ray [16]
+-----------------------------------------------
+                0.29    0.00 1026970/1026970     find_which_tiles [13]
+[15]     2.3    0.29    0.00 1026970         draw_scaled_img_to_tile [15]
+-----------------------------------------------
+                0.07    0.19 3313920/3313920     cast_rays [14]
+[16]     2.1    0.07    0.19 3313920         trace_ray [16]
+                0.19    0.00 17823929/17823929     is_sprite_visible [17]
+                0.00    0.00   26583/41146       is_door_open [33]
+-----------------------------------------------
+                0.19    0.00 17823929/17823929     trace_ray [16]
+[17]     1.5    0.19    0.00 17823929         is_sprite_visible [17]
+-----------------------------------------------
+                0.00    0.11      52/52          mlx_loop [1]
+[18]     0.9    0.00    0.11      52         check_game_status [18]
+                0.11    0.00      52/52          draw_scene [19]
+-----------------------------------------------
+                0.11    0.00      52/52          check_game_status [18]
+[19]     0.9    0.11    0.00      52         draw_scene [19]
+-----------------------------------------------
+                                                 <spontaneous>
+[20]     0.7    0.00    0.09                 render_engine [20]
+                0.00    0.08      26/1726        render_view [3]
+                0.00    0.00      26/1726        cast_rays [14]
+                0.00    0.00      26/1726        printf(char const*, ... pass_object_size1) [267]
+-----------------------------------------------
+                                                 <spontaneous>
+[21]     0.4    0.06    0.00                 mlx_draw_pixel [21]
+-----------------------------------------------
+                0.00    0.04    1700/1700        mlx_loop [1]
+[22]     0.3    0.00    0.04    1700         gun_fire_animation [22]
+                0.04    0.00      91/91          draw_gun_pixel [23]
+-----------------------------------------------
+                0.04    0.00      91/91          gun_fire_animation [22]
+[23]     0.3    0.04    0.00      91         draw_gun_pixel [23]
+-----------------------------------------------
+                                                 <spontaneous>
+[24]     0.3    0.04    0.00                 lodepng_inflatev [24]
+-----------------------------------------------
+                0.01    0.00 1116722/1116722     find_which_tiles [13]
+[25]     0.1    0.01    0.00 1116722         restrict_sizes_to_mimmap [25]
+-----------------------------------------------
+                0.01    0.00    1752/1752        game_loop [2]
+[26]     0.1    0.01    0.00    1752         draw_elapsed_time [26]
+-----------------------------------------------
+                0.01    0.00    1700/1700        game_loop [2]
+[27]     0.1    0.01    0.00    1700         check_cursor_movement [27]
+-----------------------------------------------
+                                                 <spontaneous>
+[28]     0.1    0.01    0.00                 lodepng_chunk_next [28]
+-----------------------------------------------
+                                                 <spontaneous>
+[29]     0.1    0.01    0.00                 mlx_put_string [29]
+-----------------------------------------------
+                                                 <spontaneous>
+[30]     0.1    0.01    0.00                 render_fc_plain_colors [30]
+-----------------------------------------------
+                                                 <spontaneous>
+[31]     0.1    0.01    0.00                 _init [31]
+-----------------------------------------------
+                0.00    0.00 3313920/3313920     render_wall [6]
+[32]     0.0    0.00    0.00 3313920         get_wall_texture [32]
+-----------------------------------------------
+                0.00    0.00     755/41146       draw_one_ray [9]
+                0.00    0.00   13808/41146       find_which_tiles [13]
+                0.00    0.00   26583/41146       trace_ray [16]
+[33]     0.0    0.00    0.00   41146         is_door_open [33]
+-----------------------------------------------
+                0.00    0.00    3300/3300        render_sprites [8]
+[34]     0.0    0.00    0.00    3300         get_sprite_size_and_pos [34]
+-----------------------------------------------
+                0.00    0.00    2113/2113        game_loop [2]
+[35]     0.0    0.00    0.00    2113         check_collision [35]
+-----------------------------------------------
+                0.00    0.00    1752/1752        game_loop [2]
+[36]     0.0    0.00    0.00    1752         check_timeout [36]
+-----------------------------------------------
+                0.00    0.00    1726/1726        parse_minimap [12]
+[37]     0.0    0.00    0.00    1726         put_player_in_middle [37]
+-----------------------------------------------
+                0.00    0.00    1700/1700        game_loop [2]
+[38]     0.0    0.00    0.00    1700         draw_tiles [38]
+-----------------------------------------------
+                0.00    0.00    1700/1700        game_loop [2]
+[39]     0.0    0.00    0.00    1700         movement_left_right [39]
+-----------------------------------------------
+                0.00    0.00    1700/1700        game_loop [2]
+[40]     0.0    0.00    0.00    1700         movement_up_down [40]
+-----------------------------------------------
+                0.00    0.00    1700/1700        game_loop [2]
+[41]     0.0    0.00    0.00    1700         rotate_view_keyboard [41]
+-----------------------------------------------
+                0.00    0.00    1700/1700        game_loop [2]
+[42]     0.0    0.00    0.00    1700         rotate_view_mouse [42]
+-----------------------------------------------
+                0.00    0.00      52/52          mlx_loop [1]
+[43]     0.0    0.00    0.00      52         blink_text [43]
+-----------------------------------------------
+                0.00    0.00      52/52          mlx_loop [1]
+[44]     0.0    0.00    0.00      52         draw_text [44]
+-----------------------------------------------
+                0.00    0.00      28/28          check_map [53]
+[45]     0.0    0.00    0.00      28         process_line [45]
+                0.00    0.00       4/4           store_door_info [50]
+                0.00    0.00       4/5           file_exist [49]
+                0.00    0.00       2/2           parse_plain_colors [51]
+-----------------------------------------------
+                0.00    0.00      26/26          keyboard_listener [117]
+[46]     0.0    0.00    0.00      26         check_sprite_hit [46]
+-----------------------------------------------
+                0.00    0.00      26/26          keyboard_listener [117]
+[47]     0.0    0.00    0.00      26         start_gun_fire_animation [47]
+-----------------------------------------------
+                0.00    0.00       1/16          main [180]
+                0.00    0.00      15/16          render_sprites [8]
+[48]     0.0    0.00    0.00      16         spawn_sprite [48]
+-----------------------------------------------
+                0.00    0.00       1/5           read_description [63]
+                0.00    0.00       4/5           process_line [45]
+[49]     0.0    0.00    0.00       5         file_exist [49]
+-----------------------------------------------
+                0.00    0.00       4/4           process_line [45]
+[50]     0.0    0.00    0.00       4         store_door_info [50]
+-----------------------------------------------
+                0.00    0.00       2/2           process_line [45]
+[51]     0.0    0.00    0.00       2         parse_plain_colors [51]
+-----------------------------------------------
+                                1200             check_dfs [52]
+                0.00    0.00       1/1           check_wall [54]
+[52]     0.0    0.00    0.00       1+1200    check_dfs [52]
+                                1200             check_dfs [52]
+-----------------------------------------------
+                0.00    0.00       1/1           read_description [63]
+[53]     0.0    0.00    0.00       1         check_map [53]
+                0.00    0.00      28/28          process_line [45]
+-----------------------------------------------
+                0.00    0.00       1/1           read_description [63]
+[54]     0.0    0.00    0.00       1         check_wall [54]
+                0.00    0.00       1/1           check_dfs [52]
+-----------------------------------------------
+                0.00    0.00       1/1           read_description [63]
+[55]     0.0    0.00    0.00       1         find_player_pos [55]
+-----------------------------------------------
+                0.00    0.00       1/1           exit_mlx [86]
+[56]     0.0    0.00    0.00       1         free_sprites [56]
+-----------------------------------------------
+                0.00    0.00       1/1           exit_mlx [86]
+[57]     0.0    0.00    0.00       1         free_structs [57]
+-----------------------------------------------
+                0.00    0.00       1/1           exit_mlx [86]
+[58]     0.0    0.00    0.00       1         free_textures [58]
+-----------------------------------------------
+                0.00    0.00       1/1           main [180]
+[59]     0.0    0.00    0.00       1         init [59]
+                0.00    0.00       1/1           init_sprites [62]
+                0.00    0.00       1/1           init_shotgun [61]
+                0.00    0.00       1/1           set_images_to_window [64]
+-----------------------------------------------
+                0.00    0.00       1/1           main [180]
+[60]     0.0    0.00    0.00       1         init_buffers [60]
+-----------------------------------------------
+                0.00    0.00       1/1           init [59]
+[61]     0.0    0.00    0.00       1         init_shotgun [61]
+-----------------------------------------------
+                0.00    0.00       1/1           init [59]
+[62]     0.0    0.00    0.00       1         init_sprites [62]
+-----------------------------------------------
+                0.00    0.00       1/1           main [180]
+[63]     0.0    0.00    0.00       1         read_description [63]
+                0.00    0.00    1339/1340        printf(char const*, ... pass_object_size1) [268]
+                0.00    0.00       1/5           file_exist [49]
+                0.00    0.00       1/1           check_map [53]
+                0.00    0.00       1/1           check_wall [54]
+                0.00    0.00       1/1           find_player_pos [55]
+-----------------------------------------------
+                0.00    0.00       1/1           init [59]
+[64]     0.0    0.00    0.00       1         set_images_to_window [64]
+-----------------------------------------------
+                0.00    0.00      26/1726        render_engine [20]
+                0.00    0.00    1700/1726        game_loop [2]
+[267]    0.0    0.00    0.00    1726         printf(char const*, ... pass_object_size1) [267]
+-----------------------------------------------
+                0.00    0.00       1/1340        main [180]
+                0.00    0.00    1339/1340        read_description [63]
+[268]    0.0    0.00    0.00    1340         printf(char const*, ... pass_object_size1) [268]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2024 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+ [267] printf(char const*, ... pass_object_size1) [38] draw_tiles [39] movement_left_right
+ [268] printf(char const*, ... pass_object_size1) [49] file_exist [40] movement_up_down
+  [31] _init                  [55] find_player_pos        [12] parse_minimap
+  [43] blink_text             [13] find_which_tiles       [51] parse_plain_colors
+  [14] cast_rays              [56] free_sprites           [45] process_line
+  [35] check_collision        [57] free_structs           [37] put_player_in_middle
+  [27] check_cursor_movement  [58] free_textures          [63] read_description
+  [52] check_dfs               [2] game_loop              [30] render_fc_plain_colors
+  [18] check_game_status      [34] get_sprite_size_and_pos [5] render_fc_textures
+  [53] check_map              [32] get_wall_texture        [8] render_sprites
+  [46] check_sprite_hit       [22] gun_fire_animation      [3] render_view
+  [36] check_timeout          [59] init                    [6] render_wall
+  [54] check_wall             [60] init_buffers           [25] restrict_sizes_to_mimmap
+  [26] draw_elapsed_time      [61] init_shotgun           [41] rotate_view_keyboard
+  [23] draw_gun_pixel         [62] init_sprites           [42] rotate_view_mouse
+   [9] draw_one_ray           [33] is_door_open           [64] set_images_to_window
+  [11] draw_player            [17] is_sprite_visible      [48] spawn_sprite
+  [10] draw_ray               [28] lodepng_chunk_next     [47] start_gun_fire_animation
+  [15] draw_scaled_img_to_tile [24] lodepng_inflatev      [50] store_door_info
+  [19] draw_scene             [21] mlx_draw_pixel         [16] trace_ray
+   [7] draw_sprite             [4] mlx_put_pixel
+  [44] draw_text              [29] mlx_put_string
