@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:03:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 10:45:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:31:07 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,49 +60,18 @@ void	render_view(t_caster *c)
 
 	precalculate_wall_texture_offset(c);
 	x = 0;
-//	while (x < WIDTH)
-//	{
-//		render_wall(c, x, c->draw_start[x]);
-//		if (FC_TEXTURES)
-//			render_fc_textures(c, c->draw_end[x], x);
-//		else
-//			render_fc_plain_colors(c, c->draw_end[x], x);
-//		render_wall(c, x + 1, c->draw_start[x]);
-//		if (FC_TEXTURES)
-//			render_fc_textures(c, c->draw_end[x + 1], x + 1);
-//		else
-//			render_fc_plain_colors(c, c->draw_end[x + 1], x + 1);
-//		x += 2;
-//	}
-
-	if (FC_TEXTURES)
+	while (x < WIDTH)
 	{
-		while (x < WIDTH)
-		{
-			render_wall(c, x, c->draw_start[x]);
+		render_wall(c, x, c->draw_start[x]);
+		if (FC_TEXTURES)
 			render_fc_textures(c, c->draw_end[x], x);
-			render_wall(c, x + 1, c->draw_start[x]);
+		else
+			render_fc_plain_colors(c, c->draw_end[x], x);
+		render_wall(c, x + 1, c->draw_start[x]);
+		if (FC_TEXTURES)
 			render_fc_textures(c, c->draw_end[x + 1], x + 1);
-		//	render_wall(c, x + 2, c->draw_start[x + 2]);
-		//	render_fc_textures(c, c->draw_end[x + 2], x + 2);
-		//	render_wall(c, x + 3, c->draw_start[x + 3]);
-		//	render_fc_textures(c, c->draw_end[x + 3], x + 3);
-		//	render_wall(c, x + 4, c->draw_start[x + 4]);
-		//	render_fc_textures(c, c->draw_end[x + 4], x + 4);
-		//	render_wall(c, x + 5, c->draw_start[x + 5]);
-		//	render_fc_textures(c, c->draw_end[x + 5], x + 5);
-			x += 2;
-		}
-	}
-	else
-	{
-		while (x < WIDTH)
-		{
-			render_wall(c, x, c->draw_start[x]);
-			render_fc_plain_colors(c, c->draw_end[x], x);
-			render_wall(c, x + 1, c->draw_start[x]);
-			render_fc_plain_colors(c, c->draw_end[x], x);
-			x += 2;
-		}
+		else
+			render_fc_plain_colors(c, c->draw_end[x + 1], x + 1);
+		x += 2;
 	}
 }
