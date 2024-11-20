@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 11:49:53 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:58:04 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # endif
 
 # ifndef ZOMBIE_COUNT
-#  define ZOMBIE_COUNT 15
+#  define ZOMBIE_COUNT 35
 # endif
 
 # ifndef TIMEOUT
@@ -174,9 +174,9 @@ typedef struct s_sprite
 	int				next_tile_x;
 	int				next_tile_y;
 	double			dist_to_player;
-	int			sprite_dx;
-	int	    		sprite_dy;
-	int			distance_to_sprite;
+	int				sprite_dx;
+	int				sprite_dy;
+	int				distance_to_sprite;
 }	t_sprite;
 
 typedef struct s_toggle_action
@@ -251,12 +251,12 @@ typedef struct s_caster
 	int				step_y;
 	double			dist_to_grid_x;
 	double			dist_to_grid_y;
-	int			hit_is_horizontal[WIDTH];
+	int				hit_is_horizontal[WIDTH];
 	char			hit_surface[WIDTH];
 	double			wall_dist[WIDTH];
-	int			wall_height[WIDTH];
-	int			draw_start[WIDTH];
-	int			draw_end[WIDTH];
+	int				wall_height[WIDTH];
+	int				draw_start[WIDTH];
+	int				draw_end[WIDTH];
 	double			wall_texture_offset_buffer[WIDTH];
 	mlx_texture_t	*wall_texture;
 	int				tex_x;
@@ -292,10 +292,10 @@ typedef struct s_caster
 	mlx_image_t		*time_text_img;
 	int				blink_state;
 	double			distance_to_sprite;
-	struct timeval		start_time;
-	struct timeval		current_time;
+	struct timeval	start_time;
+	struct timeval	current_time;
 	double			sp_current_time;
-	int			spawn_index;
+	int				spawn_index;
 	char			**av;
 	char			*window_title;
 }	t_caster;
