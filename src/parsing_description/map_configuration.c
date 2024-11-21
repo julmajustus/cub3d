@@ -6,38 +6,54 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/17 14:42:25 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:47:01 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	parse_texture_color(t_caster *c, char *line, t_dir *i)
+static void	path_check(t_caster *c, char *texture_path, char *line)
 {
-	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) \
-		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3) \
-		|| !ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
+	int	len;
+
+	if (ft_strncmp(texture_path, "./", 2) == 0)
 	{
-		if (ft_strlen(line) > 4 && line[3] == '.' && line[4] == '/')
-		{
-			c->map->texture_path = ft_substr(line, 3, ft_strlen(line) - 4);
-			file_exist(c, c->map->texture_path, ".png", TEXTURE);
-			if (ft_strncmp(line, "NO ", 3) == 0)
-				c->textures->north_texture = mlx_load_png(c->map->texture_path);
-			else if (ft_strncmp(line, "SO ", 3) == 0)
-				c->textures->south_texture = mlx_load_png(c->map->texture_path);
-			else if (ft_strncmp(line, "WE ", 3) == 0)
-				c->textures->west_texture = mlx_load_png(c->map->texture_path);
-			else if (ft_strncmp(line, "EA ", 3) == 0)
-				c->textures->east_texture = mlx_load_png(c->map->texture_path);
-			free_and_null((void **)&c->map->texture_path);
-		}
-		else if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
-			parse_plain_colors(c, line);
-		(*i)++;
+		len = ft_strlen(texture_path);
+		while (len > 0 && ft_isspace(texture_path[len - 1]))
+			len--;
+		texture_path[len] = '\0';
+		file_exist(c, texture_path, ".png", TEXTURE);
+		if (!ft_strncmp(line, "NO ", 3))
+			c->textures->north_texture = mlx_load_png(texture_path);
+		else if (!ft_strncmp(line, "SO ", 3))
+			c->textures->south_texture = mlx_load_png(texture_path);
+		else if (!ft_strncmp(line, "WE ", 3))
+			c->textures->west_texture = mlx_load_png(texture_path);
+		else if (!ft_strncmp(line, "EA ", 3))
+			c->textures->east_texture = mlx_load_png(texture_path);
+		free_and_null((void **)&c->map->texture_path);
 	}
 	else
+		exit_failure(c, "Texture path must start with './'");
+}
+
+static void	parse_texture_color(t_caster *c, char *line, t_dir *i)
+{
+	char	*texture_path;
+
+	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3) || \
+	!ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
+	{
+		texture_path = line + 3;
+		while (ft_isspace(*texture_path))
+			texture_path++;
+		path_check(c, texture_path, line);
+	}
+	else if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
+		parse_plain_colors(c, line);
+	else
 		exit_failure(c, "There is wrong text in between the description.");
+	(*i)++;
 }
 
 void	init_var(t_dir *i, const char **order)
@@ -49,17 +65,6 @@ void	init_var(t_dir *i, const char **order)
 	order[4] = "F ";
 	order[5] = "C ";
 	*i = NO;
-}
-
-int	whole_space_line(char *str)
-{
-	while (*str)
-	{
-		if (*str != ' ' && !(*str >= 9 && *str <= 13))
-			return (false);
-		str++;
-	}
-	return (true);
 }
 
 void	process_line(t_caster *c, char **line, t_dir *i)

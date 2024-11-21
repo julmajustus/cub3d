@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/21 14:08:50 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:43:32 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,4 +358,5 @@ void	check_timeout(t_caster *c);
 void	draw_elapsed_time(t_caster *c);
 void	draw_text(t_caster *c, mlx_texture_t *texture, int blink);
 void	draw_scene(t_caster *c, mlx_texture_t *texture, int height, int width);
+int		whole_space_line(char *str);
 #endif

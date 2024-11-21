@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:00:52 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/17 14:49:38 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:43:06 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ void	print_map(t_caster *c)
 		y++;
 	}
 	printf("\n");
+}
+
+int	whole_space_line(char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ' && !(*str >= 9 && *str <= 13))
+			return (false);
+		str++;
+	}
+	return (true);
 }
 
 void	read_description(t_caster *c)
