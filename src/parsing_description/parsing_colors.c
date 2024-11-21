@@ -6,48 +6,70 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:35:02 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 18:13:09 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:14:43 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	set_rbg_color(t_caster *c, char *line, char **rgba_arr)
+static int	ft_strarr_len(char **arr)
 {
-	int			i;
+	int	len;
+
+	len = 0;
+	while (arr[len] != NULL)
+		len++;
+	return (len);
+}
+
+static void	set_rbg_color(t_caster *c, char *line, int *rgb)
+{
 	uint32_t	color;
 
-	i = 0;
-	color = (ft_atoi(rgba_arr[i]) << 24) | (ft_atoi(rgba_arr[i + 1]) << 16) \
-								| (ft_atoi(rgba_arr[i + 2]) << 8) | 255;
+	color = (rgb[0] << 24) | (rgb[1] << 16) | (rgb[2] << 8) | 255;
 	if (line[0] == 'F')
 		c->textures->floor_color = color;
 	else
 		c->textures->ceiling_color = color;
 }
 
-void	parse_plain_colors(t_caster *c, char *line)
+void	check_rgb_format(t_caster *c, char **rgba_arr, int rgb[3])
 {
-	int		i;
-	int		j;
-	char	**rgba_arr;
+	int	i;
+	int	j;
+	int	rgb_value;
 
 	i = 0;
 	j = 0;
-	rgba_arr = malloc(sizeof(char *) * 4);
-	init_arr(rgba_arr, 4);
-	while (line[i] && !ft_isdigit(line[i]))
-		i++;
-	while (line[i])
+	while (i < 3)
 	{
-		if (line[i] == ',')
+		while (rgba_arr[i][j] && ft_isspace(rgba_arr[i][j]))
 			j++;
-		if (ft_isdigit(line[i]))
-			rgba_arr[j] = append_char(rgba_arr[j], line[i]);
+		if (!ft_isdigit(rgba_arr[i][j]))
+			exit_failure(c, "Invalid format of RGB color : Not a digit");
+		rgb_value = ft_atoi(rgba_arr[i] + j);
+		printf("each component of RGB: %d\n", rgb_value);
+		if (rgb_value < 0 || rgb_value > 255)
+			exit_failure(c, "RGB color range has to be within 0 - 255");
+		rgb[i] = rgb_value;
 		i++;
+		j = 0;
 	}
-	if (j != 2)
-		exit_failure(c, "Invalid color format");
-	set_rbg_color(c, line, rgba_arr);
+}
+
+void	parse_plain_colors(t_caster *c, char *line)
+{
+	int		rgb[3];
+	char	**rgba_arr;
+	int		len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	rgba_arr = ft_split(line + 1, ',');
+	if (!rgba_arr || ft_strarr_len(rgba_arr) != 3)
+		exit_failure(c, "Invalid color format, should be 'R,G,B'");
+	check_rgb_format(c, rgba_arr, rgb);
+	set_rbg_color(c, line, rgb);
 	free_arr_and_null(&rgba_arr);
 }

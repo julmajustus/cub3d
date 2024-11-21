@@ -1,4 +1,4 @@
-NO ./textures/brickwall10.png
+NO        ./textures/brickwall10.png
 
 SO ./textures/brickwall10.png
 
@@ -7,8 +7,8 @@ WE ./textures/brickwall10.png
 EA ./textures/brickwall10.png
 
 
-F 10,5,0
-C 0,0,0
+F 100,5, 0
+C 0,0 ,0
 
 
 111111111111111111111111111111111111
