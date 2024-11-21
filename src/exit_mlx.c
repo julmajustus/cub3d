@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 21:51:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:18:04 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	exit_mlx(t_caster *c)
 		close(c->map->texture_fd);
 	if (c->map_row_len_buffer)
 		free(c->map_row_len_buffer);
+	if (c->map->texture_path)
+		free_and_null((void **)&c->map->texture_path);
 	free_textures(c);
 	free_structs(c);
 	free_sprites(c);
@@ -73,6 +75,8 @@ void	exit_failure(t_caster *c, char *msg)
 		close(c->map->texture_fd);
 	if (c->map_row_len_buffer)
 		free(c->map_row_len_buffer);
+	if (c->map->texture_path)
+		free_and_null((void **)&c->map->texture_path);
 	free_textures(c);
 	free_structs(c);
 	free_sprites(c);

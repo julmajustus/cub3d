@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 12:04:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:40:22 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	game_loop(void *param)
 
 	c = (t_caster *)param;
 	c->cursor_pos = 0;
-	check_timeout(c);
-	draw_elapsed_time(c);
+	if (BONUS)
+	{
+		check_timeout(c);
+		draw_elapsed_time(c);
+	}
 	if (c->game_status == 2)
 	{
 		c->speed_multiplier = c->window->handle->delta_time * 2.2;
@@ -61,8 +64,6 @@ void	game_loop(void *param)
 			render_sprites(c);
 		gun_fire_animation(c);
 	}
-	else
-		check_game_status(c);
 }
 
 int	main(int ac, char **av)
@@ -78,6 +79,8 @@ int	main(int ac, char **av)
 	read_description(&c);
 	init_buffers(&c);
 	spawn_sprite(&c);
+	if (c.game_status != 2)
+		check_game_status(&c);
 	mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);
 	mlx_loop(c.window->handle);

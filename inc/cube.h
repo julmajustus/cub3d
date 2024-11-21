@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 11:58:04 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:08:50 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,7 +309,6 @@ int		rotate_view_keyboard(t_caster *c);
 int		rotate_view_mouse(t_caster *c);
 void	keyboard_listener(mlx_key_data_t key, void *param);
 void	parse_minimap(t_caster *c);
-void	draw_player_to_minimap(t_caster *c);
 void	draw_ray(t_caster *c, int player_x, int player_y);
 void	cast_rays(t_caster *c);
 void	trace_ray(t_caster *c, int x);
@@ -320,7 +319,6 @@ void	get_wall_texture(t_caster *c, int x);
 void	render_engine(t_caster *c);
 void	game_loop(void *param);
 void	check_cursor_movement(t_caster *c);
-int		check_movement(t_caster *c);
 int		check_collision(t_caster *c, double new_px, double new_py);
 void	exit_mlx(t_caster *c);
 void	exit_failure(t_caster *c, char *msg);
