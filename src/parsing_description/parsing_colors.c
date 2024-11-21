@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:35:02 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/13 18:13:09 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:01:05 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	parse_plain_colors(t_caster *c, char *line)
 		i++;
 	while (line[i])
 	{
-		if (line[i] == ',')
+		if (line[i] == ',' && ft_isdigit(line[i + 1]))
 			j++;
 		if (ft_isdigit(line[i]))
 			rgba_arr[j] = append_char(rgba_arr[j], line[i]);

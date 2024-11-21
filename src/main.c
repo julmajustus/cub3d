@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 12:04:31 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:06:35 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ void	game_loop(void *param)
 
 	c = (t_caster *)param;
 	c->cursor_pos = 0;
-	check_timeout(c);
-	draw_elapsed_time(c);
 	if (c->game_status == 2)
 	{
 		c->speed_multiplier = c->window->handle->delta_time * 2.2;
 		if (BONUS)
+		{
 			check_cursor_movement(c);
+			check_timeout(c);
+			draw_elapsed_time(c);
+		}
 		movement_up_down(c);
 		movement_left_right(c);
 		rotate_view_mouse(c);
