@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/21 17:43:32 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/22 15:57:10 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # endif
 
 # ifndef TIMEOUT
-#  define TIMEOUT 120.0
+#  define TIMEOUT 20.0
 # endif
 
 # ifndef MINIMAP_SIZE
@@ -219,6 +219,7 @@ typedef struct s_window
 	mlx_image_t		*minimap;
 	mlx_image_t		*sprite;
 	mlx_image_t		*gun;
+	mlx_image_t		*kill_count;
 }	t_window;
 
 typedef struct s_scene
@@ -298,6 +299,7 @@ typedef struct s_caster
 	int				spawn_index;
 	char			**av;
 	char			*window_title;
+	int			kill_count;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -359,4 +361,5 @@ void	draw_elapsed_time(t_caster *c);
 void	draw_text(t_caster *c, mlx_texture_t *texture, int blink);
 void	draw_scene(t_caster *c, mlx_texture_t *texture, int height, int width);
 int		whole_space_line(char *str);
+void	draw_kill_count(t_caster *c);
 #endif

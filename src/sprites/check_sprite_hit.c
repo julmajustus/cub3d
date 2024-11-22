@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 16:17:16 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:48:46 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	check_sprite_hit(t_caster *c)
 			&& is_sprite_in_view(c, c->sp[i], dy, dx))
 		{
 			c->sp[i]->is_hit = 1;
+			c->kill_count++;
 			c->sp[i]->current_frame = 24;
 		}
 	}

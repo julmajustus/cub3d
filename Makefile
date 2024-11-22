@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/21 17:20:08 by skwon2           ###   ########.fr        #
+#    Updated: 2024/11/22 15:57:47 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/init.c \
 				  $(SRC_DIR)/init_buffers.c \
 				  $(SRC_DIR)/draw_scene.c \
+				  $(SRC_DIR)/draw_kill_count.c \
 				  $(SRC_DIR)/check_game_status.c \
 				  $(SRC_DIR)/minimap/parse_minimap.c\
 				  $(SRC_DIR)/minimap/draw_ply.c\
@@ -65,7 +66,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
 				  -I$(INC_DIR) \
 				  -I$(LIBFT_DIR) \
 				  -I$(MLX42_DIR)/include \
-				  -I$(GLFW_INCLUDE_PATH) -O3 \
+				  -I$(GLFW_INCLUDE_PATH) -O3 -pg\
 				  #-g -ggdb3 -fsanitize=address
 
 
