@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 15:54:40 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/23 03:46:20 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	init_textures(t_caster *c)
 	c->textures->press_menu_enter = mlx_load_png("./textures/menu_enter.png");
 	c->textures->sp_texture = mlx_load_png("./textures/zombie_with_death.png");
 	c->textures->c_texture = mlx_load_png("./textures/brickceiling2.png");
-	c->textures->f_texture = mlx_load_png("./textures/brickfloor2.png");
+	c->textures->f_texture = mlx_load_png("./textures/brickfloor3.png");
 	if (!c->textures->menu_screen || !c->textures->start_screen \
 		|| !c->textures->death_screen || !c->textures->sp_texture \
 		|| !c->textures->c_texture || !c->textures->f_texture \
@@ -83,7 +83,7 @@ void	init(t_caster *c, char **av)
 	ft_bzero(c->window, sizeof(t_window));
 	c->blink_state = 0;
 	c->speed_multiplier = 0.02;
-	c->plane_x = 0.66;
+	c->plane_x = 1;
 	c->plane_y = 0;
 	c->is_sprite_visible = 1;
 	c->max_sprite_count = 135;

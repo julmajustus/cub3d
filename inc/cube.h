@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/22 15:57:10 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:56:15 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # endif
 
 # ifndef TIMEOUT
-#  define TIMEOUT 20.0
+#  define TIMEOUT 120.0
 # endif
 
 # ifndef MINIMAP_SIZE
@@ -174,9 +174,6 @@ typedef struct s_sprite
 	int				next_tile_x;
 	int				next_tile_y;
 	double			dist_to_player;
-	int				sprite_dx;
-	int				sprite_dy;
-	int				distance_to_sprite;
 }	t_sprite;
 
 typedef struct s_toggle_action
@@ -220,6 +217,8 @@ typedef struct s_window
 	mlx_image_t		*sprite;
 	mlx_image_t		*gun;
 	mlx_image_t		*kill_count;
+	mlx_image_t		*highest_kill_count;
+	mlx_image_t		*death_count;
 }	t_window;
 
 typedef struct s_scene
@@ -300,6 +299,8 @@ typedef struct s_caster
 	char			**av;
 	char			*window_title;
 	int			kill_count;
+	int			highest_kill_count;
+	int			death_count;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
@@ -335,6 +336,7 @@ void	store_door_info(t_caster *c, const char *line);
 int		is_door_open(t_caster *c, int y, int x);
 t_door	*find_door_in_view(t_caster *c, double max_distance);
 void	toggle_door(t_caster *c, double max_distance);
+void	reset_door_state(t_caster *c);
 void	init_sprites(t_caster *c);
 void	init_spawn_points(t_caster *c);
 void	is_sprite_visible(t_caster *c, int y, int x);
@@ -362,4 +364,6 @@ void	draw_text(t_caster *c, mlx_texture_t *texture, int blink);
 void	draw_scene(t_caster *c, mlx_texture_t *texture, int height, int width);
 int		whole_space_line(char *str);
 void	draw_kill_count(t_caster *c);
+void	draw_highest_kill_count(t_caster *c);
+void	draw_player_death_count(t_caster *c);
 #endif

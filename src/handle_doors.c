@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:39:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 00:45:40 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/23 04:10:09 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	store_door_info(t_caster *c, const char *line)
 	y = c->map->map_height;
 	if (!c->textures->door_texture)
 		c->textures->door_texture = \
-			mlx_load_png("./textures/brickdoordark2.png");
+			mlx_load_png("./textures/brickdoordark3.png");
 	while (line[++x])
 	{
 		if (line[x] == 'D')

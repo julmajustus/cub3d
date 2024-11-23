@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/22 15:48:46 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/23 00:20:32 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	is_sprite_visible(t_caster *c, int y, int x)
 
 static void	get_spawn_distance(t_caster *c, int i)
 {
-	c->sp[i]->sprite_dx = c->sp[i]->x - (int)c->px;
-	c->sp[i]->sprite_dy = c->sp[i]->y - (int)c->py;
-	c->sp[i]->distance_to_sprite = sqrt(c->sp[i]->sprite_dx * \
-	c->sp[i]->sprite_dx + c->sp[i]->sprite_dy * c->sp[i]->sprite_dy);
+	c->sp[i]->dx = c->sp[i]->x - (int)c->px;
+	c->sp[i]->dy = c->sp[i]->y - (int)c->py;
+	c->sp[i]->dist_to_player = sqrt(c->sp[i]->dx * \
+	c->sp[i]->dx + c->sp[i]->dy * c->sp[i]->dy);
 }
 
 void	spawn_sprite(t_caster *c)
@@ -48,7 +48,7 @@ void	spawn_sprite(t_caster *c)
 			c->sp[i]->x = c->valid_spawn_points[c->spawn_index].x;
 			c->sp[i]->y = c->valid_spawn_points[c->spawn_index].y;
 			get_spawn_distance(c, i);
-			if (c->sp[i]->distance_to_sprite < 3)
+			if (c->sp[i]->dist_to_player < 3)
 			{
 				c->sp[i]->x = -1;
 				c->sp[i]->y = -1;
@@ -102,11 +102,11 @@ void	check_sprite_hit(t_caster *c)
 		dx = c->sp[i]->x - c->px;
 		dy = c->sp[i]->y - c->py;
 		distance_to_sprite = sqrt(dx * dx + dy * dy);
-		if (distance_to_sprite < 4.0 \
+		if (!c->sp[i]->is_hit && distance_to_sprite < 4.0 \
 			&& is_sprite_in_view(c, c->sp[i], dy, dx))
 		{
-			c->sp[i]->is_hit = 1;
 			c->kill_count++;
+			c->sp[i]->is_hit = 1;
 			c->sp[i]->current_frame = 24;
 		}
 	}

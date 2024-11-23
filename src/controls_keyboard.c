@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:18:06 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/21 17:23:29 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/23 03:23:57 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ static void	menu_controls(mlx_key_data_t key, t_caster *c)
 	{
 		if (c->game_status == -1 || c->game_status == -2)
 		{
+			if (c->window->highest_kill_count)
+				mlx_delete_image(c->window->handle, \
+					c->window->highest_kill_count);
+			if (c->window->death_count)
+				mlx_delete_image(c->window->handle, c->window->death_count);
+			c->death_count++;
 			c->game_status = 2;
 			render_gun(c);
 		}

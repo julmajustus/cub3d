@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/16 19:35:53 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/23 00:40:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	render_sprites(t_caster *c)
 		c->sp[i]->dx = c->px - c->sp[i]->x;
 		c->sp[i]->dist_to_player = \
 			sqrt(c->sp[i]->dx * c->sp[i]->dx + c->sp[i]->dy * c->sp[i]->dy);
-		if (c->sp[i]->dist_to_player < 0.8 && !c->sp[i]->is_hit)
+		if (c->sp[i]->dist_to_player < 0.5 && !c->sp[i]->is_hit)
 			c->game_status = -1;
 		if (c->sp[i]->is_hit)
 			death_animation(c, c->sp[i]);

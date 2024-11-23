@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:28:12 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/20 12:15:02 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/23 00:24:41 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	hit_check(t_caster *c, int x)
 
 void	trace_ray(t_caster *c, int x)
 {
+	is_sprite_visible(c, c->map_y, c->map_x);
 	while (1)
 	{
 		if (c->dist_to_grid_x < c->dist_to_grid_y)

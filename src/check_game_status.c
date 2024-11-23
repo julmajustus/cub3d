@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/19 14:08:28 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:56:57 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static void	reset_values(t_caster *c)
 	c->py = c->map->spawn_location_y;
 	c->px = c->map->spawn_location_x;
 	c->active_sprite_count = ZOMBIE_COUNT;
+	c->kill_count = 0;
+	reset_door_state(c);
 	spawn_sprite(c);
 }
 
@@ -83,11 +85,15 @@ void	check_game_status(t_caster *c)
 	else if (c->game_status == -1 || c->game_status == -2)
 	{
 		set_images_to_window(c);
-		reset_values(c);
 		if (c->game_status == -1)
+		{
 			draw_scene(c, c->textures->death_screen, HEIGHT, WIDTH);
+			draw_player_death_count(c);
+			draw_highest_kill_count(c);
+		}
 		if (c->game_status == -2)
 			draw_scene(c, c->textures->succeed_screen, HEIGHT, WIDTH);
 		blink_text(c);
+		reset_values(c);
 	}
 }
