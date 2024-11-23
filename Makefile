@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/22 15:57:47 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/23 03:57:29 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/parsing_description/parsing_colors.c \
 				  $(SRC_DIR)/parsing_description/check_wall.c \
 				  $(SRC_DIR)/handle_doors.c \
+				  $(SRC_DIR)/reset_door_state.c \
 				  $(SRC_DIR)/sprites/init_sprites.c \
 				  $(SRC_DIR)/sprites/render_sprites.c \
 				  $(SRC_DIR)/sprites/draw_sprite.c \
