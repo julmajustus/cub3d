@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:50:00 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/23 01:27:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/24 23:45:28 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	draw_player_death_count(t_caster *c)
 	char	*death_count;
 	char	*str;
 
-	death_count = ft_itoa(c->death_count);
-	str = ft_strjoin("PLAYER DEATH COUNT: ", death_count);
+	death_count = safe_itoa(c, c->death_count);
+	str = safe_strjoin(c, "PLAYER DEATH COUNT: ", death_count);
 	free(death_count);
 	if (c->window->death_count)
 		mlx_delete_image(c->window->handle, c->window->death_count);
@@ -37,11 +37,11 @@ void	draw_highest_kill_count(t_caster *c)
 	if (c->kill_count > c->highest_kill_count)
 	{
 		c->highest_kill_count = c->kill_count;
-		kill_count = ft_itoa(c->highest_kill_count);
+		kill_count = safe_itoa(c, c->highest_kill_count);
 	}
 	else
-		kill_count = ft_itoa(c->highest_kill_count);
-	str = ft_strjoin("HIGHEST KILL COUNT: ", kill_count);
+		kill_count = safe_itoa(c, c->highest_kill_count);
+	str = safe_strjoin(c, "HIGHEST KILL COUNT: ", kill_count);
 	free(kill_count);
 	if (c->window->highest_kill_count)
 		mlx_delete_image(c->window->handle, c->window->highest_kill_count);
@@ -57,8 +57,8 @@ void	draw_kill_count(t_caster *c)
 	char	*kill_count;
 	char	*str;
 
-	kill_count = ft_itoa(c->kill_count);
-	str = ft_strjoin("KILL COUNT: ", kill_count);
+	kill_count = safe_itoa(c, c->kill_count);
+	str = safe_strjoin(c, "KILL COUNT: ", kill_count);
 	free(kill_count);
 	if (c->window->kill_count)
 		mlx_delete_image(c->window->handle, c->window->kill_count);
