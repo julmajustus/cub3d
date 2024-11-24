@@ -6,13 +6,13 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:48:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/14 00:53:17 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:24:11 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	update_gun_frame(t_sprite *g)
+static void	update_gun_frame(t_sprite *g)
 {
 	g->current_frame = (g->current_frame + 1) % g->frame_count;
 	g->frame_offset = g->current_frame * 64 * 64 * 4;
@@ -50,7 +50,7 @@ void	gun_fire_animation(t_caster *c)
 	}
 }
 
-void	draw_gun_pixel(t_caster *c, int scr_x, int scr_y, int size)
+static void	draw_gun_pixel(t_caster *c, int scr_x, int scr_y, int size)
 {
 	int		y;
 	int		x;

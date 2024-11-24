@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:47:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/24 23:42:40 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/24 23:52:45 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	draw_elapsed_time(t_caster *c)
 	leftover_time = safe_strjoin(c, int_part, ".");
 	new_time = safe_strjoin(c, leftover_time, decimal_part);
 	free(leftover_time);
-	leftover_time = safe_strjoin(c ,"TIME : ", new_time);
+	leftover_time = safe_strjoin(c, "TIME : ", new_time);
 	free(new_time);
 	c->time_text_img = mlx_put_string(c->window->handle, \
 					leftover_time, 800, 20);

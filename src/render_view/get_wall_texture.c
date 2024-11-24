@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_wall_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 19:20:13 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/18 23:15:32 by jmakkone         ###   ########.fr       */
+/*   Created: 2024/11/25 00:16:58 by jmakkone          #+#    #+#             */
+/*   Updated: 2024/11/25 00:17:01 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

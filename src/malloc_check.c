@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 23:30:04 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/24 23:40:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:11:59 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ char	*safe_strjoin(t_caster *c, const char *s1, const char *s2)
 	return ((char *)malloc_check(c, ft_strjoin(s1, s2)));
 }
 
-
 char	*safe_substr(t_caster *c, const char *s, unsigned int start, size_t len)
 {
 	return ((char *)malloc_check(c, ft_substr(s, start, len)));
+}
+
+char	*safe_strdup(t_caster *c, const char *s)
+{
+	return ((char *)malloc_check(c, ft_strdup(s)));
 }

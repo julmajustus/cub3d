@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/23 00:40:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:25:11 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	update_sprite_position(t_caster *c, t_sprite *sp)
 	}
 }
 
-void	get_sprite_size_and_pos(t_caster *c, \
+static void	get_sprite_size_and_pos(t_caster *c, \
 					t_sprite *sp, mlx_texture_t *texture)
 {
 	sp->is_visible = 0;

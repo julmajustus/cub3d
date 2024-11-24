@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:57:58 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/10/02 10:41:59 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:05:50 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_abs(int n);
 char		*append_char(char *str, char c);
-void		append_array(char *content, char ***new_arr, int *new_arr_size);
+int			append_array(char *content, char ***new_arr, int *new_arr_size);
 void		init_arr(char **arr, int arr_len);
 int			is_empty_str(char *str);
 void		free_and_null(void **ptr);
