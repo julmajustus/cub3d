@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:25:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:38:39 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,9 +298,9 @@ typedef struct s_caster
 	int				spawn_index;
 	char			**av;
 	char			*window_title;
-	int			kill_count;
-	int			highest_kill_count;
-	int			death_count;
+	int				kill_count;
+	int				highest_kill_count;
+	int				death_count;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
