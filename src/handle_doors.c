@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 13:39:32 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/23 04:10:09 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/24 23:50:39 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	toggle_door(t_caster *c, double max_distance)
 	door = find_door_in_view(c, max_distance);
 	if (door)
 	{
-		printf("Trying to open door! is door open %d\n", door->is_open);
 		if (!door->is_open)
 			door->is_open = 1;
 		else
@@ -84,11 +83,8 @@ void	store_door_info(t_caster *c, const char *line)
 	int		y;
 	t_door	*new_door;
 
-	x = -1;
 	y = c->map->map_height;
-	if (!c->textures->door_texture)
-		c->textures->door_texture = \
-			mlx_load_png("./textures/brickdoordark3.png");
+	x = -1;
 	while (line[++x])
 	{
 		if (line[x] == 'D')
