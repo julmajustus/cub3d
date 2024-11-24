@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/23 03:46:20 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/24 22:34:43 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	init_map(t_caster *c, char **av)
 	c->mmap->wall = mlx_load_png("./textures/wall.png");
 	c->mmap->space = mlx_load_png("./textures/space.png");
 	c->mmap->door = mlx_load_png("./textures/door.png");
+	if (!c->mmap->wall || !c->mmap->space || !c->mmap->door)
+		exit_failure(c, "Failed to load textures");
 }
 
 static void	init_textures(t_caster *c)
@@ -70,7 +72,6 @@ static void	init_mlx(t_caster *c)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_set_cursor_mode(c->window->handle, MLX_MOUSE_HIDDEN);
 	set_images_to_window(c);
-	mlx_set_mouse_pos(c->window->handle, WIDTH / 2, HEIGHT / 2);
 }
 
 void	init(t_caster *c, char **av)
@@ -81,14 +82,11 @@ void	init(t_caster *c, char **av)
 	if (!c->window)
 		exit_failure(c, "window struct malloc failed");
 	ft_bzero(c->window, sizeof(t_window));
-	c->blink_state = 0;
 	c->speed_multiplier = 0.02;
 	c->plane_x = 1;
-	c->plane_y = 0;
 	c->is_sprite_visible = 1;
 	c->max_sprite_count = 135;
 	c->active_sprite_count = ZOMBIE_COUNT;
-	c->game_status = 0;
 	init_map(c, av);
 	init_shotgun(c);
 	init_sprites(c);
