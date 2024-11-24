@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/23 04:17:00 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/24 23:41:15 by jmakkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/check_timeout.c \
 				  $(SRC_DIR)/init.c \
 				  $(SRC_DIR)/init_buffers.c \
+				  $(SRC_DIR)/malloc_check.c \
 				  $(SRC_DIR)/draw_scene.c \
 				  $(SRC_DIR)/draw_kill_count.c \
 				  $(SRC_DIR)/check_game_status.c \

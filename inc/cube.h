@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/23 03:56:15 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/24 23:40:52 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,4 +366,9 @@ int		whole_space_line(char *str);
 void	draw_kill_count(t_caster *c);
 void	draw_highest_kill_count(t_caster *c);
 void	draw_player_death_count(t_caster *c);
+void	*malloc_check(t_caster *c, void *ptr);
+char	*safe_itoa(t_caster *c, int n);
+char	*safe_strjoin(t_caster *c, const char *s1, const char *s2);
+char	*safe_substr(t_caster *c, const char *s, \
+		unsigned int start, size_t len);
 #endif

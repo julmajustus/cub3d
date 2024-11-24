@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 11:47:20 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/23 00:39:23 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/24 23:42:40 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	draw_elapsed_time(t_caster *c)
 	if (c->time_text_img)
 		mlx_delete_image(c->window->handle, c->time_text_img);
 	left_time = TIMEOUT - c->elapsed_time;
-	int_part = ft_itoa((int)(left_time));
-	decimal_part = ft_itoa((int)((left_time - (int)(left_time)) * 1000));
-	leftover_time = ft_strjoin(int_part, ".");
-	new_time = ft_strjoin(leftover_time, decimal_part);
+	int_part = safe_itoa(c, (int)(left_time));
+	decimal_part = safe_itoa(c, (int)((left_time - (int)(left_time)) * 1000));
+	leftover_time = safe_strjoin(c, int_part, ".");
+	new_time = safe_strjoin(c, leftover_time, decimal_part);
 	free(leftover_time);
-	leftover_time = ft_strjoin("TIME : ", new_time);
+	leftover_time = safe_strjoin(c ,"TIME : ", new_time);
 	free(new_time);
 	c->time_text_img = mlx_put_string(c->window->handle, \
 					leftover_time, 800, 20);
