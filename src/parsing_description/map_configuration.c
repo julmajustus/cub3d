@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/21 17:47:01 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/25 00:08:19 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	process_line(t_caster *c, char **line, t_dir *i)
 			(*line)[len - 1] = '\0';
 		if (ft_strchr(*line, 'D'))
 			store_door_info(c, *line);
-		append_array(*line, &c->map->map_arr, &c->map->map_height);
+		if (append_array(*line, &c->map->map_arr, &c->map->map_height))
+			exit_failure(c, "append array failed.");
 	}
 }
 

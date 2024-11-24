@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/24 23:40:52 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 00:25:29 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,8 +343,6 @@ void	is_sprite_visible(t_caster *c, int y, int x);
 void	render_sprites(t_caster *c);
 void	draw_sprite(t_caster *c, t_sprite *sp, \
 mlx_texture_t *texture, int size);
-void	get_sprite_size_and_pos(t_caster *c, \
-t_sprite *sp, mlx_texture_t *texture);
 void	check_sprite_hit(t_caster *c);
 void	spawn_sprite(t_caster *c);
 void	init_shotgun(t_caster *c);
@@ -371,4 +369,5 @@ char	*safe_itoa(t_caster *c, int n);
 char	*safe_strjoin(t_caster *c, const char *s1, const char *s2);
 char	*safe_substr(t_caster *c, const char *s, \
 		unsigned int start, size_t len);
+char	*safe_strdup(t_caster *c, const char *s);
 #endif
