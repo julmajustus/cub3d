@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:18:35 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:09:28 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	init(t_caster *c, char **av)
 		exit_failure(c, "window struct malloc failed");
 	ft_bzero(c->window, sizeof(t_window));
 	c->speed_multiplier = 0.02;
-	c->plane_x = 1;
+	c->plane_x = 0.66;
 	c->is_sprite_visible = 1;
 	c->max_sprite_count = 135;
 	c->active_sprite_count = ZOMBIE_COUNT;
