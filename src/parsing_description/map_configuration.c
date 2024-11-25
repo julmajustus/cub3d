@@ -6,13 +6,32 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/25 00:08:19 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:46:41 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	path_check(t_caster *c, char *texture_path, char *line)
+static void	add_textures(t_caster *c, char *line, char *dir, \
+mlx_texture_t	**texture)
+{
+	char	direction[4];
+
+	direction[0] = line[0];
+	direction[1] = line[1];
+	direction[2] = line[2];
+	direction[3] = '\0';
+	if (!ft_strncmp(line, dir, 3) && !*texture)
+		*texture = mlx_load_png(c->map->texture_path);
+	else
+	{
+		ft_putstr_fd("Double initailizing in ", 2);
+		ft_putstr_fd(direction, 2);
+		exit_failure(c, "textures");
+	}
+}
+
+static void	path_check(t_caster *c, char *texture_path, char *line, t_dir *i)
 {
 	int	len;
 
@@ -23,15 +42,15 @@ static void	path_check(t_caster *c, char *texture_path, char *line)
 			len--;
 		texture_path[len] = '\0';
 		file_exist(c, texture_path, ".png", TEXTURE);
-		if (!ft_strncmp(line, "NO ", 3))
-			c->textures->north_texture = mlx_load_png(texture_path);
-		else if (!ft_strncmp(line, "SO ", 3))
-			c->textures->south_texture = mlx_load_png(texture_path);
-		else if (!ft_strncmp(line, "WE ", 3))
-			c->textures->west_texture = mlx_load_png(texture_path);
-		else if (!ft_strncmp(line, "EA ", 3))
-			c->textures->east_texture = mlx_load_png(texture_path);
-		free_and_null((void **)&c->map->texture_path);
+		c->map->texture_path = texture_path;
+		if (*i == 0)
+			add_textures(c, line, "NO ", &c->textures->north_texture);
+		else if (*i == 1)
+			add_textures(c, line, "SO ", &c->textures->south_texture);
+		else if (*i == 2)
+			add_textures(c, line, "WE ", &c->textures->west_texture);
+		else if (*i == 3)
+			add_textures(c, line, "EA ", &c->textures->east_texture);
 	}
 	else
 		exit_failure(c, "Texture path must start with './'");
@@ -47,9 +66,11 @@ static void	parse_texture_color(t_caster *c, char *line, t_dir *i)
 		texture_path = line + 3;
 		while (ft_isspace(*texture_path))
 			texture_path++;
-		path_check(c, texture_path, line);
+		path_check(c, texture_path, line, i);
 	}
-	else if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
+	else if (!ft_strncmp(line, "F ", 2) && *i == 4)
+		parse_plain_colors(c, line);
+	else if (!ft_strncmp(line, "C ", 2) && *i == 5)
 		parse_plain_colors(c, line);
 	else
 		exit_failure(c, "There is wrong text in between the description.");
@@ -93,32 +114,5 @@ void	process_line(t_caster *c, char **line, t_dir *i)
 			store_door_info(c, *line);
 		if (append_array(*line, &c->map->map_arr, &c->map->map_height))
 			exit_failure(c, "append array failed.");
-	}
-}
-
-void	check_map(t_caster *c)
-{
-	char	*line;
-	t_dir	i;
-
-	i = NO;
-	line = get_next_line(c->map->map_fd);
-	if (!line)
-		exit_failure(c, "Empty description.");
-	while (line)
-	{
-		if (whole_space_line(line))
-		{
-			if (i >= end && c->map->map_arr && c->map->map_arr[0])
-				exit_failure(c, "Newline in between the map.");
-			if (line)
-				free_and_null((void **)&line);
-			line = get_next_line(c->map->map_fd);
-			continue ;
-		}
-		process_line(c, &line, &i);
-		if (line)
-			free_and_null((void **)&line);
-		line = get_next_line(c->map->map_fd);
 	}
 }

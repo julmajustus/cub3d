@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:38:39 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:52:11 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,4 +370,5 @@ char	*safe_strjoin(t_caster *c, const char *s1, const char *s2);
 char	*safe_substr(t_caster *c, const char *s, \
 		unsigned int start, size_t len);
 char	*safe_strdup(t_caster *c, const char *s);
+void	process_line(t_caster *c, char **line, t_dir *i);
 #endif
