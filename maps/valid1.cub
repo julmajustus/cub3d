@@ -3,7 +3,7 @@ SO ./textures/test_wall5.png
 WE ./textures/test_wall3.png
 EA ./textures/brickwall10.png
 F 220,100,0
-C 111,222,122
+C 111, 222, 122
 
 1111111111111111111111111
 1000000000110000000000001
