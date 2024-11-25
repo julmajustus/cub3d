@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:35:02 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/25 10:22:41 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/25 10:55:12 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static int	check_digit(char *rgba_arr)
 	i = 0;
 	while (rgba_arr[i])
 	{
-		while (rgba_arr[i] && ft_isspace(rgba_arr[i]))
-			i++;
 		if (rgba_arr[i] && !ft_isdigit(rgba_arr[i]))
 			return (0);
 		i++;
