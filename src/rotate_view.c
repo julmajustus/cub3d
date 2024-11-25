@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:56:02 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:20:20 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:09:58 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	rotate_view_mouse(t_caster *c)
 			c->view_angle += 2 * M_PI;
 		else if (c->view_angle < M_PI)
 			c->view_angle -= 2 * M_PI;
-		c->plane_x = -1 * sin(c->view_angle);
-		c->plane_y = 1 * cos(c->view_angle);
+		c->plane_x = -0.66 * sin(c->view_angle);
+		c->plane_y = 0.66 * cos(c->view_angle);
 		retval = 1;
 	}
 	return (retval);
@@ -64,7 +64,7 @@ int	rotate_view_keyboard(t_caster *c)
 			c->view_angle -= 2 * M_PI;
 		retval = 1;
 	}
-	c->plane_x = -1 * sin(c->view_angle);
-	c->plane_y = 1 * cos(c->view_angle);
+	c->plane_x = -0.66 * sin(c->view_angle);
+	c->plane_y = 0.66 * cos(c->view_angle);
 	return (retval);
 }
