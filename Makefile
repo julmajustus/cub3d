@@ -6,7 +6,7 @@
 #    By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 16:11:30 by jmakkone          #+#    #+#              #
-#    Updated: 2024/11/27 05:18:12 by jmakkone         ###   ########.fr        #
+#    Updated: 2024/11/27 16:47:27 by skwon2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC             = $(SRC_DIR)/main.c \
 				  $(SRC_DIR)/minimap/draw_sprites.c\
                   $(SRC_DIR)/raycaster/cast_rays.c \
                   $(SRC_DIR)/raycaster/trace_ray.c \
-                  $(SRC_DIR)/render_view/get_wall_texture.c \
+                  $(SRC_DIR)/render_view/get_wall_texture_buffer.c \
                   $(SRC_DIR)/render_view/init_pixel_color_buffers.c \
                   $(SRC_DIR)/render_view/render_floor_and_ceiling.c \
                   $(SRC_DIR)/render_view/render_view.c \
@@ -70,7 +70,7 @@ CFLAGS          = -Wunreachable-code -Wall -Wextra -Werror \
 				  -I$(LIBFT_DIR) \
 				  -I$(MLX42_DIR)/include \
 				  -I$(GLFW_INCLUDE_PATH) -O3 \
-				  #-g -ggdb3 -fsanitize=address
+				  -g -ggdb3 -fsanitize=address
 
 
 all : .delete .mandatory

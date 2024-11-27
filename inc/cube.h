@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/27 05:19:13 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:29:38 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,5 +380,5 @@ char	*safe_strjoin(t_caster *c, const char *s1, const char *s2);
 char	*safe_substr(t_caster *c, const char *s, \
 		unsigned int start, size_t len);
 char	*safe_strdup(t_caster *c, const char *s);
-void	process_line(t_caster *c, char **line, t_dir *i);
+void	process_line(t_caster *c, char **line, int *line_check);
 #endif
