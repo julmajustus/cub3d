@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/27 16:46:25 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/27 19:47:23 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	process_line(t_caster *c, char **line, int *line_check)
 	int	width;
 
 	width = ft_strlen(*line);
-	if (width > INT_MAX - 100)
+	if (width > 2500)
 		exit_failure(c, "over the limit of map width");
 	if (width > c->map->map_width)
 		c->map->map_width = width - 1;

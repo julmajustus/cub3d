@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:00:52 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/27 16:47:39 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/27 19:47:57 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	check_each_line(t_caster *c, char **line)
 	line_check = 0;
 	while (*line)
 	{
-		if (count_gnl > INT_MAX - 100)
+		if (count_gnl > 2500)
 			exit_failure(c, "Over the limit of height of map.");
 		if (whole_space_line(*line))
 		{
