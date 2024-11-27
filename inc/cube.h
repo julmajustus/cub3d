@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 13:52:11 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/27 05:19:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,10 +301,21 @@ typedef struct s_caster
 	int				kill_count;
 	int				highest_kill_count;
 	int				death_count;
+	int				*no_wall_pixel_buffer;
+	int				*so_wall_pixel_buffer;
+	int				*we_wall_pixel_buffer;
+	int				*ea_wall_pixel_buffer;
+	int				*door_pixel_buffer;
+	int				*exit_pixel_buffer;
+	int				*ceiling_pixel_buffer;
+	int				*floor_pixel_buffer;
+	int				*sp_pixel_buffer;
+
 }	t_caster;
 
 void	init(t_caster *c, char **av);
 void	init_buffers(t_caster *c);
+void	init_pixel_color_buffers(t_caster *c);
 void	set_images_to_window(t_caster *c);
 int		movement_up_down(t_caster *c);
 int		movement_left_right(t_caster *c);
@@ -318,9 +329,9 @@ void	trace_ray(t_caster *c, int x);
 void	render_fc_plain_colors(t_caster *c, int draw_end, int x);
 void	render_fc_textures(t_caster *c, int draw_end, int x);
 void	render_view(t_caster *c);
-void	get_wall_texture(t_caster *c, int x);
-void	render_engine(t_caster *c);
+int		*get_wall_texture_buffer(t_caster *c, int x);
 void	game_loop(void *param);
+void	game_loop_bonus(void *param);
 void	check_cursor_movement(t_caster *c);
 int		check_collision(t_caster *c, double new_px, double new_py);
 void	exit_mlx(t_caster *c);
@@ -341,8 +352,7 @@ void	init_sprites(t_caster *c);
 void	init_spawn_points(t_caster *c);
 void	is_sprite_visible(t_caster *c, int y, int x);
 void	render_sprites(t_caster *c);
-void	draw_sprite(t_caster *c, t_sprite *sp, \
-mlx_texture_t *texture, int size);
+void	draw_sprite(t_caster *c, t_sprite *sp, int size);
 void	check_sprite_hit(t_caster *c);
 void	spawn_sprite(t_caster *c);
 void	init_shotgun(t_caster *c);

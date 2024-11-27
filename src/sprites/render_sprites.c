@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:25:11 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/27 05:06:54 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	update_sprite_position(t_caster *c, t_sprite *sp)
 {
 	sp->current_frame = (sp->current_frame + 1) % sp->frame_count;
-	sp->frame_offset = sp->current_frame * 64 * 64 * 4;
+	sp->frame_offset = sp->current_frame * 64 * 64;
 	if (sp->dist_to_player > 0)
 	{
 		sp->dx /= sp->dist_to_player;
@@ -41,8 +41,7 @@ static void	update_sprite_position(t_caster *c, t_sprite *sp)
 	}
 }
 
-static void	get_sprite_size_and_pos(t_caster *c, \
-					t_sprite *sp, mlx_texture_t *texture)
+static void	get_sprite_size_and_pos(t_caster *c, t_sprite *sp)
 {
 	sp->is_visible = 0;
 	sp->dx = sp->x - c->px;
@@ -61,7 +60,7 @@ static void	get_sprite_size_and_pos(t_caster *c, \
 		sp->screen_y = (HEIGHT / 2) - (sp->scale / 1.7);
 		sp->screen_y += sp->scale / 3;
 		sp->screen_x = sp->screen_x - sp->scale / 2;
-		draw_sprite(c, sp, texture, sp->scale);
+		draw_sprite(c, sp, sp->scale);
 	}
 }
 
@@ -70,10 +69,10 @@ static void	death_animation(t_caster *c, t_sprite *sp)
 	double	current_time;
 
 	current_time = mlx_get_time();
-	if (current_time - sp->last_frame_time >= 0.15)
+	if (current_time - sp->last_frame_time >= 0.12)
 	{
 		sp->current_frame++;
-		sp->frame_offset = sp->current_frame * 64 * 64 * 4;
+		sp->frame_offset = sp->current_frame * 64 * 64;
 		sp->last_frame_time = current_time;
 		if (sp->current_frame >= sp->death_frame_count)
 		{
@@ -88,7 +87,7 @@ static void	death_animation(t_caster *c, t_sprite *sp)
 			return ;
 		}
 	}
-	get_sprite_size_and_pos(c, sp, c->textures->sp_texture);
+	get_sprite_size_and_pos(c, sp);
 }
 
 static void	animation(t_caster *c, t_sprite *sp)
@@ -101,7 +100,7 @@ static void	animation(t_caster *c, t_sprite *sp)
 		update_sprite_position(c, sp);
 		sp->last_frame_time = current_time;
 	}
-	get_sprite_size_and_pos(c, sp, c->textures->sp_texture);
+	get_sprite_size_and_pos(c, sp);
 }
 
 void	render_sprites(t_caster *c)

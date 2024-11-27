@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 11:20:48 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/27 05:18:55 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ void	set_images_to_window(t_caster *c)
 	c->window->minimap->instances[0].z = 1;
 }
 
-void	render_engine(t_caster *c)
-{
-	printf("FPS: %f\n", 1 / c->window->handle->delta_time);
-	cast_rays(c);
-	render_view(c);
-	parse_minimap(c);
-}
-
 void	game_loop(void *param)
 {
 	t_caster	*c;
@@ -50,17 +42,36 @@ void	game_loop(void *param)
 		movement_up_down(c);
 		movement_left_right(c);
 		rotate_view_keyboard(c);
-		render_engine(c);
-		if (BONUS)
-		{
-			c->cursor_pos = 0;
-			check_cursor_movement(c);
-			rotate_view_mouse(c);
-			check_timeout(c);
-			draw_elapsed_time(c);
-			draw_kill_count(c);
-			render_sprites(c);
-		}
+		printf("FPS: %f\n", 1 / c->window->handle->delta_time);
+		cast_rays(c);
+		render_view(c);
+	}
+	else
+		check_game_status(c);
+}
+
+void	game_loop_bonus(void *param)
+{
+	t_caster	*c;
+
+	c = (t_caster *)param;
+	if (c->game_status == 2)
+	{
+		c->speed_multiplier = c->window->handle->delta_time * 2.2;
+		c->cursor_pos = 0;
+		check_cursor_movement(c);
+		movement_up_down(c);
+		movement_left_right(c);
+		rotate_view_keyboard(c);
+		rotate_view_mouse(c);
+		printf("FPS: %f\n", 1 / c->window->handle->delta_time);
+		cast_rays(c);
+		render_view(c);
+		parse_minimap(c);
+		check_timeout(c);
+		draw_elapsed_time(c);
+		draw_kill_count(c);
+		render_sprites(c);
 		gun_fire_animation(c);
 	}
 	else
@@ -79,8 +90,12 @@ int	main(int ac, char **av)
 	init(&c, av);
 	read_description(&c);
 	init_buffers(&c);
+	init_pixel_color_buffers(&c);
 	spawn_sprite(&c);
-	mlx_loop_hook(c.window->handle, &game_loop, &c);
+	if (BONUS)
+		mlx_loop_hook(c.window->handle, &game_loop_bonus, &c);
+	else
+		mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);
 	mlx_loop(c.window->handle);
 	exit_mlx(&c);

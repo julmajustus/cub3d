@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:22:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 15:39:54 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/11/27 04:40:56 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ static void	free_structs(t_caster *c)
 		free(c->valid_spawn_points);
 }
 
+static void	free_pixel_buffers(t_caster *c)
+{
+	if (c->no_wall_pixel_buffer)
+		free(c->no_wall_pixel_buffer);
+	if (c->so_wall_pixel_buffer)
+		free(c->so_wall_pixel_buffer);
+	if (c->we_wall_pixel_buffer)
+		free(c->we_wall_pixel_buffer);
+	if (c->ea_wall_pixel_buffer)
+		free(c->ea_wall_pixel_buffer);
+	if (c->door_pixel_buffer)
+		free(c->door_pixel_buffer);
+	if (c->exit_pixel_buffer)
+		free(c->exit_pixel_buffer);
+	if (c->ceiling_pixel_buffer)
+		free(c->ceiling_pixel_buffer);
+	if (c->floor_pixel_buffer)
+		free(c->floor_pixel_buffer);
+	if (c->sp_pixel_buffer)
+		free(c->sp_pixel_buffer);
+}
+
 void	exit_mlx(t_caster *c)
 {
 	mlx_terminate(c->window->handle);
@@ -58,6 +80,7 @@ void	exit_mlx(t_caster *c)
 	free_textures(c);
 	free_structs(c);
 	free_sprites(c);
+	free_pixel_buffers(c);
 	exit(EXIT_SUCCESS);
 }
 
@@ -76,6 +99,7 @@ void	exit_failure(t_caster *c, char *msg)
 	free_textures(c);
 	free_structs(c);
 	free_sprites(c);
+	free_pixel_buffers(c);
 	perror(msg);
 	exit(EXIT_FAILURE);
 }
