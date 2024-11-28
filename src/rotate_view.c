@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:56:02 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 11:09:58 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:23:16 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	rotate_view_mouse(t_caster *c)
 	double	scaled_rotation;
 
 	retval = 0;
-	mouse_sensitivity = 0.025;
+	mouse_sensitivity = 0.015;
 	scaled_rotation = -c->cursor_pos * mouse_sensitivity * c->speed_multiplier;
 	if (c->cursor_pos != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:13:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 11:09:28 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:12:13 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init(t_caster *c, char **av)
 	c->speed_multiplier = 0.02;
 	c->plane_x = 0.66;
 	c->is_sprite_visible = 1;
-	c->max_sprite_count = 135;
+	c->max_sprite_count = 150;
 	c->active_sprite_count = ZOMBIE_COUNT;
 	init_map(c, av);
 	init_shotgun(c);

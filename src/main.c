@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:55:57 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/27 05:18:55 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:11:18 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ int	main(int ac, char **av)
 	read_description(&c);
 	init_buffers(&c);
 	init_pixel_color_buffers(&c);
-	spawn_sprite(&c);
 	if (BONUS)
+	{
+		spawn_sprite(&c);
 		mlx_loop_hook(c.window->handle, &game_loop_bonus, &c);
+	}
 	else
 		mlx_loop_hook(c.window->handle, &game_loop, &c);
 	mlx_key_hook(c.window->handle, &keyboard_listener, &c);

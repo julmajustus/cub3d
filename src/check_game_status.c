@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:33:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:19:25 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:21:03 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	reset_values(t_caster *c)
 	i = -1;
 	while (++i < c->active_sprite_count)
 	{
-		c->sp[i]->x = -1;
-		c->sp[i]->y = -1;
+		c->sp[i]->x = 0;
+		c->sp[i]->y = 0;
 	}
 	c->start_time.tv_sec = 0;
 	c->start_time.tv_usec = 0;

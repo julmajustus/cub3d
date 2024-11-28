@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:02:27 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/27 05:06:54 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:28:39 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,12 @@ static void	death_animation(t_caster *c, t_sprite *sp)
 		sp->last_frame_time = current_time;
 		if (sp->current_frame >= sp->death_frame_count)
 		{
-			sp->x = -1;
-			sp->y = -1;
+			sp->x = 0;
+			sp->y = 0;
 			sp->is_hit = 0;
 			if (c->active_sprite_count < c->max_sprite_count)
-			{
-				spawn_sprite(c);
 				c->active_sprite_count++;
-			}
+			spawn_sprite(c);
 			return ;
 		}
 	}

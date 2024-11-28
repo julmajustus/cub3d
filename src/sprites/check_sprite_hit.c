@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 04:03:39 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/23 00:20:32 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:26:50 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,28 @@ static void	get_spawn_distance(t_caster *c, int i)
 void	spawn_sprite(t_caster *c)
 {
 	int	i;
+	int	iter_count;
 
+	iter_count = -1;
 	i = -1;
-	while (++i < c->active_sprite_count)
+	while (++i < c->active_sprite_count && ++iter_count < 100)
 	{
 		c->sp_current_time = mlx_get_time();
-		if (c->sp[i]->y == -1 && c->sp[i]->x == -1)
+		if (c->sp[i]->y == 0 && c->sp[i]->x == 0)
 		{
 			c->sp[i]->is_visible = 0;
 			c->spawn_index = ft_abs((long long)((c->sp_current_time \
 				* mlx_get_time() * 942983343)) % c->total_spawn_points);
-			c->sp[i]->x = c->valid_spawn_points[c->spawn_index].x;
-			c->sp[i]->y = c->valid_spawn_points[c->spawn_index].y;
+			c->sp[i]->x = c->valid_spawn_points[c->spawn_index].x + 0.5;
+			c->sp[i]->y = c->valid_spawn_points[c->spawn_index].y + 0.5;
 			get_spawn_distance(c, i);
 			if (c->sp[i]->dist_to_player < 3)
 			{
-				c->sp[i]->x = -1;
-				c->sp[i]->y = -1;
+				c->sp[i]->x = 0;
+				c->sp[i]->y = 0;
 				i = -1;
 				continue ;
 			}
-			c->sp[i]->last_spwan_time = c->sp_current_time;
 		}
 	}
 }

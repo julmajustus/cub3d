@@ -6,7 +6,7 @@
 /*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 03:55:17 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:22:35 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:26:33 by jmakkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	init_sprites(t_caster *c)
 		c->sp[i]->frame_count = 24;
 		c->sp[i]->death_frame_count = 29;
 		c->sp[i]->current_frame = 0;
-		c->sp[i]->frame_offset = c->sp[i]->current_frame * 64 * 64 * 4;
+		c->sp[i]->frame_offset = c->sp[i]->current_frame * 64 * 64;
 		c->sp[i]->last_frame_time = 0.0;
 		c->sp[i]->speed = 0.22;
-		c->sp[i]->x = -1.0;
-		c->sp[i]->y = -1.0;
+		c->sp[i]->x = 0;
+		c->sp[i]->y = 0;
 		c->sp[i]->is_visible = 0;
 		c->sp[i]->cam_y = 0;
 		c->sp[i]->cam_x = 0;
