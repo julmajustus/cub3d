@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:24:03 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/27 19:47:23 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:59:43 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,16 @@ static void	parse_texture_color(t_caster *c, char *line, int *line_check)
 			texture_path++;
 		path_check(c, texture_path, line);
 	}
-	else if (!ft_strncmp(line, "F ", 2))
+	else if (!ft_strncmp(line, "F ", 2) && c->count_f == 0)
+	{
 		parse_plain_colors(c, line);
-	else if (!ft_strncmp(line, "C ", 2))
+		c->count_f = 1;
+	}
+	else if (!ft_strncmp(line, "C ", 2) && c->count_c == 0)
+	{
 		parse_plain_colors(c, line);
+		c->count_c = 1;
+	}
 	else
 		exit_failure(c, "There is wrong text in between the description.");
 	(*line_check)++;

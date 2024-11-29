@@ -6,20 +6,27 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:35:02 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/25 10:55:12 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:51:33 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static int	ft_strarr_len(char **arr)
+static void	count_comma(t_caster *c, char *line)
 {
-	int	len;
+	int	i;
+	int	count;
 
-	len = 0;
-	while (arr[len] != NULL)
-		len++;
-	return (len);
+	count = 0;
+	i = 1;
+	while (*(line + i))
+	{
+		if (*(line + i) == ',')
+			count++;
+		i++;
+	}
+	if (count != 2)
+		exit_failure(c, "Too many , : Invalid color format, should be 'R,G,B'");
 }
 
 static void	set_rbg_color(t_caster *c, char *line, int *rgb)
@@ -79,9 +86,15 @@ void	parse_plain_colors(t_caster *c, char *line)
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
+	count_comma(c, line);
 	rgba_arr = ft_split(line + 1, ',');
-	if (!rgba_arr || ft_strarr_len(rgba_arr) != 3)
-		exit_failure(c, "Invalid color format, should be 'R,G,B'");
+	len = 0;
+	while (rgba_arr && rgba_arr[len])
+	{
+		if (!rgba_arr[len])
+			exit_failure(c, "Invalid color format, should be 'R,G,B'");
+		len++;
+	}
 	check_rgb_format(c, rgba_arr, rgb);
 	set_rbg_color(c, line, rgb);
 	free_arr_and_null(&rgba_arr);

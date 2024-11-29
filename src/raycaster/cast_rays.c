@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmakkone <jmakkone@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 00:17:25 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/25 00:17:29 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:22:34 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	get_wall_dist_and_height(t_caster *c, int x)
 	if (c->draw_start[x] < 0 || c->draw_start[x] > HEIGHT)
 		c->draw_start[x] = 0;
 	c->draw_end[x] = c->wall_height[x] / 2 + HEIGHT / 2;
-	if (c->draw_end[x] >= HEIGHT || c->draw_end < 0)
+	if (c->draw_end[x] >= HEIGHT || c->draw_end[x] < 0)
 		c->draw_end[x] = HEIGHT;
 }
 

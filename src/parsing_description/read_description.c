@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:00:52 by skwon2            #+#    #+#             */
-/*   Updated: 2024/11/27 19:47:57 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:57:57 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	read_description(t_caster *c)
 	c->textures->south_texture = NULL;
 	c->textures->west_texture = NULL;
 	c->textures->east_texture = NULL;
+	c->count_f = 0;
+	c->count_c = 0;
 	file_exist(c, c->map->map_path, ".cub", MAP);
 	check_map(c);
 	print_map(c);

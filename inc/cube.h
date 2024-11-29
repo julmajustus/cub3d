@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:11:37 by jmakkone          #+#    #+#             */
-/*   Updated: 2024/11/28 11:11:37 by jmakkone         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:58:26 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,8 @@ typedef struct s_caster
 	int				*ceiling_pixel_buffer;
 	int				*floor_pixel_buffer;
 	int				*sp_pixel_buffer;
-
+	int				count_f;
+	int				count_c;
 }	t_caster;
 
 void	init(t_caster *c, char **av);
