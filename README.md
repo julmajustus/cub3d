@@ -18,18 +18,6 @@ This project is a survival-based maze game where you must navigate, fight zombie
 
 ### Game Title: BlooDrip
 
-![Start_scene](./textures/start_screen_text.png)
-![How_To_Play](./textures/howto2.png)
-
-### Start GIF
-![Start GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/start.gif)
-
-### Exit GIF
-![Exit GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/exit.gif)
-
-
-This project is licensed under the MIT License.
-
 Step into an apocalyptic nightmare in *BlooDrip*, where survival is your only mission.
 
 You find yourself trapped in a sprawling maze swarming with relentless zombies. Your only way out? Fight your way through, eliminate the undead, and locate the glowing exit door.
@@ -37,6 +25,17 @@ You find yourself trapped in a sprawling maze swarming with relentless zombies. 
 Here’s the twist: the exit door will only reveal itself halfway through the countdown. You’ll have a total of **120 seconds** to make your escape, but the glowing exit will only appear in the final **60 seconds**.
 
 Are you ready to test your reflexes and strategy in the ultimate survival maze? Dive in and prove yourself!
+
+
+<!-- ![Start_scene](./textures/start_screen_text.png)
+![How_To_Play](./textures/howto2.png) -->
+---
+
+### Start GIF
+![Start GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/start.gif)
+
+### Exit GIF
+![Exit GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/exit.gif)
 
 ---
 
