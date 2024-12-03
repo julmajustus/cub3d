@@ -55,7 +55,7 @@ Follow these steps to install and run the game:
 
 ```bash
   //Clone the repository:
-   git clone https://github.com/yourusername/yourproject.git
+    git clone https://github.com/yourusername/yourproject.git
 
   //Compile the project:
     make fclean && make fc
@@ -68,6 +68,7 @@ Play the game and enjoy your adventure!
 
 
 ## Dependencies & Tools
+
 The game utilizes the following technologies and tools:
 
 - **Raycasting**: DDA Algorithm for efficient rendering.
@@ -76,3 +77,5 @@ The game utilizes the following technologies and tools:
 - **Perf / Gmon**: Performance profiling and optimization tools.
 
 ## License
+
+This project is licensed under the MIT License.
