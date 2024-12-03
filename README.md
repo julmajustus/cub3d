@@ -22,10 +22,10 @@ This project is a survival-based maze game where you must navigate, fight zombie
 ![How_To_Play](./textures/howto2.png)
 
 ### Start GIF
-[Start GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/start.gif)
+![Start GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/start.gif)
 
 ### Exit GIF
-[Exit GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/exit.gif)
+![Exit GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/exit.gif)
 
 
 This project is licensed under the MIT License.
