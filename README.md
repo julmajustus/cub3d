@@ -21,13 +21,12 @@ This project is a survival-based maze game where you must navigate, fight zombie
 ![Start_scene](./textures/start_screen_text.png)
 ![How_To_Play](./textures/howto2.png)
 
-**Video preview**
-<video src="./textures/start.mp4" width="640" height="360" controls>
-Your browser does not support the video tag.
-</video>
-<video src="./textures/exit.mp4" width="640" height="360" controls>
-Your browser does not support the video tag.
-</video>
+### Start GIF
+[Start GIF](./textures/start.gif)
+
+### Exit GIF
+[Exit GIF](./textures/exit.gif)
+
 
 This project is licensed under the MIT License.
 
