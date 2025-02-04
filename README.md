@@ -72,7 +72,7 @@ The game utilizes the following technologies and tools:
 - **Raycasting**: DDA Algorithm for efficient rendering.
 - **MLX42**: Lightweight graphics library.
 - **GLFW**: Window and input management.
-- **Perf / Gmon**: Performance profiling and optimization tools.
+- **Perf / Gmon**: Code optimization done based on different profiling data.
 
 ## License
 
