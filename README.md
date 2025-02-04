@@ -31,11 +31,9 @@ Are you ready to test your reflexes and strategy in the ultimate survival maze? 
 ![How_To_Play](./textures/howto2.png) -->
 ---
 
-### Start GIF
-![Start GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/start.gif)
+### Gameplay demo
+![Gameplay](textures/cub3d-demo.gif)
 
-### Exit GIF
-![Exit GIF](https://media.githubusercontent.com/media/julmajustus/cub3d/refs/heads/main/textures/exit.gif)
 
 ---
 
